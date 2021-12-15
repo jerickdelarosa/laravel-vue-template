@@ -7,6 +7,9 @@ import VueRouter from 'vue-router'
 // Dashboard
 import Dashboard from '../components/pages/Dashboard.vue'
 
+// Pages
+import JobPosting from '../components/pages/JobPosting/JobPosting.vue'
+
 // =======================================================================
 // IMPORT ROUTER CHILD COMPONENTS HERE
 // =======================================================================
@@ -24,7 +27,7 @@ Vue.use(VueRouter)
 // =======================================================================
 // VueRouter Settings
 // =======================================================================
-const AppName = 'Test'
+const AppName = 'BulSU'
 
 const router = new VueRouter({
   mode: 'history', // Navigation Mode
@@ -35,7 +38,7 @@ const router = new VueRouter({
 
   // Routes Declaration
   routes: [
-    // Dashboard
+    // Job Posting
     {
       path: '/',
       name: 'dashboard',
@@ -45,6 +48,20 @@ const router = new VueRouter({
       },
       meta: {
         title: 'Dashboard',
+        auth: true
+      }
+    },
+
+    // Job Posting
+    {
+      path: '/job-posting',
+      name: 'job-posting',
+      components: {
+        default: JobPosting,
+        navigation: MainNavigation
+      },
+      meta: {
+        title: 'Job Posting',
         auth: true
       }
     }

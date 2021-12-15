@@ -39,7 +39,7 @@
       <v-app-bar-nav-icon @click="toggleNav" />
 
       <!-- TITLE -->
-      <v-toolbar-title> Test </v-toolbar-title>
+      <v-toolbar-title> BulSU Job Posting </v-toolbar-title>
     </v-app-bar>
   </div>
 </template>
@@ -58,6 +58,11 @@ export default {
           to: 'dashboard',
           title: 'Dashboard',
           icon: 'mdi-view-dashboard-outline'
+        },
+        {
+          to: 'job-posting',
+          title: 'Job Posting',
+          icon: 'mdi-briefcase-outline'
         }
       ]
     }
