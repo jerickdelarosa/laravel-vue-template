@@ -2367,7 +2367,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     next(function (vm) {
-      vm.getInventories();
+      vm.getJobs();
     });
   },
   data: function data() {
@@ -2380,7 +2380,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return !v || /^[\w\r\n Ññ.,-]*$/.test(v) || 'This field must contain valid characters.';
         }
       },
-      inventoryDialog: false,
+      userRoleDialog: true,
       deleteDialog: false,
       deleting: false,
       loading: false,
@@ -2428,32 +2428,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
-    inventories: 'jobposting/LIST'
+    inventories: 'jobpostings/LIST'
   })),
   watch: {},
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)({
-    _getInventories: 'jobposting/GET',
-    _deleteItem: 'jobposting/DELETE'
+    _getJobs: 'jobpostings/GET',
+    _deleteItem: 'jobpostings/DELETE'
   })), {}, {
-    getInventories: function getInventories() {
+    getJobs: function getJobs() {
       var _this = this;
 
       this.loading = true;
 
-      this._getInventories()["finally"](function () {
+      this._getJobs()["finally"](function () {
         _this.loading = false;
       });
     },
     // Create Item
     openItemDialog: function openItemDialog() {
-      this.inventoryDialog = true;
+      this.userRoleDialog = true;
     },
     closeItemDialog: function closeItemDialog(mustReload) {
-      this.inventoryDialog = false;
+      this.userRoleDialog = false;
       this.selectedItem = null;
 
       if (mustReload) {
-        this.getInventories();
+        this.getJobs();
       }
     },
     // View Item Details
@@ -2471,7 +2471,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // SHOW EDIT DIALOG FOR SELECTED CATEGORY
     editItem: function editItem(item) {
       this.selectedItem = item === null || item === void 0 ? void 0 : item.code;
-      this.inventoryDialog = true;
+      this.userRoleDialog = true;
     },
     // DELETE
     deleteItem: function deleteItem(item) {
@@ -2491,7 +2491,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: this.iId
       }).then(function (response) {
         if (response !== null && response !== void 0 && response.deleted) {
-          _this2.getInventories();
+          _this2.getJobs();
 
           _this2.closeDelete();
         }
@@ -2871,6 +2871,104 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2899,34 +2997,69 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       },
       formLoading: false,
-      inventoryForm: null,
-      itemName: null,
+      userRoleForm: null,
       saving: false,
-      inventoryErrors: null,
-      iPoNum: null,
-      iArticle: null,
-      iDescription: null,
-      iCategory: null,
-      iSubcategory: null,
-      iFund: null,
-      iAmount: null,
-      iQuantity: null,
-      iUnit: null,
-      iWarrantyDuration: null,
-      iWarrantyLength: null,
-      dateDialog: false,
-      iDateAcquired: null
+      userRoleErrors: null,
+      dataDialog: false,
+      iDatePosted: null,
+      campuses: [{
+        id: 1,
+        name: 'Malolos'
+      }, {
+        id: 2,
+        name: 'Bustos'
+      }, {
+        id: 3,
+        name: 'Meneses'
+      }, {
+        id: 4,
+        name: 'Sarmiento'
+      }, {
+        id: 5,
+        name: 'Hagonoy'
+      }],
+      offices: [],
+      hrmo_types: [{
+        id: 1,
+        name: 'Central',
+        email: 'chrmo.recruitment@bulsu.edu.ph'
+      }, {
+        id: 2,
+        name: 'Main',
+        email: 'hrmo.main@bulsu.edu.ph'
+      }, {
+        id: 3,
+        name: 'External',
+        email: 'hrmo.external@bulsu.edu.ph'
+      }]
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    funds: 'jobposting/FUND_LIST',
-    locations: 'jobposting/LOCATION_LIST',
-    measurements: 'jobposting/MEASUREMENT_LIST',
-    offices: 'jobposting/OFFICE_LIST',
-    categories: 'jobposting/CATEGORY_LIST',
-    warrantyLengths: 'jobposting/WARRANTY_LENGTH_LIST',
-    _subcategories: 'jobposting/SUBCATEGORY_LIST'
+    funds: 'jobpostings/FUND_LIST',
+    locations: 'jobpostings/LOCATION_LIST',
+    measurements: 'jobpostings/MEASUREMENT_LIST',
+    offices: 'jobpostings/OFFICE_LIST',
+    categories: 'jobpostings/CATEGORY_LIST',
+    warrantyLengths: 'jobpostings/WARRANTY_LENGTH_LIST',
+    _subcategories: 'jobpostings/SUBCATEGORY_LIST'
   })), {}, {
+    datePostedError: function datePostedError() {
+      var _this$jobPostingError;
+
+      return (_this$jobPostingError = this.jobPostingErrors) === null || _this$jobPostingError === void 0 ? void 0 : _this$jobPostingError.id;
+    },
+    hasDatePostedError: function hasDatePostedError() {
+      return !!this.datePostedError;
+    },
+    dateFormatted: function dateFormatted() {
+      return this.iDatePosted ? moment__WEBPACK_IMPORTED_MODULE_1___default()(this.iDatePosted).format('YYYY-MM-DD') : '';
+    },
+    hasWarrantyDuration: function hasWarrantyDuration() {
+      return !!this.iWarrantyDuration;
+    },
+    hasWarrantyLength: function hasWarrantyLength() {
+      return !!this.iWarrantyLength;
+    },
     subcategories: function subcategories() {
       var _this$iCategory;
 
@@ -2945,41 +3078,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     hasDeliveredByError: function hasDeliveredByError() {
       return !!this.deliveredByError;
     },
-    dateAcquiredError: function dateAcquiredError() {
+    descriptionError: function descriptionError() {
       var _this$inventoryErrors2;
 
       return (_this$inventoryErrors2 = this.inventoryErrors) === null || _this$inventoryErrors2 === void 0 ? void 0 : _this$inventoryErrors2.code;
-    },
-    hasDateAcquiredError: function hasDateAcquiredError() {
-      return !!this.dateAcquiredError;
-    },
-    descriptionError: function descriptionError() {
-      var _this$inventoryErrors3;
-
-      return (_this$inventoryErrors3 = this.inventoryErrors) === null || _this$inventoryErrors3 === void 0 ? void 0 : _this$inventoryErrors3.code;
     },
     hasDescriptionError: function hasDescriptionError() {
       return !!this.descriptionError;
     },
     warrantyError: function warrantyError() {
-      var _this$inventoryErrors4;
+      var _this$inventoryErrors3;
 
-      return (_this$inventoryErrors4 = this.inventoryErrors) === null || _this$inventoryErrors4 === void 0 ? void 0 : _this$inventoryErrors4.code;
+      return (_this$inventoryErrors3 = this.inventoryErrors) === null || _this$inventoryErrors3 === void 0 ? void 0 : _this$inventoryErrors3.code;
     },
     hasWarrantyError: function hasWarrantyError() {
       return !!this.warrantyError;
     },
     hasSelectedItem: function hasSelectedItem() {
       return !!this.itemId;
-    },
-    dateFormatted: function dateFormatted() {
-      return this.iDateAcquired ? moment__WEBPACK_IMPORTED_MODULE_1___default()(this.iDateAcquired).format('MM/DD/YYYY') : '';
-    },
-    hasWarrantyDuration: function hasWarrantyDuration() {
-      return !!this.iWarrantyDuration;
-    },
-    hasWarrantyLength: function hasWarrantyLength() {
-      return !!this.iWarrantyLength;
     }
   }),
   watch: {
@@ -3001,10 +3117,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)({
-    _getData: 'jobposting/GET_DATA',
-    _editItem: 'jobposting/EDIT',
-    _saveItem: 'jobposting/SAVE',
-    _updateItem: 'jobposting/UPDATE'
+    _getData: 'jobpostings/GET_DATA',
+    _editItem: 'jobpostings/EDIT',
+    _saveItem: 'jobpostings/SAVE',
+    _updateItem: 'jobpostings/UPDATE'
   })), {}, {
     getData: function getData() {
       var _this = this;
@@ -3473,10 +3589,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 
 /***/ }),
 
-/***/ "./resources/js/store/modules/jobposting.js":
-/*!**************************************************!*\
-  !*** ./resources/js/store/modules/jobposting.js ***!
-  \**************************************************/
+/***/ "./resources/js/store/modules/jobpostings.js":
+/*!***************************************************!*\
+  !*** ./resources/js/store/modules/jobpostings.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -44617,7 +44733,7 @@ var render = function () {
                                 attrs: { icon: "" },
                                 on: {
                                   click: function ($event) {
-                                    return _vm.getInventories()
+                                    return _vm.getJobs()
                                   },
                                 },
                               },
@@ -44819,7 +44935,7 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("job-posting-form-dialog", {
-        attrs: { visible: _vm.inventoryDialog, "item-id": _vm.selectedItem },
+        attrs: { visible: _vm.userRoleDialog, "item-id": _vm.selectedItem },
         on: { close: _vm.closeItemDialog },
       }),
       _vm._v(" "),
@@ -44988,7 +45104,7 @@ var render = function () {
                           : [
                               _c("v-toolbar-title", [
                                 _vm._v(
-                                  "\n              Add New Item\n            "
+                                  "\n              Add New Job\n            "
                                 ),
                               ]),
                             ],
@@ -45088,7 +45204,7 @@ var render = function () {
                                         { staticClass: "title" },
                                         [
                                           _vm._v(
-                                            "\n                    Item Details\n                  "
+                                            "\n                    Job Details\n                  "
                                           ),
                                         ]
                                       ),
@@ -45101,27 +45217,12 @@ var render = function () {
                                   _c(
                                     "v-card-text",
                                     [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "PO Number",
-                                          outlined: "",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iPoNum,
-                                          callback: function ($$v) {
-                                            _vm.iPoNum = $$v
-                                          },
-                                          expression: "iPoNum",
-                                        },
-                                      }),
-                                      _vm._v(" "),
                                       _c(
                                         "v-dialog",
                                         {
                                           ref: "dateDialog",
                                           attrs: {
-                                            "return-value": _vm.iDateAcquired,
+                                            "return-value": _vm.iDatePosted,
                                             persistent: "",
                                             width: "290px",
                                           },
@@ -45129,12 +45230,12 @@ var render = function () {
                                             "update:returnValue": function (
                                               $event
                                             ) {
-                                              _vm.iDateAcquired = $event
+                                              _vm.iDatePosted = $event
                                             },
                                             "update:return-value": function (
                                               $event
                                             ) {
-                                              _vm.iDateAcquired = $event
+                                              _vm.iDatePosted = $event
                                             },
                                           },
                                           scopedSlots: _vm._u([
@@ -45152,7 +45253,7 @@ var render = function () {
                                                           attrs: {
                                                             outlined: "",
                                                             label:
-                                                              "Date Acquired *",
+                                                              "Date Posted *",
                                                             value:
                                                               _vm.dateFormatted,
                                                             clearable: "",
@@ -45168,7 +45269,7 @@ var render = function () {
                                                               function (
                                                                 $event
                                                               ) {
-                                                                _vm.iDateAcquired =
+                                                                _vm.iDatePosted =
                                                                   null
                                                               },
                                                           },
@@ -45197,17 +45298,17 @@ var render = function () {
                                           _c(
                                             "v-date-picker",
                                             {
-                                              ref: "dateAcquiredPicker",
+                                              ref: "datePostedPicker",
                                               attrs: {
                                                 scrollable: "",
                                                 clearable: "",
                                               },
                                               model: {
-                                                value: _vm.iDateAcquired,
+                                                value: _vm.iDatePosted,
                                                 callback: function ($$v) {
-                                                  _vm.iDateAcquired = $$v
+                                                  _vm.iDatePosted = $$v
                                                 },
-                                                expression: "iDateAcquired",
+                                                expression: "iDatePosted",
                                               },
                                             },
                                             [
@@ -45243,7 +45344,7 @@ var render = function () {
                                                   on: {
                                                     click: function ($event) {
                                                       return _vm.$refs.dateDialog.save(
-                                                        _vm.iDateAcquired
+                                                        _vm.iDatePosted
                                                       )
                                                     },
                                                   },
@@ -45263,17 +45364,169 @@ var render = function () {
                                       _vm._v(" "),
                                       _c("v-text-field", {
                                         attrs: {
-                                          label: "Article / Item Name *",
-                                          outlined: "",
+                                          label: "Position *",
                                           rules: [_vm.rules.required],
+                                          outlined: "",
                                           clearable: "",
                                         },
                                         model: {
-                                          value: _vm.iArticle,
+                                          value: _vm.iPosition,
                                           callback: function ($$v) {
-                                            _vm.iArticle = $$v
+                                            _vm.iPosition = $$v
                                           },
-                                          expression: "iArticle",
+                                          expression: "iPosition",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            {
+                                              staticClass: "pb-0",
+                                              attrs: { cols: "6" },
+                                            },
+                                            [
+                                              _c("v-autocomplete", {
+                                                attrs: {
+                                                  items: _vm.campuses,
+                                                  "item-value": "id",
+                                                  "item-text": "name",
+                                                  label: "Campus *",
+                                                  rules: [_vm.rules.required],
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value: _vm.iCampus,
+                                                  callback: function ($$v) {
+                                                    _vm.iCampus = $$v
+                                                  },
+                                                  expression: "iCampus",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            {
+                                              staticClass: "pb-0",
+                                              attrs: { cols: "6" },
+                                            },
+                                            [
+                                              _c("v-autocomplete", {
+                                                attrs: {
+                                                  items: _vm.offices,
+                                                  "item-value": "id",
+                                                  "item-text": "name",
+                                                  label: "Office",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value: _vm.iOffice,
+                                                  callback: function ($$v) {
+                                                    _vm.iOffice = $$v
+                                                  },
+                                                  expression: "iOffice",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            {
+                                              staticClass: "pt-0",
+                                              attrs: { cols: "6" },
+                                            },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Vacancy Count *",
+                                                  rules: [
+                                                    _vm.rules.required,
+                                                    _vm.rules.number_min,
+                                                  ],
+                                                  type: "number",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value: _vm.iVacancyCount,
+                                                  callback: function ($$v) {
+                                                    _vm.iVacancyCount = $$v
+                                                  },
+                                                  expression: "iVacancyCount",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            {
+                                              staticClass: "pt-0",
+                                              attrs: { cols: "6" },
+                                            },
+                                            [
+                                              _c("v-autocomplete", {
+                                                attrs: {
+                                                  items: _vm.hrmo_types,
+                                                  "item-value": "id",
+                                                  "item-text": "name",
+                                                  label: "HRMO type *",
+                                                  rules: [_vm.rules.required],
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value: _vm.iHrmoTypes,
+                                                  callback: function ($$v) {
+                                                    _vm.iHrmoTypes = $$v
+                                                  },
+                                                  expression: "iHrmoTypes",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-autocomplete", {
+                                        attrs: {
+                                          items: _vm.job_status,
+                                          "item-value": "status_id",
+                                          "item-text": "status_name",
+                                          label: "Job Status *",
+                                          rules: [_vm.rules.required],
+                                          required: "",
+                                          outlined: "",
+                                          clearable: "",
+                                        },
+                                        model: {
+                                          value: _vm.iJobStatus,
+                                          callback: function ($$v) {
+                                            _vm.iJobStatus = $$v
+                                          },
+                                          expression: "iJobStatus",
                                         },
                                       }),
                                       _vm._v(" "),
@@ -45281,74 +45534,110 @@ var render = function () {
                                         attrs: {
                                           clearable: "",
                                           "clear-icon": "mdi-close",
-                                          label: "Item Description *",
-                                          error: _vm.hasDescriptionError,
-                                          "error-messages":
-                                            _vm.descriptionError,
-                                          rules: [_vm.rules.required],
+                                          label: "Job Qualification Education",
                                           "auto-grow": "",
                                           required: "",
                                           outlined: "",
                                         },
                                         model: {
-                                          value: _vm.iDescription,
+                                          value: _vm.iEducation,
                                           callback: function ($$v) {
-                                            _vm.iDescription = $$v
+                                            _vm.iEducation = $$v
                                           },
-                                          expression: "iDescription",
+                                          expression: "iEducation",
                                         },
                                       }),
                                       _vm._v(" "),
-                                      _c("v-autocomplete", {
+                                      _c("v-textarea", {
                                         attrs: {
-                                          items: _vm.categories,
-                                          "item-text": "name",
-                                          "item-value": "id",
-                                          label: "Category *",
-                                          "return-object": "",
-                                          rules: [_vm.rules.required],
+                                          clearable: "",
+                                          "clear-icon": "mdi-close",
+                                          label: "Job Qualification Experience",
+                                          "auto-grow": "",
                                           required: "",
                                           outlined: "",
-                                          clearable: "",
                                         },
                                         model: {
-                                          value: _vm.iCategory,
+                                          value: _vm.iExperience,
                                           callback: function ($$v) {
-                                            _vm.iCategory = $$v
+                                            _vm.iExperience = $$v
                                           },
-                                          expression: "iCategory",
+                                          expression: "iExperience",
                                         },
                                       }),
                                       _vm._v(" "),
-                                      _c(
-                                        "v-slide-y-transition",
-                                        [
-                                          _vm.hasSubcategories
-                                            ? [
-                                                _c("v-autocomplete", {
-                                                  attrs: {
-                                                    items: _vm.subcategories,
-                                                    rules: [_vm.rules.required],
-                                                    "item-text": "name",
-                                                    "item-value": "id",
-                                                    label: "Subcategory *",
-                                                    required: "",
-                                                    outlined: "",
-                                                    clearable: "",
-                                                  },
-                                                  model: {
-                                                    value: _vm.iSubcategory,
-                                                    callback: function ($$v) {
-                                                      _vm.iSubcategory = $$v
-                                                    },
-                                                    expression: "iSubcategory",
-                                                  },
-                                                }),
-                                              ]
-                                            : _vm._e(),
-                                        ],
-                                        2
-                                      ),
+                                      _c("v-textarea", {
+                                        attrs: {
+                                          clearable: "",
+                                          "clear-icon": "mdi-close",
+                                          label: "Job Qualification Training",
+                                          "auto-grow": "",
+                                          required: "",
+                                          outlined: "",
+                                        },
+                                        model: {
+                                          value: _vm.iTraining,
+                                          callback: function ($$v) {
+                                            _vm.iTraining = $$v
+                                          },
+                                          expression: "iTraining",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-textarea", {
+                                        attrs: {
+                                          clearable: "",
+                                          "clear-icon": "mdi-close",
+                                          label:
+                                            "Job Qualification Eligibility",
+                                          "auto-grow": "",
+                                          required: "",
+                                          outlined: "",
+                                        },
+                                        model: {
+                                          value: _vm.iEligibility,
+                                          callback: function ($$v) {
+                                            _vm.iEligibility = $$v
+                                          },
+                                          expression: "iEligibility",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-textarea", {
+                                        attrs: {
+                                          clearable: "",
+                                          "clear-icon": "mdi-close",
+                                          label: "Job Qualification Other",
+                                          "auto-grow": "",
+                                          required: "",
+                                          outlined: "",
+                                        },
+                                        model: {
+                                          value: _vm.iOther,
+                                          callback: function ($$v) {
+                                            _vm.iOther = $$v
+                                          },
+                                          expression: "iOther",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-textarea", {
+                                        attrs: {
+                                          clearable: "",
+                                          "clear-icon": "mdi-close",
+                                          label: "Job Duties",
+                                          "auto-grow": "",
+                                          required: "",
+                                          outlined: "",
+                                        },
+                                        model: {
+                                          value: _vm.iDuties,
+                                          callback: function ($$v) {
+                                            _vm.iDuties = $$v
+                                          },
+                                          expression: "iDuties",
+                                        },
+                                      }),
                                       _vm._v(" "),
                                       _c("v-autocomplete", {
                                         attrs: {
@@ -45585,7 +45874,7 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                Save Item\n              "
+                                    "\n                Save Job\n              "
                                   ),
                                 ]
                               ),
@@ -96418,7 +96707,7 @@ var index = {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./jobposting.js": "./resources/js/store/modules/jobposting.js"
+	"./jobpostings.js": "./resources/js/store/modules/jobpostings.js"
 };
 
 

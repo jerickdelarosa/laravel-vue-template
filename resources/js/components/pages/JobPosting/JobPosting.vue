@@ -14,7 +14,7 @@
         <v-tooltip bottom>
           <template #activator="{ on: refreshTooltip }">
             <v-btn
-              @click="getInventories()"
+              @click="getJobs()"
               icon
               v-on="refreshTooltip"
             >
@@ -105,7 +105,7 @@
 
     <!-- INVENTORY FORM -->
     <job-posting-form-dialog
-      :visible="inventoryDialog"
+      :visible="userRoleDialog"
       :item-id="selectedItem"
       @close="closeItemDialog"
     />
@@ -152,7 +152,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next((vm) => {
-      vm.getInventories()
+      vm.getJobs()
     })
   },
   data () {
@@ -165,7 +165,7 @@ export default {
           'This field must contain valid characters.'
       },
 
-      inventoryDialog: false,
+      userRoleDialog: true,
 
       deleteDialog: false,
 
@@ -226,7 +226,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      inventories: 'jobposting/LIST'
+      inventories: 'jobpostings/LIST'
     })
   },
   watch: {
@@ -234,13 +234,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      _getInventories: 'jobposting/GET',
-      _deleteItem: 'jobposting/DELETE'
+      _getJobs: 'jobpostings/GET',
+      _deleteItem: 'jobpostings/DELETE'
     }),
 
-    getInventories () {
+    getJobs () {
       this.loading = true
-      this._getInventories()
+      this._getJobs()
         .finally(() => {
           this.loading = false
         })
@@ -248,15 +248,15 @@ export default {
 
     // Create Item
     openItemDialog () {
-      this.inventoryDialog = true
+      this.userRoleDialog = true
     },
 
     closeItemDialog (mustReload) {
-      this.inventoryDialog = false
+      this.userRoleDialog = false
       this.selectedItem = null
 
       if (mustReload) {
-        this.getInventories()
+        this.getJobs()
       }
     },
 
@@ -276,7 +276,7 @@ export default {
     // SHOW EDIT DIALOG FOR SELECTED CATEGORY
     editItem (item) {
       this.selectedItem = item?.code
-      this.inventoryDialog = true
+      this.userRoleDialog = true
     },
 
     // DELETE
@@ -296,7 +296,7 @@ export default {
       })
         .then((response) => {
           if (response?.deleted) {
-            this.getInventories()
+            this.getJobs()
             this.closeDelete()
           }
         })

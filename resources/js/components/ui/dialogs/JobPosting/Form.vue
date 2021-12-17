@@ -46,7 +46,7 @@
             </template>
             <template v-else>
               <v-toolbar-title>
-                Add New Item
+                Add New Job
               </v-toolbar-title>
             </template>
           </template>
@@ -94,34 +94,26 @@
                     color="grey lighten-4"
                   >
                     <v-toolbar-title class="title">
-                      Item Details
+                      Job Details
                     </v-toolbar-title>
                   </v-toolbar>
                   <v-divider />
                   <v-card-text>
-                    <!-- PO Number -->
-                    <v-text-field
-                      v-model="iPoNum"
-                      label="PO Number"
-                      outlined
-                      clearable
-                    />
-
-                    <!-- Date Acquired -->
+                    <!-- Date Posted -->
                     <v-dialog
                       ref="dateDialog"
                       v-model="dateDialog"
-                      :return-value.sync="iDateAcquired"
+                      :return-value.sync="iDatePosted"
                       persistent
                       width="290px"
                     >
                       <template #activator="{ on, attrs }">
                         <v-text-field
                           outlined
-                          label="Date Acquired *"
+                          label="Date Posted *"
                           :value="dateFormatted"
                           clearable
-                          @click:clear="iDateAcquired = null"
+                          @click:clear="iDatePosted = null"
                           readonly
                           v-bind="attrs"
                           v-on="on"
@@ -131,9 +123,9 @@
                       </template>
 
                       <v-date-picker
-                        v-model="iDateAcquired"
+                        v-model="iDatePosted"
                         scrollable
-                        ref="dateAcquiredPicker"
+                        ref="datePostedPicker"
                         clearable
                       >
                         <v-spacer />
@@ -147,66 +139,171 @@
                         <v-btn
                           text
                           color="primary"
-                          @click="$refs.dateDialog.save(iDateAcquired)"
+                          @click="$refs.dateDialog.save(iDatePosted)"
                         >
                           OK
                         </v-btn>
                       </v-date-picker>
                     </v-dialog>
 
-                    <!-- Article -->
+                    <!-- Job Position -->
                     <v-text-field
-                      label="Article / Item Name *"
-                      outlined
-                      v-model="iArticle"
+                      v-model="iPosition"
+                      label="Position *"
                       :rules="[rules.required]"
+                      outlined
                       clearable
                     />
 
-                    <!-- Description -->
+                    <!-- Campus and Office -->
+                    <v-row>
+                      <v-col
+                        cols="6"
+                        class="pb-0"
+                      >
+                        <v-autocomplete
+                          v-model="iCampus"
+                          :items="campuses"
+                          item-value="id"
+                          item-text="name"
+                          label="Campus *"
+                          :rules="[rules.required]"
+                          required
+                          outlined
+                          clearable
+                        />
+                      </v-col>
+
+                      <v-col
+                        cols="6"
+                        class="pb-0"
+                      >
+                        <v-autocomplete
+                          v-model="iOffice"
+                          :items="offices"
+                          item-value="id"
+                          item-text="name"
+                          label="Office"
+                          required
+                          outlined
+                          clearable
+                        />
+                      </v-col>
+                    </v-row>
+
+                    <!-- Vacancy Count and HRMO Type -->
+                    <v-row>
+                      <v-col
+                        cols="6"
+                        class="pt-0"
+                      >
+                        <v-text-field
+                          v-model="iVacancyCount"
+                          label="Vacancy Count *"
+                          :rules="[rules.required, rules.number_min]"
+                          type="number"
+                          required
+                          outlined
+                          clearable
+                        />
+                      </v-col>
+
+                      <v-col
+                        cols="6"
+                        class="pt-0"
+                      >
+                        <v-autocomplete
+                          v-model="iHrmoTypes"
+                          :items="hrmo_types"
+                          item-value="id"
+                          item-text="name"
+                          label="HRMO type *"
+                          :rules="[rules.required]"
+                          required
+                          outlined
+                          clearable
+                        />
+                      </v-col>
+                    </v-row>
+
+                    <!-- Job Status -->
+                    <v-autocomplete
+                      v-model="iJobStatus"
+                      :items="job_status"
+                      item-value="status_id"
+                      item-text="status_name"
+                      label="Job Status *"
+                      :rules="[rules.required]"
+                      required
+                      outlined
+                      clearable
+                    />
+
+                    <!-- Job Qualifications - Education -->
                     <v-textarea
-                      v-model="iDescription"
+                      v-model="iEducation"
                       clearable
                       clear-icon="mdi-close"
-                      label="Item Description *"
-                      :error="hasDescriptionError"
-                      :error-messages="descriptionError"
-                      :rules="[rules.required]"
+                      label="Job Qualification Education"
                       auto-grow
                       required
                       outlined
                     />
 
-                    <!-- Category -->
-                    <v-autocomplete
-                      v-model="iCategory"
-                      :items="categories"
-                      item-text="name"
-                      item-value="id"
-                      label="Category *"
-                      return-object
-                      :rules="[rules.required]"
+                    <!-- Job Qualifications - Experience -->
+                    <v-textarea
+                      v-model="iExperience"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Experience"
+                      auto-grow
                       required
                       outlined
-                      clearable
                     />
 
-                    <!-- Subcategory -->
-                    <v-slide-y-transition>
-                      <template v-if="hasSubcategories">
-                        <v-autocomplete
-                          v-model="iSubcategory"
-                          :items="subcategories"
-                          :rules="[rules.required]"
-                          item-text="name"
-                          item-value="id"
-                          label="Subcategory *"
-                          required
-                          outlined
-                          clearable
-                        />
-                      </template>
-                    </v-slide-y-transition>
+                    <!-- Job Qualifications - Training -->
+                    <v-textarea
+                      v-model="iTraining"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Training"
+                      auto-grow
+                      required
+                      outlined
+                    />
+
+                    <!-- Job Qualifications - Eligibility  -->
+                    <v-textarea
+                      v-model="iEligibility"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Eligibility"
+                      auto-grow
+                      required
+                      outlined
+                    />
+
+                    <!-- Job Qualifications - Other  -->
+                    <v-textarea
+                      v-model="iOther"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Other"
+                      auto-grow
+                      required
+                      outlined
+                    />
+
+                    <!-- Job Duties -->
+                    <v-textarea
+                      v-model="iDuties"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Duties"
+                      auto-grow
+                      required
+                      outlined
+                    />
 
                     <!-- Source of Fund -->
                     <v-autocomplete
@@ -248,6 +345,7 @@
                           clearable
                         />
                       </v-col>
+
                       <v-col
                         cols="6"
                         class="pb-0"
@@ -326,7 +424,7 @@
                   large
                   type="submit"
                 >
-                  Save Item
+                  Save Job
                 </v-btn>
               </v-col>
             </v-row>
@@ -366,37 +464,86 @@ export default {
       },
 
       formLoading: false,
-      inventoryForm: null,
-
-      itemName: null,
+      userRoleForm: null,
 
       saving: false,
-      inventoryErrors: null,
-      iPoNum: null,
-      iArticle: null,
-      iDescription: null,
-      iCategory: null,
-      iSubcategory: null,
-      iFund: null,
-      iAmount: null,
-      iQuantity: null,
-      iUnit: null,
-      iWarrantyDuration: null,
-      iWarrantyLength: null,
-      dateDialog: false,
-      iDateAcquired: null
+      userRoleErrors: null,
+
+      dataDialog: false,
+      iDatePosted: null,
+
+      campuses: [
+        {
+          id: 1,
+          name: 'Malolos'
+        },
+        {
+          id: 2,
+          name: 'Bustos'
+        },
+        {
+          id: 3,
+          name: 'Meneses'
+        },
+        {
+          id: 4,
+          name: 'Sarmiento'
+        },
+        {
+          id: 5,
+          name: 'Hagonoy'
+        }
+      ],
+
+      offices: [],
+
+      hrmo_types: [
+        {
+          id: 1,
+          name: 'Central',
+          email: 'chrmo.recruitment@bulsu.edu.ph'
+        },
+        {
+          id: 2,
+          name: 'Main',
+          email: 'hrmo.main@bulsu.edu.ph'
+        },
+        {
+          id: 3,
+          name: 'External',
+          email: 'hrmo.external@bulsu.edu.ph'
+        }
+      ]
+
     }
   },
   computed: {
     ...mapGetters({
-      funds: 'jobposting/FUND_LIST',
-      locations: 'jobposting/LOCATION_LIST',
-      measurements: 'jobposting/MEASUREMENT_LIST',
-      offices: 'jobposting/OFFICE_LIST',
-      categories: 'jobposting/CATEGORY_LIST',
-      warrantyLengths: 'jobposting/WARRANTY_LENGTH_LIST',
-      _subcategories: 'jobposting/SUBCATEGORY_LIST'
+      funds: 'jobpostings/FUND_LIST',
+      locations: 'jobpostings/LOCATION_LIST',
+      measurements: 'jobpostings/MEASUREMENT_LIST',
+      offices: 'jobpostings/OFFICE_LIST',
+      categories: 'jobpostings/CATEGORY_LIST',
+      warrantyLengths: 'jobpostings/WARRANTY_LENGTH_LIST',
+      _subcategories: 'jobpostings/SUBCATEGORY_LIST'
     }),
+
+    datePostedError () {
+      return this.jobPostingErrors?.id
+    },
+    hasDatePostedError () {
+      return !!this.datePostedError
+    },
+    dateFormatted () {
+      return this.iDatePosted ? moment(this.iDatePosted).format('YYYY-MM-DD') : ''
+    },
+
+    hasWarrantyDuration () {
+      return !!this.iWarrantyDuration
+    },
+    hasWarrantyLength () {
+      return !!this.iWarrantyLength
+    },
     subcategories () {
       return this.iCategory?.subcategories
     },
@@ -409,12 +556,7 @@ export default {
     hasDeliveredByError () {
       return !!this.deliveredByError
     },
-    dateAcquiredError () {
-      return this.inventoryErrors?.code
-    },
-    hasDateAcquiredError () {
-      return !!this.dateAcquiredError
-    },
+
     descriptionError () {
       return this.inventoryErrors?.code
     },
@@ -429,15 +571,6 @@ export default {
     },
     hasSelectedItem () {
       return !!this.itemId
-    },
-    dateFormatted () {
-      return this.iDateAcquired ? moment(this.iDateAcquired).format('MM/DD/YYYY') : ''
-    },
-    hasWarrantyDuration () {
-      return !!this.iWarrantyDuration
-    },
-    hasWarrantyLength () {
-      return !!this.iWarrantyLength
     }
 
   },
@@ -464,10 +597,10 @@ export default {
 
   methods: {
     ...mapActions({
-      _getData: 'jobposting/GET_DATA',
-      _editItem: 'jobposting/EDIT',
-      _saveItem: 'jobposting/SAVE',
-      _updateItem: 'jobposting/UPDATE'
+      _getData: 'jobpostings/GET_DATA',
+      _editItem: 'jobpostings/EDIT',
+      _saveItem: 'jobpostings/SAVE',
+      _updateItem: 'jobpostings/UPDATE'
     }),
     async getData () {
       this.formLoading = true
