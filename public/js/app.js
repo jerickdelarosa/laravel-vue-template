@@ -2180,8 +2180,8 @@ __webpack_require__.r(__webpack_exports__);
         title: 'Dashboard',
         icon: 'mdi-view-dashboard-outline'
       }, {
-        to: 'job-posting',
-        title: 'Job Posting',
+        to: 'job-openings',
+        title: 'Job Openings',
         icon: 'mdi-briefcase-outline'
       }]
     };
@@ -2196,10 +2196,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2207,7 +2207,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ui_dialogs_JobPosting_Form_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ui/dialogs/JobPosting/Form.vue */ "./resources/js/components/ui/dialogs/JobPosting/Form.vue");
+/* harmony import */ var _ui_dialogs_JobOpenings_Form_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ui/dialogs/JobOpenings/Form.vue */ "./resources/js/components/ui/dialogs/JobOpenings/Form.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -2363,7 +2363,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    JobPostingFormDialog: _ui_dialogs_JobPosting_Form_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    JobPostingFormDialog: _ui_dialogs_JobOpenings_Form_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     next(function (vm) {
@@ -2504,10 +2504,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2532,76 +2532,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3002,6 +2932,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       userRoleErrors: null,
       dataDialog: false,
       iDatePosted: null,
+      steps: [1, 2, 3, 4],
+      e1: 1,
       campuses: [{
         id: 1,
         name: 'Malolos'
@@ -3431,7 +3363,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/pages/Dashboard.vue */ "./resources/js/components/pages/Dashboard.vue");
-/* harmony import */ var _components_pages_JobPosting_JobPosting_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/pages/JobPosting/JobPosting.vue */ "./resources/js/components/pages/JobPosting/JobPosting.vue");
+/* harmony import */ var _components_pages_JobOpenings_JobOpenings_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/pages/JobOpenings/JobOpenings.vue */ "./resources/js/components/pages/JobOpenings/JobOpenings.vue");
 /* harmony import */ var _components_navigation_Main_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/navigation/Main.vue */ "./resources/js/components/navigation/Main.vue");
 
  // =======================================================================
@@ -3483,10 +3415,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     }
   }, // Job Posting
   {
-    path: '/job-posting',
-    name: 'job-posting',
+    path: '/job-openings',
+    name: 'job-openings',
     components: {
-      "default": _components_pages_JobPosting_JobPosting_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+      "default": _components_pages_JobOpenings_JobOpenings_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
       navigation: _components_navigation_Main_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
     },
     meta: {
@@ -4029,10 +3961,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".no-transition {\n  transition: none !
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -43787,10 +43719,10 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -43800,7 +43732,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobPosting.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobOpenings.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss&");
 
             
 
@@ -43809,11 +43741,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -44243,10 +44175,10 @@ component.options.__file = "resources/js/components/pages/Dashboard.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/JobPosting/JobPosting.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/pages/JobPosting/JobPosting.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/components/pages/JobOpenings/JobOpenings.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/pages/JobOpenings/JobOpenings.vue ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -44254,9 +44186,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _JobPosting_vue_vue_type_template_id_3dd88f49___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JobPosting.vue?vue&type=template&id=3dd88f49& */ "./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=template&id=3dd88f49&");
-/* harmony import */ var _JobPosting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JobPosting.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=script&lang=js&");
-/* harmony import */ var _JobPosting_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JobPosting.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _JobOpenings_vue_vue_type_template_id_60c15f9b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JobOpenings.vue?vue&type=template&id=60c15f9b& */ "./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=template&id=60c15f9b&");
+/* harmony import */ var _JobOpenings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JobOpenings.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=script&lang=js&");
+/* harmony import */ var _JobOpenings_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JobOpenings.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -44267,9 +44199,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _JobPosting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _JobPosting_vue_vue_type_template_id_3dd88f49___WEBPACK_IMPORTED_MODULE_0__.render,
-  _JobPosting_vue_vue_type_template_id_3dd88f49___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _JobOpenings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _JobOpenings_vue_vue_type_template_id_60c15f9b___WEBPACK_IMPORTED_MODULE_0__.render,
+  _JobOpenings_vue_vue_type_template_id_60c15f9b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -44279,15 +44211,15 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pages/JobPosting/JobPosting.vue"
+component.options.__file = "resources/js/components/pages/JobOpenings/JobOpenings.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/ui/dialogs/JobPosting/Form.vue":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/ui/dialogs/JobPosting/Form.vue ***!
-  \****************************************************************/
+/***/ "./resources/js/components/ui/dialogs/JobOpenings/Form.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/ui/dialogs/JobOpenings/Form.vue ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -44295,8 +44227,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Form_vue_vue_type_template_id_a678e30c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form.vue?vue&type=template&id=a678e30c& */ "./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=template&id=a678e30c&");
-/* harmony import */ var _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form.vue?vue&type=script&lang=js& */ "./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Form_vue_vue_type_template_id_ba478f82___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form.vue?vue&type=template&id=ba478f82& */ "./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=template&id=ba478f82&");
+/* harmony import */ var _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form.vue?vue&type=script&lang=js& */ "./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -44307,8 +44239,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Form_vue_vue_type_template_id_a678e30c___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Form_vue_vue_type_template_id_a678e30c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Form_vue_vue_type_template_id_ba478f82___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Form_vue_vue_type_template_id_ba478f82___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -44318,7 +44250,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/ui/dialogs/JobPosting/Form.vue"
+component.options.__file = "resources/js/components/ui/dialogs/JobOpenings/Form.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -44355,9 +44287,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobOpenings.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************!*\
-  !*** ./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -44366,23 +44314,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobPosting.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Form.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Form.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
@@ -44400,15 +44332,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss& ***!
-  \***************************************************************************************************/
+/***/ "./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss& ***!
+  \*****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobPosting.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobOpenings.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=style&index=0&lang=scss&");
 
 
 /***/ }),
@@ -44464,36 +44396,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=template&id=3dd88f49&":
+/***/ "./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=template&id=60c15f9b&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=template&id=60c15f9b& ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_template_id_60c15f9b___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_template_id_60c15f9b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobOpenings_vue_vue_type_template_id_60c15f9b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobOpenings.vue?vue&type=template&id=60c15f9b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=template&id=60c15f9b&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=template&id=ba478f82&":
 /*!************************************************************************************************!*\
-  !*** ./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=template&id=3dd88f49& ***!
+  !*** ./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=template&id=ba478f82& ***!
   \************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_template_id_3dd88f49___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_template_id_3dd88f49___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_ba478f82___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_ba478f82___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobPosting_vue_vue_type_template_id_3dd88f49___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobPosting.vue?vue&type=template&id=3dd88f49& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=template&id=3dd88f49&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=template&id=a678e30c&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=template&id=a678e30c& ***!
-  \***********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_a678e30c___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_a678e30c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_a678e30c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Form.vue?vue&type=template&id=a678e30c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=template&id=a678e30c&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_ba478f82___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Form.vue?vue&type=template&id=ba478f82& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=template&id=ba478f82&");
 
 
 /***/ }),
@@ -44680,10 +44612,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=template&id=3dd88f49&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobPosting/JobPosting.vue?vue&type=template&id=3dd88f49& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=template&id=60c15f9b&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/JobOpenings/JobOpenings.vue?vue&type=template&id=60c15f9b& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -44711,7 +44643,7 @@ var render = function () {
               _c(
                 "v-toolbar-title",
                 { staticClass: " text-subtitle-1 font-weight-bold" },
-                [_vm._v("\n        Job Posting\n      ")]
+                [_vm._v("\n        Job Openings\n      ")]
               ),
               _vm._v(" "),
               _c("v-spacer"),
@@ -45003,10 +44935,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=template&id=a678e30c&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobPosting/Form.vue?vue&type=template&id=a678e30c& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=template&id=ba478f82&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/dialogs/JobOpenings/Form.vue?vue&type=template&id=ba478f82& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -45158,64 +45090,65 @@ var render = function () {
                   ),
                   _vm._v(" "),
                   _c(
-                    "v-form",
-                    {
-                      ref: "inventoryForm",
-                      on: {
-                        submit: function ($event) {
-                          $event.preventDefault()
-                          return _vm.submitForm.apply(null, arguments)
-                        },
-                      },
-                      model: {
-                        value: _vm.inventoryForm,
-                        callback: function ($$v) {
-                          _vm.inventoryForm = $$v
-                        },
-                        expression: "inventoryForm",
-                      },
-                    },
+                    "v-row",
+                    { attrs: { justify: "center" } },
                     [
                       _c(
-                        "v-row",
-                        { attrs: { justify: "center" } },
+                        "v-col",
+                        { attrs: { cols: "12", md: "10", lg: "8", xl: "8" } },
                         [
                           _c(
-                            "v-col",
+                            "v-stepper",
                             {
-                              attrs: { cols: "12", md: "10", lg: "7", xl: "5" },
+                              model: {
+                                value: _vm.e1,
+                                callback: function ($$v) {
+                                  _vm.e1 = $$v
+                                },
+                                expression: "e1",
+                              },
                             },
                             [
                               _c(
-                                "v-card",
-                                { attrs: { outlined: "" } },
+                                "v-stepper-header",
                                 [
-                                  _c(
-                                    "v-toolbar",
-                                    {
-                                      attrs: {
-                                        flat: "",
-                                        color: "grey lighten-4",
-                                      },
-                                    },
-                                    [
+                                  _vm._l(_vm.steps, function (n) {
+                                    return [
                                       _c(
-                                        "v-toolbar-title",
-                                        { staticClass: "title" },
+                                        "v-stepper-step",
+                                        {
+                                          key: n + "-step",
+                                          attrs: {
+                                            complete: _vm.e1 > n,
+                                            step: n,
+                                            editable: "",
+                                            "edit-icon": "mdi-check",
+                                          },
+                                        },
                                         [
                                           _vm._v(
-                                            "\n                    Job Details\n                  "
+                                            "\n                    Step " +
+                                              _vm._s(n) +
+                                              "\n                  "
                                           ),
                                         ]
                                       ),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-divider"),
-                                  _vm._v(" "),
+                                      _vm._v(" "),
+                                      n !== _vm.steps
+                                        ? _c("v-divider", { key: n })
+                                        : _vm._e(),
+                                    ]
+                                  }),
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-stepper-items",
+                                [
                                   _c(
-                                    "v-card-text",
+                                    "v-stepper-content",
+                                    { key: "step-1", attrs: { step: "1" } },
                                     [
                                       _c(
                                         "v-dialog",
@@ -45250,6 +45183,7 @@ var render = function () {
                                                     _vm._g(
                                                       _vm._b(
                                                         {
+                                                          staticClass: "pt-3",
                                                           attrs: {
                                                             outlined: "",
                                                             label:
@@ -45263,6 +45197,8 @@ var render = function () {
                                                                 .required,
                                                             ],
                                                             required: "",
+                                                            "append-icon":
+                                                              "mdi-calendar",
                                                           },
                                                           on: {
                                                             "click:clear":
@@ -45510,6 +45446,47 @@ var render = function () {
                                         1
                                       ),
                                       _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { color: "primary" },
+                                          on: {
+                                            click: function ($event) {
+                                              _vm.e1 = 2
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                    Continue\n                  "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { text: "" },
+                                          on: {
+                                            click: function ($event) {
+                                              _vm.e1 = 1
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                    Cancel\n                  "
+                                          ),
+                                        ]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-stepper-content",
+                                    { key: "step-2", attrs: { step: "2" } },
+                                    [
                                       _c("v-autocomplete", {
                                         attrs: {
                                           items: _vm.job_status,
@@ -45639,244 +45616,44 @@ var render = function () {
                                         },
                                       }),
                                       _vm._v(" "),
-                                      _c("v-autocomplete", {
-                                        attrs: {
-                                          items: _vm.funds,
-                                          "item-text": "name",
-                                          "item-value": "id",
-                                          label: "Source of Fund *",
-                                          rules: [_vm.rules.required],
-                                          required: "",
-                                          outlined: "",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iFund,
-                                          callback: function ($$v) {
-                                            _vm.iFund = $$v
-                                          },
-                                          expression: "iFund",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Item Amount *",
-                                          rules: [
-                                            _vm.rules.required,
-                                            _vm.rules.number_min,
-                                          ],
-                                          required: "",
-                                          outlined: "",
-                                          type: "number",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iAmount,
-                                          callback: function ($$v) {
-                                            _vm.iAmount = $$v
-                                          },
-                                          expression: "iAmount",
-                                        },
-                                      }),
-                                      _vm._v(" "),
                                       _c(
-                                        "v-row",
+                                        "v-btn",
+                                        {
+                                          attrs: { color: "primary" },
+                                          on: {
+                                            click: function ($event) {
+                                              _vm.e1 = 3
+                                            },
+                                          },
+                                        },
                                         [
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pb-0",
-                                              attrs: { cols: "6" },
-                                            },
-                                            [
-                                              _c("v-text-field", {
-                                                attrs: {
-                                                  label: "Quantity *",
-                                                  rules: [
-                                                    _vm.rules.required,
-                                                    _vm.rules.number_min,
-                                                  ],
-                                                  type: "number",
-                                                  required: "",
-                                                  outlined: "",
-                                                  clearable: "",
-                                                },
-                                                model: {
-                                                  value: _vm.iQuantity,
-                                                  callback: function ($$v) {
-                                                    _vm.iQuantity = $$v
-                                                  },
-                                                  expression: "iQuantity",
-                                                },
-                                              }),
-                                            ],
-                                            1
+                                          _vm._v(
+                                            "\n                    Continue\n                  "
                                           ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pb-0",
-                                              attrs: { cols: "6" },
-                                            },
-                                            [
-                                              _c("v-autocomplete", {
-                                                attrs: {
-                                                  items: _vm.measurements,
-                                                  "item-value": "id",
-                                                  "item-text": "unit",
-                                                  label:
-                                                    "Unit of Measurement *",
-                                                  rules: [_vm.rules.required],
-                                                  required: "",
-                                                  outlined: "",
-                                                  clearable: "",
-                                                },
-                                                model: {
-                                                  value: _vm.iUnit,
-                                                  callback: function ($$v) {
-                                                    _vm.iUnit = $$v
-                                                  },
-                                                  expression: "iUnit",
-                                                },
-                                              }),
-                                            ],
-                                            1
-                                          ),
-                                        ],
-                                        1
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "v-row",
+                                        "v-btn",
+                                        {
+                                          attrs: { text: "" },
+                                          on: {
+                                            click: function ($event) {
+                                              _vm.e1 = 1
+                                            },
+                                          },
+                                        },
                                         [
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "py-0",
-                                              attrs: { cols: "6" },
-                                            },
-                                            [
-                                              _c("v-text-field", {
-                                                attrs: {
-                                                  label: "Warranty Duration *",
-                                                  type: "number",
-                                                  rules: _vm.hasWarrantyLength
-                                                    ? [
-                                                        _vm.rules.required,
-                                                        _vm.rules.number_min,
-                                                      ]
-                                                    : [],
-                                                  required:
-                                                    _vm.hasWarrantyLength,
-                                                  outlined: "",
-                                                  clearable: "",
-                                                },
-                                                model: {
-                                                  value: _vm.iWarrantyDuration,
-                                                  callback: function ($$v) {
-                                                    _vm.iWarrantyDuration = $$v
-                                                  },
-                                                  expression:
-                                                    "iWarrantyDuration",
-                                                },
-                                              }),
-                                            ],
-                                            1
+                                          _vm._v(
+                                            "\n                    Back\n                  "
                                           ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "py-0",
-                                              attrs: { cols: "6" },
-                                            },
-                                            [
-                                              _c("v-autocomplete", {
-                                                attrs: {
-                                                  items: _vm.warrantyLengths,
-                                                  label: "Warranty Length *",
-                                                  "item-value": "id",
-                                                  "item-text": "name",
-                                                  rules: _vm.hasWarrantyDuration
-                                                    ? [_vm.rules.required]
-                                                    : [],
-                                                  required:
-                                                    _vm.hasWarrantyDuration,
-                                                  outlined: "",
-                                                  clearable: "",
-                                                },
-                                                model: {
-                                                  value: _vm.iWarrantyLength,
-                                                  callback: function ($$v) {
-                                                    _vm.iWarrantyLength = $$v
-                                                  },
-                                                  expression: "iWarrantyLength",
-                                                },
-                                              }),
-                                            ],
-                                            1
-                                          ),
-                                        ],
-                                        1
+                                        ]
                                       ),
                                     ],
                                     1
                                   ),
                                 ],
                                 1
-                              ),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-row",
-                        { attrs: { justify: "center" } },
-                        [
-                          _c(
-                            "v-col",
-                            {
-                              staticClass: " text-right",
-                              attrs: { cols: "12", md: "10", lg: "7", xl: "5" },
-                            },
-                            [
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { depressed: "", large: "" },
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.closeDialog(false)
-                                    },
-                                  },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                Cancel\n              "
-                                  ),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    color: "primary",
-                                    depressed: "",
-                                    large: "",
-                                    type: "submit",
-                                  },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                Save Job\n              "
-                                  ),
-                                ]
                               ),
                             ],
                             1

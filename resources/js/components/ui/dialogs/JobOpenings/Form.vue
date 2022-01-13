@@ -76,29 +76,41 @@
               />
             </template>
           </v-overlay>
-          <v-form
-            ref="inventoryForm"
-            v-model="inventoryForm"
-            @submit.prevent="submitForm"
-          >
-            <v-row justify="center">
-              <v-col
-                cols="12"
-                md="10"
-                lg="7"
-                xl="5"
-              >
-                <v-card outlined>
-                  <v-toolbar
-                    flat
-                    color="grey lighten-4"
+
+          <v-row justify="center">
+            <v-col
+              cols="12"
+              md="10"
+              lg="8"
+              xl="8"
+            >
+              <!-- STEPPER -->
+              <v-stepper v-model="e1">
+                <v-stepper-header>
+                  <template v-for="n in steps">
+                    <v-stepper-step
+                      :key="`${n}-step`"
+                      :complete="e1 > n"
+                      :step="n"
+                      editable
+                      edit-icon="mdi-check"
+                    >
+                      Step {{ n }}
+                    </v-stepper-step>
+
+                    <v-divider
+                      v-if="n !== steps"
+                      :key="n"
+                    />
+                  </template>
+                </v-stepper-header>
+
+                <v-stepper-items>
+                  <!-- STEP 1 -->
+                  <v-stepper-content
+                    key="step-1"
+                    step="1"
                   >
-                    <v-toolbar-title class="title">
-                      Job Details
-                    </v-toolbar-title>
-                  </v-toolbar>
-                  <v-divider />
-                  <v-card-text>
                     <!-- Date Posted -->
                     <v-dialog
                       ref="dateDialog"
@@ -119,6 +131,8 @@
                           v-on="on"
                           :rules="[rules.required]"
                           required
+                          append-icon="mdi-calendar"
+                          class="pt-3"
                         />
                       </template>
 
@@ -226,6 +240,27 @@
                       </v-col>
                     </v-row>
 
+                    <!-- ACTIONS -->
+                    <v-btn
+                      color="primary"
+                      @click="e1 = 2"
+                    >
+                      Continue
+                    </v-btn>
+
+                    <v-btn
+                      @click="e1 = 1"
+                      text
+                    >
+                      Cancel
+                    </v-btn>
+                  </v-stepper-content>
+
+                  <!-- STEP 2 -->
+                  <v-stepper-content
+                    key="step-2"
+                    step="2"
+                  >
                     <!-- Job Status -->
                     <v-autocomplete
                       v-model="iJobStatus"
@@ -305,130 +340,25 @@
                       outlined
                     />
 
-                    <!-- Source of Fund -->
-                    <v-autocomplete
-                      v-model="iFund"
-                      :items="funds"
-                      item-text="name"
-                      item-value="id"
-                      label="Source of Fund *"
-                      :rules="[rules.required]"
-                      required
-                      outlined
-                      clearable
-                    />
+                    <!-- ACTIONS -->
+                    <v-btn
+                      color="primary"
+                      @click="e1 = 3"
+                    >
+                      Continue
+                    </v-btn>
 
-                    <!-- Amount -->
-                    <v-text-field
-                      v-model="iAmount"
-                      label="Item Amount *"
-                      :rules="[rules.required, rules.number_min]"
-                      required
-                      outlined
-                      type="number"
-                      clearable
-                    />
-
-                    <!-- Count and Unit -->
-                    <v-row>
-                      <v-col
-                        cols="6"
-                        class="pb-0"
-                      >
-                        <v-text-field
-                          v-model="iQuantity"
-                          label="Quantity *"
-                          :rules="[rules.required, rules.number_min]"
-                          type="number"
-                          required
-                          outlined
-                          clearable
-                        />
-                      </v-col>
-
-                      <v-col
-                        cols="6"
-                        class="pb-0"
-                      >
-                        <v-autocomplete
-                          v-model="iUnit"
-                          :items="measurements"
-                          item-value="id"
-                          item-text="unit"
-                          label="Unit of Measurement *"
-                          :rules="[rules.required]"
-                          required
-                          outlined
-                          clearable
-                        />
-                      </v-col>
-                    </v-row>
-
-                    <!-- Warranty -->
-                    <v-row>
-                      <v-col
-                        cols="6"
-                        class="py-0"
-                      >
-                        <v-text-field
-                          v-model="iWarrantyDuration"
-                          label="Warranty Duration *"
-                          type="number"
-                          :rules="hasWarrantyLength ? [rules.required, rules.number_min] : []"
-                          :required="hasWarrantyLength"
-                          outlined
-                          clearable
-                        />
-                      </v-col>
-                      <v-col
-                        cols="6"
-                        class="py-0"
-                      >
-                        <v-autocomplete
-                          v-model="iWarrantyLength"
-                          :items="warrantyLengths"
-                          label="Warranty Length *"
-                          item-value="id"
-                          item-text="name"
-                          :rules="hasWarrantyDuration ? [rules.required] : []"
-                          :required="hasWarrantyDuration"
-                          outlined
-                          clearable
-                        />
-                      </v-col>
-                    </v-row>
-                  </v-card-text>
-                </v-card>
-              </v-col>
-            </v-row>
-
-            <v-row justify="center">
-              <v-col
-                class=" text-right"
-                cols="12"
-                md="10"
-                lg="7"
-                xl="5"
-              >
-                <v-btn
-                  @click="closeDialog(false)"
-                  depressed
-                  large
-                >
-                  Cancel
-                </v-btn>
-
-                <v-btn
-                  color="primary"
-                  depressed
-                  large
-                  type="submit"
-                >
-                  Save Job
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-form>
+                    <v-btn
+                      @click="e1 = 1"
+                      text
+                    >
+                      Back
+                    </v-btn>
+                  </v-stepper-content>
+                </v-stepper-items>
+              </v-stepper>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card-text>
     </v-card>
@@ -471,6 +401,9 @@ export default {
 
       dataDialog: false,
       iDatePosted: null,
+
+      steps: [1, 2, 3, 4],
+      e1: 1,
 
       campuses: [
         {

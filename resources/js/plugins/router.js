@@ -8,7 +8,7 @@ import VueRouter from 'vue-router'
 import Dashboard from '../components/pages/Dashboard.vue'
 
 // Pages
-import JobPosting from '../components/pages/JobPosting/JobPosting.vue'
+import JobOpenings from '../components/pages/JobOpenings/JobOpenings.vue'
 
 // =======================================================================
 // IMPORT ROUTER CHILD COMPONENTS HERE
@@ -54,10 +54,10 @@ const router = new VueRouter({
 
     // Job Posting
     {
-      path: '/job-posting',
-      name: 'job-posting',
+      path: '/job-openings',
+      name: 'job-openings',
       components: {
-        default: JobPosting,
+        default: JobOpenings,
         navigation: MainNavigation
       },
       meta: {

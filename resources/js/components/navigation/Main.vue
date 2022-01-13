@@ -60,8 +60,8 @@ export default {
           icon: 'mdi-view-dashboard-outline'
         },
         {
-          to: 'job-posting',
-          title: 'Job Posting',
+          to: 'job-openings',
+          title: 'Job Openings',
           icon: 'mdi-briefcase-outline'
         }
       ]

@@ -1,0 +1,233 @@
+  <v-form
+            ref="inventoryForm"
+            v-model="inventoryForm"
+            @submit.prevent="submitForm"
+          >
+            <v-row justify="center">
+              <v-col
+                cols="12"
+                md="10"
+                lg="7"
+                xl="5"
+              >
+                <v-card outlined>
+                  <v-toolbar
+                    flat
+                    color="grey lighten-4"
+                  >
+                    <v-toolbar-title class="title">
+                      Job Details
+                    </v-toolbar-title>
+                  </v-toolbar>
+                  <v-divider />
+                  <v-card-text>
+                    <!-- Date Posted -->
+                    <v-dialog
+                      ref="dateDialog"
+                      v-model="dateDialog"
+                      :return-value.sync="iDatePosted"
+                      persistent
+                      width="290px"
+                    >
+                      <template #activator="{ on, attrs }">
+                        <v-text-field
+                          outlined
+                          label="Date Posted *"
+                          :value="dateFormatted"
+                          clearable
+                          @click:clear="iDatePosted = null"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                          :rules="[rules.required]"
+                          required
+                        />
+                      </template>
+
+                      <v-date-picker
+                        v-model="iDatePosted"
+                        scrollable
+                        ref="datePostedPicker"
+                        clearable
+                      >
+                        <v-spacer />
+                        <v-btn
+                          text
+                          color="primary"
+                          @click="dateDialog = false"
+                        >
+                          Cancel
+                        </v-btn>
+                        <v-btn
+                          text
+                          color="primary"
+                          @click="$refs.dateDialog.save(iDatePosted)"
+                        >
+                          OK
+                        </v-btn>
+                      </v-date-picker>
+                    </v-dialog>
+
+                    <!-- Job Position -->
+                    <v-text-field
+                      v-model="iPosition"
+                      label="Position *"
+                      :rules="[rules.required]"
+                      outlined
+                      clearable
+                    />
+
+                    <!-- Campus and Office -->
+                    <v-row>
+                      <v-col
+                        cols="6"
+                        class="pb-0"
+                      >
+                        <v-autocomplete
+                          v-model="iCampus"
+                          :items="campuses"
+                          item-value="id"
+                          item-text="name"
+                          label="Campus *"
+                          :rules="[rules.required]"
+                          required
+                          outlined
+                          clearable
+                        />
+                      </v-col>
+
+                      <v-col
+                        cols="6"
+                        class="pb-0"
+                      >
+                        <v-autocomplete
+                          v-model="iOffice"
+                          :items="offices"
+                          item-value="id"
+                          item-text="name"
+                          label="Office"
+                          required
+                          outlined
+                          clearable
+                        />
+                      </v-col>
+                    </v-row>
+
+                    <!-- Vacancy Count and HRMO Type -->
+                    <v-row>
+                      <v-col
+                        cols="6"
+                        class="pt-0"
+                      >
+                        <v-text-field
+                          v-model="iVacancyCount"
+                          label="Vacancy Count *"
+                          :rules="[rules.required, rules.number_min]"
+                          type="number"
+                          required
+                          outlined
+                          clearable
+                        />
+                      </v-col>
+
+                      <v-col
+                        cols="6"
+                        class="pt-0"
+                      >
+                        <v-autocomplete
+                          v-model="iHrmoTypes"
+                          :items="hrmo_types"
+                          item-value="id"
+                          item-text="name"
+                          label="HRMO type *"
+                          :rules="[rules.required]"
+                          required
+                          outlined
+                          clearable
+                        />
+                      </v-col>
+                    </v-row>
+
+                    <!-- Job Status -->
+                    <v-autocomplete
+                      v-model="iJobStatus"
+                      :items="job_status"
+                      item-value="status_id"
+                      item-text="status_name"
+                      label="Job Status *"
+                      :rules="[rules.required]"
+                      required
+                      outlined
+                      clearable
+                    />
+
+                    <!-- Job Qualifications - Education -->
+                    <v-textarea
+                      v-model="iEducation"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Education"
+                      auto-grow
+                      required
+                      outlined
+                    />
+
+                    <!-- Job Qualifications - Experience -->
+                    <v-textarea
+                      v-model="iExperience"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Experience"
+                      auto-grow
+                      required
+                      outlined
+                    />
+
+                    <!-- Job Qualifications - Training -->
+                    <v-textarea
+                      v-model="iTraining"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Training"
+                      auto-grow
+                      required
+                      outlined
+                    />
+
+                    <!-- Job Qualifications - Eligibility  -->
+                    <v-textarea
+                      v-model="iEligibility"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Eligibility"
+                      auto-grow
+                      required
+                      outlined
+                    />
+
+                    <!-- Job Qualifications - Other  -->
+                    <v-textarea
+                      v-model="iOther"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Qualification Other"
+                      auto-grow
+                      required
+                      outlined
+                    />
+
+                    <!-- Job Duties -->
+                    <v-textarea
+                      v-model="iDuties"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Job Duties"
+                      auto-grow
+                      required
+                      outlined
+                    />
+          </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-form>

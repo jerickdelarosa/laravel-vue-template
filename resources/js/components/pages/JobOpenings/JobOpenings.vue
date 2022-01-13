@@ -5,7 +5,7 @@
         <v-toolbar-title
           class=" text-subtitle-1 font-weight-bold"
         >
-          Job Posting
+          Job Openings
         </v-toolbar-title>
 
         <v-spacer />
@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import JobPostingFormDialog from '../../ui/dialogs/JobPosting/Form.vue'
+import JobPostingFormDialog from '../../ui/dialogs/JobOpenings/Form.vue'
 
 import { mapActions, mapGetters } from 'vuex'
 export default {
