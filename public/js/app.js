@@ -3466,19 +3466,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       e1: 1,
       campuses: [{
         id: 1,
-        name: 'Malolos'
+        name: 'Malolos Campus'
       }, {
         id: 2,
-        name: 'Bustos'
+        name: 'Bustos Campus'
       }, {
         id: 3,
-        name: 'Meneses'
+        name: 'Meneses Campus'
       }, {
         id: 4,
-        name: 'Sarmiento'
+        name: 'Sarmiento Campus'
       }, {
         id: 5,
-        name: 'Hagonoy'
+        name: 'Hagonoy Campus'
       }]
     };
   },
@@ -3509,15 +3509,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.getData();
       } else {
         this.resetFields();
-      }
-    },
-    iCategory: function iCategory(newVal, oldVal) {
-      if (!this.hasSelectedItem) {
-        this.iSubcategory = null;
-      } else {
-        if (oldVal) {
-          this.iSubcategory = null;
-        }
       }
     }
   },
@@ -3992,16 +3983,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 
 /***/ }),
 
-/***/ "./resources/js/store/modules/hrmo_types.js":
-/*!**************************************************!*\
-  !*** ./resources/js/store/modules/hrmo_types.js ***!
-  \**************************************************/
-/***/ (() => {
-
-
-
-/***/ }),
-
 /***/ "./resources/js/store/modules/jobopenings.js":
 /*!***************************************************!*\
   !*** ./resources/js/store/modules/jobopenings.js ***!
@@ -4073,9 +4054,11 @@ var actions = {
               commit = _ref.commit;
               _context.next = 3;
               return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/job_openings/create').then(function (response) {
-                commit('SET_OFFICE', response === null || response === void 0 ? void 0 : response.data.offices);
-                commit('SET_STATUS', response === null || response === void 0 ? void 0 : response.data.status);
-                commit('SET_HRMO_TYPE', response === null || response === void 0 ? void 0 : response.data.hrmoTypes);
+                var _response$data, _response$data2, _response$data3;
+
+                commit('SET_OFFICE', response === null || response === void 0 ? void 0 : (_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.offices);
+                commit('SET_STATUS', response === null || response === void 0 ? void 0 : (_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.status);
+                commit('SET_HRMO_TYPE', response === null || response === void 0 ? void 0 : (_response$data3 = response.data) === null || _response$data3 === void 0 ? void 0 : _response$data3.hrmoTypes);
               });
 
             case 3:
@@ -4106,9 +4089,9 @@ var actions = {
               commit = _ref2.commit;
               _context2.next = 3;
               return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/job_openings').then(function (response) {
-                var _response$data;
+                var _response$data4;
 
-                commit('SET_JOBS', response === null || response === void 0 ? void 0 : (_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.data);
+                commit('SET_JOBS', response === null || response === void 0 ? void 0 : (_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.data);
               });
 
             case 3:
@@ -4207,162 +4190,6 @@ var actions = {
     })
   } */
 
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  namespaced: true,
-  state: state,
-  getters: getters,
-  mutations: mutations,
-  actions: actions
-});
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/offices.js":
-/*!***********************************************!*\
-  !*** ./resources/js/store/modules/offices.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _api_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/api */ "./resources/js/api/api.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-var state = {
-  offices: []
-};
-var getters = {
-  OFFICE_LIST: function OFFICE_LIST(state) {
-    return state.offices;
-  }
-};
-var mutations = {
-  SET_OFFICES: function SET_OFFICES(state, payload) {
-    state.offices = payload;
-  }
-};
-var actions = {
-  GET: function () {
-    var _GET = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(_ref) {
-      var commit;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              commit = _ref.commit;
-              _context.next = 3;
-              return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/job_openings/offices').then(function (response) {
-                var _response$data;
-
-                commit('SET_OFFICES', response === null || response === void 0 ? void 0 : (_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.data);
-              });
-
-            case 3:
-              return _context.abrupt("return", _context.sent);
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    function GET(_x) {
-      return _GET.apply(this, arguments);
-    }
-
-    return GET;
-  }()
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  namespaced: true,
-  state: state,
-  getters: getters,
-  mutations: mutations,
-  actions: actions
-});
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/status.js":
-/*!**********************************************!*\
-  !*** ./resources/js/store/modules/status.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _api_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/api */ "./resources/js/api/api.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-var state = {
-  status: []
-};
-var getters = {
-  STATUS_LIST: function STATUS_LIST(state) {
-    return state.status;
-  }
-};
-var mutations = {
-  SET_STATUS: function SET_STATUS(state, payload) {
-    state.status = payload;
-  }
-};
-var actions = {
-  GET: function () {
-    var _GET = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(_ref) {
-      var commit;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              commit = _ref.commit;
-              _context.next = 3;
-              return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/job_openings/status').then(function (response) {
-                var _response$data;
-
-                commit('SET_STATUS', response === null || response === void 0 ? void 0 : (_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.data);
-              });
-
-            case 3:
-              return _context.abrupt("return", _context.sent);
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    function GET(_x) {
-      return _GET.apply(this, arguments);
-    }
-
-    return GET;
-  }()
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
@@ -47349,7 +47176,10 @@ var render = function () {
                                                   _vm._v(
                                                     "\n                          " +
                                                       _vm._s(
-                                                        this.iSalaryGrade
+                                                        this.iSalaryGrade !==
+                                                          null
+                                                          ? this.iSalaryGrade
+                                                          : "N/A"
                                                       ) +
                                                       "\n                        "
                                                   ),
@@ -98400,10 +98230,7 @@ var index = {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./hrmo_types.js": "./resources/js/store/modules/hrmo_types.js",
-	"./jobopenings.js": "./resources/js/store/modules/jobopenings.js",
-	"./offices.js": "./resources/js/store/modules/offices.js",
-	"./status.js": "./resources/js/store/modules/status.js"
+	"./jobopenings.js": "./resources/js/store/modules/jobopenings.js"
 };
 
 

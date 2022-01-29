@@ -37,9 +37,9 @@ const actions = {
   GET_DATA: async ({ commit }) => {
     return await api.get('/api/job_openings/create')
       .then((response) => {
-        commit('SET_OFFICE', response?.data.offices)
-        commit('SET_STATUS', response?.data.status)
-        commit('SET_HRMO_TYPE', response?.data.hrmoTypes)
+        commit('SET_OFFICE', response?.data?.offices)
+        commit('SET_STATUS', response?.data?.status)
+        commit('SET_HRMO_TYPE', response?.data?.hrmoTypes)
       })
   },
 

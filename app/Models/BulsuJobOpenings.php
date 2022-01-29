@@ -50,8 +50,8 @@ class BulsuJobOpenings extends Model
         return $this->hasOne(TblJobStatus::class, 'status_id', 'jo_status');
     }
 
-    public function offices()
+    /* public function offices()
     {
         return $this->hasOne(BulsuOffices::class, 'office_id', 'jo_office');
-    }
+    } */
 }

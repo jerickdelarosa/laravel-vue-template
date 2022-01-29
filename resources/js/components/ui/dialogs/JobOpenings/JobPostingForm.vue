@@ -795,7 +795,7 @@
                             Salary Grade:
                           </td>
                           <td class="font-weight-regular">
-                            {{ this.iSalaryGrade }}
+                            {{ this.iSalaryGrade !== null ? this.iSalaryGrade : 'N/A' }}
                           </td>
                         </tr>
                         <tr>
@@ -938,23 +938,23 @@ export default {
       campuses: [
         {
           id: 1,
-          name: 'Malolos'
+          name: 'Malolos Campus'
         },
         {
           id: 2,
-          name: 'Bustos'
+          name: 'Bustos Campus'
         },
         {
           id: 3,
-          name: 'Meneses'
+          name: 'Meneses Campus'
         },
         {
           id: 4,
-          name: 'Sarmiento'
+          name: 'Sarmiento Campus'
         },
         {
           id: 5,
-          name: 'Hagonoy'
+          name: 'Hagonoy Campus'
         }
       ]
 
@@ -966,7 +966,6 @@ export default {
       status: 'jobopenings/STATUS_LIST',
       hrmoTypes: 'jobopenings/HRMO_TYPE_LIST'
     }),
-
     dateDeadlineFormatted () {
       return this.iDeadline ? moment(this.iDeadline).format('YYYY-MM-DD') : ''
     },
@@ -994,16 +993,6 @@ export default {
         this.getData()
       } else {
         this.resetFields()
-      }
-    },
-
-    iCategory (newVal, oldVal) {
-      if (!this.hasSelectedItem) {
-        this.iSubcategory = null
-      } else {
-        if (oldVal) {
-          this.iSubcategory = null
-        }
       }
     }
 

@@ -15,8 +15,8 @@ class JobOfficesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'offices_id' => $this->office_id,
-            'offices_name' => $this->office_name
+            'office_id' => $this->office_id,
+            'office_name' => $this->office_name
         ];
     }
 }
