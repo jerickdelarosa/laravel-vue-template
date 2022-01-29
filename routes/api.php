@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\HrmoTypeController;
+use App\Http\Controllers\JobOpeningsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +20,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::prefix('job_openings')->name('job_openings.')->group(function () {
+    //Get Job
+    Route::get('/', [JobOpeningsController::class, 'get'])->name('get');
+    //Get Job
+    Route::get('/create', [JobOpeningsController::class, 'create'])->name('create');
+
+
+    //Get Offices
+    Route::get('/offices', [OfficeController::class, 'get'])->name('offices.get');
+
+    //Get Job Status
+    Route::get('/status', [StatusController::class, 'get'])->name('status.get');
+
+    //Get HRMO Type
+    Route::get('/hrmo-type', [HrmoTypeController::class, 'get'])->name('hrmo.get');
 });

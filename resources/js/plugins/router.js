@@ -61,7 +61,7 @@ const router = new VueRouter({
         navigation: MainNavigation
       },
       meta: {
-        title: 'Job Posting',
+        title: 'Job Openings',
         auth: true
       }
     }

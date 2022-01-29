@@ -45,7 +45,7 @@
         <v-text-field
           v-model="search"
           prepend-icon="mdi-magnify"
-          label="Search Item.."
+          label="Search Job.."
           clearable
           hide-details
           solo
@@ -59,7 +59,7 @@
         class="inventory-table"
         :headers="headers"
         :footer-props="footer"
-        :items="inventories"
+        :items="jobs"
         :search="search"
         :loading="loading"
         @click:row="viewItem"
@@ -105,7 +105,7 @@
 
     <!-- INVENTORY FORM -->
     <job-posting-form-dialog
-      :visible="userRoleDialog"
+      :visible="jobPostingDialog"
       :item-id="selectedItem"
       @close="closeItemDialog"
     />
@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import JobPostingFormDialog from '../../ui/dialogs/JobOpenings/Form.vue'
+import JobPostingFormDialog from '../../ui/dialogs/JobOpenings/JobPostingForm.vue'
 
 import { mapActions, mapGetters } from 'vuex'
 export default {
@@ -165,13 +165,13 @@ export default {
           'This field must contain valid characters.'
       },
 
-      userRoleDialog: true,
+      jobPostingDialog: false,
 
       deleteDialog: false,
 
       deleting: false,
       loading: false,
-      inventoriesLoading: false,
+      jobPostingLoading: false,
 
       selectedItem: null,
 
@@ -179,34 +179,39 @@ export default {
 
       headers: [
         {
-          value: 'property_number',
-          text: 'Property Number',
+          value: 'jo_date_posted',
+          text: 'Date Posted',
           filterable: false,
           sortable: false,
           width: 150
         },
         {
-          value: 'date_acquired',
-          text: 'Date Acquired',
+          value: 'jo_position',
+          text: 'Position',
           filterable: false,
           sortable: false,
-          align: 'end',
-          width: 150
-        },
-        {
-          value: 'article',
-          text: 'Article',
           width: 300
         },
         {
-          value: 'description',
-          text: 'Description',
-          cellClass: ['text-wrap'],
-          width: 500
+          value: 'jo_vacancy_count',
+          text: 'Vacancy Count',
+          width: 150
+
         },
         {
-          value: 'amount',
-          text: 'Unit Value',
+          value: 'jo_campus',
+          text: 'Campus',
+          cellClass: ['text-wrap'],
+          width: 150
+        },
+        {
+          value: 'jo_office',
+          text: 'Office',
+          width: 150
+        },
+        {
+          value: 'jo_status',
+          text: 'Status',
           width: 150
         },
         {
@@ -226,7 +231,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      inventories: 'jobpostings/LIST'
+      jobs: 'jobopenings/JOBS_LIST'
     })
   },
   watch: {
@@ -234,8 +239,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      _getJobs: 'jobpostings/GET',
-      _deleteItem: 'jobpostings/DELETE'
+      _getJobs: 'jobopenings/GET'
     }),
 
     getJobs () {
@@ -248,11 +252,11 @@ export default {
 
     // Create Item
     openItemDialog () {
-      this.userRoleDialog = true
+      this.jobPostingDialog = true
     },
 
     closeItemDialog (mustReload) {
-      this.userRoleDialog = false
+      this.jobPostingDialog = false
       this.selectedItem = null
 
       if (mustReload) {
@@ -265,7 +269,7 @@ export default {
       this.$router.push({
         name: 'main.inventory.view.overview',
         params: {
-          item: item?.code
+          item: item?.id
         },
         query: {
           ref: 'inventory'
@@ -275,13 +279,13 @@ export default {
 
     // SHOW EDIT DIALOG FOR SELECTED CATEGORY
     editItem (item) {
-      this.selectedItem = item?.code
-      this.userRoleDialog = true
+      this.selectedItem = item?.id
+      this.jobPostingDialog = true
     },
 
     // DELETE
     deleteItem (item) {
-      this.iId = item?.code
+      this.iId = item?.id
       this.deleteDialog = true
     },
 

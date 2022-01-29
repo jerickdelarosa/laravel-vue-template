@@ -39,7 +39,7 @@
       <v-app-bar-nav-icon @click="toggleNav" />
 
       <!-- TITLE -->
-      <v-toolbar-title> BulSU Job Posting </v-toolbar-title>
+      <v-toolbar-title> BulSU Job Openings </v-toolbar-title>
     </v-app-bar>
   </div>
 </template>
