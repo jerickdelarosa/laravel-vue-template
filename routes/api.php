@@ -33,6 +33,12 @@ Route::prefix('job_openings')->name('job_openings.')->group(function () {
     //Store New Job
     Route::post('/', [JobOpeningsController::class, 'store'])->name('store');
 
+    //Update
+    Route::patch('/{jobOpening}', [JobOpeningsController::class, 'update'])->name('update');
+
+    //Delete
+    Route::delete('/{jobOpening}', [JobOpeningsController::class, 'delete'])->name('delete');
+
 
 
     //Get Offices

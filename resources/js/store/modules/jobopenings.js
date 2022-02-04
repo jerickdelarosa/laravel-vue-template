@@ -32,8 +32,8 @@ const mutations = {
 }
 
 const actions = {
-  // Get data for creating New Job Vacancy
 
+  // Get data for creating New Job Vacancy
   GET_DATA: async ({ commit }) => {
     return await api.get('/api/job_openings/create')
       .then((response) => {
@@ -43,13 +43,13 @@ const actions = {
       })
   },
 
-  // Get list of saved inventory items
+  // Get list of saved job opening items
   GET: async ({ commit }) => {
     return await api.get('/api/job_openings')
       .then((response) => {
         commit('SET_JOBS', response?.data?.data)
       })
-  }
+  },
 
   // Show details of inventory
   /*  EDIT: async ({ commit }, payload) => {
@@ -82,10 +82,10 @@ const actions = {
   },
 
  */
-  // Save item
-  /* SAVE: async ({ commit }, data) => {
+  // Save Job
+  SAVE: async ({ commit }, data) => {
     return await new Promise((resolve, reject) => {
-      return api.post('/api/inventory', data)
+      return api.post('/api/job_openings', data)
         .then((response) => {
           resolve(response?.data)
         })
@@ -93,12 +93,12 @@ const actions = {
           reject(e.response?.data)
         })
     })
-  }, */
+  },
 
-  // Save item
-  /* UPDATE: async ({ commit }, payload) => {
+  // Save Job
+  UPDATE: async ({ commit }, payload) => {
     return await new Promise((resolve, reject) => {
-      return api.patch(`/api/inventory/${payload.id}`, payload)
+      return api.patch(`/api/job_openings/${payload.id}`, payload)
         .then((response) => {
           resolve(response?.data)
         })
@@ -106,12 +106,12 @@ const actions = {
           reject(e.response?.data)
         })
     })
-  }, */
+  },
 
-  // Delete Item
-  /* DELETE: async ({ commit }, payload) => {
+  // Delete Job
+  DELETE: async ({ commit }, payload) => {
     return await new Promise((resolve, reject) => {
-      api.delete(`/api/inventory/${payload.id}`)
+      api.delete(`/api/job_openings/${payload.id}`)
         .then((response) => {
           resolve(response?.data)
         })
@@ -119,7 +119,7 @@ const actions = {
           reject(e.response?.data)
         })
     })
-  } */
+  }
 }
 
 export default {

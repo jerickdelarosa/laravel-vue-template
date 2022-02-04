@@ -52,6 +52,8 @@ class BulsuJobOpenings extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'jo_id';
+
     public function status()
     {
         return $this->hasOne(TblJobStatus::class, 'status_id', 'jo_status');

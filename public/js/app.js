@@ -4095,7 +4095,7 @@ var actions = {
 
     return GET_DATA;
   }(),
-  // Get list of saved inventory items
+  // Get list of saved job opening items
   GET: function () {
     var _GET = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(_ref2) {
       var commit;
@@ -4127,7 +4127,8 @@ var actions = {
     }
 
     return GET;
-  }() // Show details of inventory
+  }(),
+  // Show details of inventory
 
   /*  EDIT: async ({ commit }, payload) => {
     return await new Promise((resolve, reject) => {
@@ -4156,46 +4157,117 @@ var actions = {
     commit('SET_ITEM_DETAILS', null)
   },
   */
-  // Save item
+  // Save Job
+  SAVE: function () {
+    var _SAVE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(_ref3, data) {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              commit = _ref3.commit;
+              _context3.next = 3;
+              return new Promise(function (resolve, reject) {
+                return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/job_openings', data).then(function (response) {
+                  resolve(response === null || response === void 0 ? void 0 : response.data);
+                })["catch"](function (e) {
+                  var _e$response;
 
-  /* SAVE: async ({ commit }, data) => {
-    return await new Promise((resolve, reject) => {
-      return api.post('/api/inventory', data)
-        .then((response) => {
-          resolve(response?.data)
-        })
-        .catch((e) => {
-          reject(e.response?.data)
-        })
-    })
-  }, */
-  // Save item
+                  reject((_e$response = e.response) === null || _e$response === void 0 ? void 0 : _e$response.data);
+                });
+              });
 
-  /* UPDATE: async ({ commit }, payload) => {
-    return await new Promise((resolve, reject) => {
-      return api.patch(`/api/inventory/${payload.id}`, payload)
-        .then((response) => {
-          resolve(response?.data)
-        })
-        .catch((e) => {
-          reject(e.response?.data)
-        })
-    })
-  }, */
-  // Delete Item
+            case 3:
+              return _context3.abrupt("return", _context3.sent);
 
-  /* DELETE: async ({ commit }, payload) => {
-    return await new Promise((resolve, reject) => {
-      api.delete(`/api/inventory/${payload.id}`)
-        .then((response) => {
-          resolve(response?.data)
-        })
-        .catch((e) => {
-          reject(e.response?.data)
-        })
-    })
-  } */
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
 
+    function SAVE(_x3, _x4) {
+      return _SAVE.apply(this, arguments);
+    }
+
+    return SAVE;
+  }(),
+  // Save Job
+  UPDATE: function () {
+    var _UPDATE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(_ref4, payload) {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              commit = _ref4.commit;
+              _context4.next = 3;
+              return new Promise(function (resolve, reject) {
+                return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/api/job_openings/".concat(payload.id), payload).then(function (response) {
+                  resolve(response === null || response === void 0 ? void 0 : response.data);
+                })["catch"](function (e) {
+                  var _e$response2;
+
+                  reject((_e$response2 = e.response) === null || _e$response2 === void 0 ? void 0 : _e$response2.data);
+                });
+              });
+
+            case 3:
+              return _context4.abrupt("return", _context4.sent);
+
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    function UPDATE(_x5, _x6) {
+      return _UPDATE.apply(this, arguments);
+    }
+
+    return UPDATE;
+  }(),
+  // Delete Job
+  DELETE: function () {
+    var _DELETE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(_ref5, payload) {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              commit = _ref5.commit;
+              _context5.next = 3;
+              return new Promise(function (resolve, reject) {
+                _api_api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/job_openings/".concat(payload.id)).then(function (response) {
+                  resolve(response === null || response === void 0 ? void 0 : response.data);
+                })["catch"](function (e) {
+                  var _e$response3;
+
+                  reject((_e$response3 = e.response) === null || _e$response3 === void 0 ? void 0 : _e$response3.data);
+                });
+              });
+
+            case 3:
+              return _context5.abrupt("return", _context5.sent);
+
+            case 4:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    function DELETE(_x7, _x8) {
+      return _DELETE.apply(this, arguments);
+    }
+
+    return DELETE;
+  }()
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,

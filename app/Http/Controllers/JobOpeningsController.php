@@ -44,4 +44,18 @@ class JobOpeningsController extends Controller
             'created' => $query->save()
         ];
     }
+
+    public function update(JobOpeningRequest $request, BulsuJobOpenings $jobOpening)
+    {
+        return [
+            'updated' => $jobOpening->update($request->all())
+        ];
+    }
+
+    public function delete(BulsuJobOpenings $jobOpening)
+    {
+        return [
+            'deleted' => $jobOpening->delete()
+        ];
+    }
 }
