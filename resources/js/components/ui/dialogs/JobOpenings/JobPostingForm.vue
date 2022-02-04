@@ -96,7 +96,7 @@
                       edit-icon="mdi-check"
                     >
                       <template v-if="n == steps">
-                        Finalize
+                        Summary
                       </template>
 
                       <template v-else>
@@ -266,9 +266,8 @@
                       v-model="iEducation"
                       clearable
                       clear-icon="mdi-close"
-                      label="Job Qualification Education *"
+                      label="Job Qualification Education"
                       auto-grow
-                      required
                       outlined
                     />
 
@@ -317,9 +316,8 @@
                       v-model="iDuties"
                       clearable
                       clear-icon="mdi-close"
-                      label="Job Duties *"
+                      label="Job Duties"
                       auto-grow
-                      required
                       outlined
                     />
 
@@ -529,6 +527,15 @@
                       outlined
                     />
 
+                    <!-- Job Link-->
+                    <v-text-field
+                      v-model="iLink"
+                      clearable
+                      clear-icon="mdi-close"
+                      label="Appy Link"
+                      outlined
+                    />
+
                     <!-- Job Visibility -->
                     <v-switch
                       class="my-0 ml-3"
@@ -632,7 +639,7 @@
                             {{ this.iVacancyCount }}
                           </td>
                         </tr>
-                        <tr v-show="this.iItemNumber !== null">
+                        <tr>
                           <td class="font-weight-bold">
                             Job Item Number:
                           </td>
@@ -838,6 +845,14 @@
                             {{ this.iShowDetails ? 'True' : 'False' }}
                           </td>
                         </tr>
+                        <tr>
+                          <td class="font-weight-bold">
+                            Apply Link:
+                          </td>
+                          <td class="font-weight-regular">
+                            {{ this.iLink ? this.iLink : 'N/A' }}
+                          </td>
+                        </tr>
                       </tbody>
                     </v-simple-table>
 
@@ -931,6 +946,7 @@ export default {
       iRemark: false,
       iVisibility: true,
       iShowDetails: true,
+      iLink: null,
 
       steps: 4,
       e1: 1,
@@ -1070,6 +1086,7 @@ export default {
         this.iWarrantyDuration = null
         this.iWarrantyLength = null
         this.iDateAcquired = null
+        this.e1 = 1
 
         this.$refs.inventoryForm.resetValidation()
       }, 500)

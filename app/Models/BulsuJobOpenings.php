@@ -20,7 +20,7 @@ class BulsuJobOpenings extends Model
         'jo_vacancy_count',
         'jo_status',
         'jo_hr_type',
-        'jo_qualifications_educations',
+        'jo_qualifications_education',
         'jo_qualifications_experience',
         'jo_qualifications_training',
         'jo_qualifications_eligibility',
@@ -36,14 +36,21 @@ class BulsuJobOpenings extends Model
         'jo_hidden_at',
         'attachment',
         'show_details',
+        'link',
     ];
 
     protected $casts = [
         'jo_date_posted' => 'date',
         'jo_date_filled' => 'date',
         'jo_deadline' => 'date',
-        'jo_hidden_at' => 'date'
+        'jo_hidden_at' => 'date',
+
+        'jo_remarks' => 'boolean',
+        'jo_visibility' => 'boolean',
+        'show_details' => 'boolean',
     ];
+
+    public $timestamps = false;
 
     public function status()
     {

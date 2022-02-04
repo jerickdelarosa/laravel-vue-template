@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobOpeningRequest;
 use App\Http\Resources\create\JobHrmoTypeResource;
 use App\Http\Resources\create\JobOfficesResource;
 use App\Http\Resources\create\JobStatusResource;
@@ -31,6 +32,16 @@ class JobOpeningsController extends Controller
             'offices' => JobOfficesResource::collection($offices),
             'status' => JobStatusResource::collection($status),
             'hrmoTypes' => JobHrmoTypeResource::collection($hrmoTypes)
+        ];
+    }
+
+    public function store(JobOpeningRequest $request)
+    {
+        $query = new BulsuJobOpenings;
+        $query->fill($request->all());
+
+        return [
+            'created' => $query->save()
         ];
     }
 }

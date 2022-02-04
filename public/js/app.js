@@ -3405,6 +3405,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3462,6 +3477,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       iRemark: false,
       iVisibility: true,
       iShowDetails: true,
+      iLink: null,
       steps: 4,
       e1: 1,
       campuses: [{
@@ -3601,6 +3617,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.iWarrantyDuration = null;
         _this2.iWarrantyLength = null;
         _this2.iDateAcquired = null;
+        _this2.e1 = 1;
 
         _this2.$refs.inventoryForm.resetValidation();
       }, 500);
@@ -4129,17 +4146,6 @@ var actions = {
         .then((response) => {
           resolve(true)
           commit('SET_ITEM_DETAILS', response?.data?.data)
-        })
-        .catch((e) => {
-          reject(e.response?.data)
-        })
-    })
-  },
-   SHOW_LOG_DETAILS: async ({ commit }, payload) => {
-    return await new Promise((resolve, reject) => {
-      return api.get(`/api/inventory/${payload.code}/logs/${payload.log_id}`)
-        .then((response) => {
-          resolve(response?.data)
         })
         .catch((e) => {
           reject(e.response?.data)
@@ -45393,7 +45399,7 @@ var render = function () {
                                           n == _vm.steps
                                             ? [
                                                 _vm._v(
-                                                  "\n                      Finalize\n                    "
+                                                  "\n                      Summary\n                    "
                                                 ),
                                               ]
                                             : [
@@ -45740,10 +45746,8 @@ var render = function () {
                                         attrs: {
                                           clearable: "",
                                           "clear-icon": "mdi-close",
-                                          label:
-                                            "Job Qualification Education *",
+                                          label: "Job Qualification Education",
                                           "auto-grow": "",
-                                          required: "",
                                           outlined: "",
                                         },
                                         model: {
@@ -45828,9 +45832,8 @@ var render = function () {
                                         attrs: {
                                           clearable: "",
                                           "clear-icon": "mdi-close",
-                                          label: "Job Duties *",
+                                          label: "Job Duties",
                                           "auto-grow": "",
-                                          required: "",
                                           outlined: "",
                                         },
                                         model: {
@@ -46392,6 +46395,22 @@ var render = function () {
                                         },
                                       }),
                                       _vm._v(" "),
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          clearable: "",
+                                          "clear-icon": "mdi-close",
+                                          label: "Appy Link",
+                                          outlined: "",
+                                        },
+                                        model: {
+                                          value: _vm.iLink,
+                                          callback: function ($$v) {
+                                            _vm.iLink = $$v
+                                          },
+                                          expression: "iLink",
+                                        },
+                                      }),
+                                      _vm._v(" "),
                                       _c("v-switch", {
                                         staticClass: "my-0 ml-3",
                                         attrs: {
@@ -46654,52 +46673,35 @@ var render = function () {
                                               ),
                                             ]),
                                             _vm._v(" "),
-                                            _c(
-                                              "tr",
-                                              {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value:
-                                                      this.iItemNumber !== null,
-                                                    expression:
-                                                      "this.iItemNumber !== null",
-                                                  },
-                                                ],
-                                              },
-                                              [
-                                                _c(
-                                                  "td",
-                                                  {
-                                                    staticClass:
-                                                      "font-weight-bold",
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                          Job Item Number:\n                        "
-                                                    ),
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "td",
-                                                  {
-                                                    staticClass:
-                                                      "font-weight-regular",
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                          " +
-                                                        _vm._s(
-                                                          this.iItemNumber
-                                                        ) +
-                                                        "\n                        "
-                                                    ),
-                                                  ]
-                                                ),
-                                              ]
-                                            ),
+                                            _c("tr", [
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "font-weight-bold",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Job Item Number:\n                        "
+                                                  ),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "font-weight-regular",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(this.iItemNumber) +
+                                                      "\n                        "
+                                                  ),
+                                                ]
+                                              ),
+                                            ]),
                                             _vm._v(" "),
                                             _c("tr", [
                                               _c(
@@ -47344,6 +47346,40 @@ var render = function () {
                                                         this.iShowDetails
                                                           ? "True"
                                                           : "False"
+                                                      ) +
+                                                      "\n                        "
+                                                  ),
+                                                ]
+                                              ),
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("tr", [
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "font-weight-bold",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Apply Link:\n                        "
+                                                  ),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "font-weight-regular",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(
+                                                        this.iLink
+                                                          ? this.iLink
+                                                          : "N/A"
                                                       ) +
                                                       "\n                        "
                                                   ),

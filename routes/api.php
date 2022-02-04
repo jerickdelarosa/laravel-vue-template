@@ -26,8 +26,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('job_openings')->name('job_openings.')->group(function () {
     //Get Job
     Route::get('/', [JobOpeningsController::class, 'get'])->name('get');
-    //Get Job
+
+    //Get Offices/Job Status/HRMO Type for form
     Route::get('/create', [JobOpeningsController::class, 'create'])->name('create');
+
+    //Store New Job
+    Route::post('/', [JobOpeningsController::class, 'store'])->name('store');
+
 
 
     //Get Offices

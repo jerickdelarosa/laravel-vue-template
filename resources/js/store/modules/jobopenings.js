@@ -77,21 +77,10 @@ const actions = {
     })
   },
 
-  SHOW_LOG_DETAILS: async ({ commit }, payload) => {
-    return await new Promise((resolve, reject) => {
-      return api.get(`/api/inventory/${payload.code}/logs/${payload.log_id}`)
-        .then((response) => {
-          resolve(response?.data)
-        })
-        .catch((e) => {
-          reject(e.response?.data)
-        })
-    })
-  },
-
   CLEAR_ITEM_DETAILS: async ({ commit }) => {
     commit('SET_ITEM_DETAILS', null)
   },
+
  */
   // Save item
   /* SAVE: async ({ commit }, data) => {
