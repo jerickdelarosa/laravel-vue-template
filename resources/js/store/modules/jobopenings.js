@@ -52,9 +52,9 @@ const actions = {
   },
 
   // Show details of inventory
-  /*  EDIT: async ({ commit }, payload) => {
+  EDIT: async ({ commit }, payload) => {
     return await new Promise((resolve, reject) => {
-      return api.get(`/api/inventory/${payload.code}/edit`)
+      return api.get(`/api/job_openings/${payload.jo_id}/edit`)
         .then((response) => {
           resolve(response?.data)
         })
@@ -64,7 +64,7 @@ const actions = {
     })
   },
 
-  SHOW: async ({ commit }, payload) => {
+  /* SHOW: async ({ commit }, payload) => {
     return await new Promise((resolve, reject) => {
       return api.get(`/api/inventory/${payload.code}`)
         .then((response) => {
@@ -79,9 +79,8 @@ const actions = {
 
   CLEAR_ITEM_DETAILS: async ({ commit }) => {
     commit('SET_ITEM_DETAILS', null)
-  },
+  }, */
 
- */
   // Save Job
   SAVE: async ({ commit }, data) => {
     return await new Promise((resolve, reject) => {
@@ -98,7 +97,7 @@ const actions = {
   // Save Job
   UPDATE: async ({ commit }, payload) => {
     return await new Promise((resolve, reject) => {
-      return api.patch(`/api/job_openings/${payload.id}`, payload)
+      return api.patch(`/api/job_openings/${payload.jo_id}`, payload)
         .then((response) => {
           resolve(response?.data)
         })
@@ -111,7 +110,7 @@ const actions = {
   // Delete Job
   DELETE: async ({ commit }, payload) => {
     return await new Promise((resolve, reject) => {
-      api.delete(`/api/job_openings/${payload.id}`)
+      api.delete(`/api/job_openings/${payload.jo_id}`)
         .then((response) => {
           resolve(response?.data)
         })

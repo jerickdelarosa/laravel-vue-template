@@ -64,6 +64,24 @@
         :loading="loading"
         @click:row="viewItem"
       >
+        <!-- JOB STATUS-->
+        <template #[`item.jo_visibility`]="{ item }">
+          <v-chip
+            small
+            dark
+            label
+            :color="item.jo_visibility ? 'green' : 'grey'"
+          >
+            <v-icon
+              small
+              left
+            >
+              mdi-{{ item.jo_visibility ? "check" : "close" }}
+            </v-icon>
+            {{ item.jo_visibility ? "Active" : "Inactive" }}
+          </v-chip>
+        </template>
+
         <!--  ITEM ACTIONS -->
         <template #[`item.actions`]="{ item }">
           <v-tooltip bottom>
@@ -173,11 +191,19 @@ export default {
       loading: false,
       jobPostingLoading: false,
 
+      iJobId: null,
+
       selectedItem: null,
 
       search: null,
 
       headers: [
+        {
+          value: 'jo_visibility',
+          text: 'Status',
+          filterable: false,
+          width: 150
+        },
         {
           value: 'jo_date_posted',
           text: 'Date Posted',
@@ -239,7 +265,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      _getJobs: 'jobopenings/GET'
+      _getJobs: 'jobopenings/GET',
+      _deleteJob: 'jobopenings/DELETE'
     }),
 
     getJobs () {
@@ -266,7 +293,7 @@ export default {
 
     // View Item Details
     viewItem (item) {
-      this.$router.push({
+      /* this.$router.push({
         name: 'main.inventory.view.overview',
         params: {
           item: item?.id
@@ -274,29 +301,29 @@ export default {
         query: {
           ref: 'inventory'
         }
-      })
+      }) */
     },
 
     // SHOW EDIT DIALOG FOR SELECTED CATEGORY
     editItem (item) {
-      this.selectedItem = item?.id
+      this.selectedItem = item?.jo_id
       this.jobPostingDialog = true
     },
 
     // DELETE
     deleteItem (item) {
-      this.iId = item?.id
+      this.iJobId = item?.jo_id
       this.deleteDialog = true
     },
 
     closeDelete () {
       this.deleteDialog = false
-      this.iId = null
+      this.iJobId = null
     },
     confirmDelete () {
       this.deleting = true
-      this._deleteItem({
-        id: this.iId
+      this._deleteJob({
+        jo_id: this.iJobId
       })
         .then((response) => {
           if (response?.deleted) {

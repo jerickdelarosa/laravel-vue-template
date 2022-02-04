@@ -6,6 +6,7 @@ use App\Http\Requests\JobOpeningRequest;
 use App\Http\Resources\create\JobHrmoTypeResource;
 use App\Http\Resources\create\JobOfficesResource;
 use App\Http\Resources\create\JobStatusResource;
+use App\Http\Resources\edit\JobOpeningResource as EditJobOpeningResource;
 use App\Models\BulsuJobOpenings;
 use Illuminate\Http\Request;
 use App\Http\Resources\JobOpeningResource;
@@ -43,6 +44,11 @@ class JobOpeningsController extends Controller
         return [
             'created' => $query->save()
         ];
+    }
+
+    public function edit(Request $request, BulsuJobOpenings $jobOpening)
+    {
+        return new EditJobOpeningResource($jobOpening);
     }
 
     public function update(JobOpeningRequest $request, BulsuJobOpenings $jobOpening)

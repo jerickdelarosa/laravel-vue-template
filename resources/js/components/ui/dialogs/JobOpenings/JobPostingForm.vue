@@ -179,7 +179,7 @@
                     <v-autocomplete
                       v-model="iCampus"
                       :items="campuses"
-                      item-value="name"
+                      item-value="id"
                       item-text="name"
                       label="Campus *"
                       :rules="[rules.required]"
@@ -214,8 +214,8 @@
                     <v-autocomplete
                       v-model="iHrmoType"
                       :items="hrmoTypes"
-                      item-value="email"
-                      item-text="name"
+                      item-value="id"
+                      item-text="email"
                       label="HRMO type *"
                       :rules="[rules.required]"
                       required
@@ -896,7 +896,7 @@ export default {
       default: false
     },
     itemId: {
-      type: String,
+      type: Number,
       required: false,
       default: null
     }
@@ -916,7 +916,6 @@ export default {
 
       saving: false,
 
-      iId: null,
       datePostedDialog: false,
       iDatePosted: null,
       iPosition: null,
@@ -1027,32 +1026,42 @@ export default {
 
       if (this.hasSelectedItem) {
         await this._editItem({
-          id: this.itemId
+          jo_id: this.itemId
         }).then((response) => {
-          /* const selectedItem = response?.data */
-          /*
-          this.itemName = selectedItem?.article
+          const selectedItem = response?.data
+          console.log(selectedItem)
 
-          this.iPoNum = selectedItem?.po_number
-          this.iDateAcquired = selectedItem?.acquired_at
+          this.itemName = selectedItem?.jo_position
 
-          this.iArticle = selectedItem?.article
-          this.iDescription = selectedItem?.description
+          // Step 1
+          this.iDatePosted = selectedItem?.jo_date_posted // Date Format
+          this.iPosition = selectedItem?.jo_position
+          this.iCampus = selectedItem?.jo_campus // Add Table for Campuses (Model/Resource)
+          this.iOffice = selectedItem?.jo_office
+          this.iVacancyCount = selectedItem?.jo_vacancy_count
+          this.iHrmoType = selectedItem?.jo_hr_type
 
-          this.iCategory = this.categories?.find((category) => {
-            return category.id === selectedItem?.category?.id
-          })
-          this.iSubcategory = selectedItem?.subcategory?.id
+          // Step 2
+          this.iJobStatus = selectedItem?.jo_status
+          this.iEducation = selectedItem?.jo_qualifications_education
+          this.iExperience = selectedItem?.jo_qualifications_experience
+          this.iTraining = selectedItem?.jo_qualifications_training
+          this.iEligibility = selectedItem?.jo_qualifications_eligibility
+          this.iOther = selectedItem?.jo_qualifications_other
+          this.iDuties = selectedItem?.jo_duties
 
-          this.iFund = selectedItem?.fund?.id
-
-          this.iAmount = selectedItem?.amount
-
-          this.iQuantity = selectedItem?.quantity
-          this.iUnit = selectedItem?.measurement?.id
-
-          this.iWarrantyDuration = selectedItem?.warranty_duration
-          this.iWarrantyLength = selectedItem?.warranty_length?.id */
+          // Step 3
+          this.iItemNumber = selectedItem?.jo_item_number
+          this.iSalaryGrade = selectedItem?.jo_salary_grade
+          this.iSalaryValue = selectedItem?.jo_salary_value
+          this.iDeadline = selectedItem?.jo_deadline
+          this.iDateFilled = selectedItem?.jo_date_filled
+          this.iDateUnpost = selectedItem?.jo_hidden_at
+          this.iAttachment = selectedItem?.attachment
+          this.iLink = selectedItem?.link
+          this.iRemark = selectedItem?.jo_remarks
+          this.iVisibility = selectedItem?.jo_visibility
+          this.iShowDetails = selectedItem?.show_details
         })
       }
 
@@ -1074,21 +1083,35 @@ export default {
     },
     resetFields () {
       setTimeout(() => {
-        this.iPoNum = null
-        this.iArticle = null
-        this.iDescription = null
-        this.iCategory = null
-        this.iSubcategory = null
-        this.iFund = null
-        this.iAmount = null
-        this.iQuantity = null
-        this.iUnit = null
-        this.iWarrantyDuration = null
-        this.iWarrantyLength = null
-        this.iDateAcquired = null
+        this.iDatePosted = null
+        this.iPosition = null
+        this.iCampus = null
+        this.iOffice = null
+        this.iVacancyCount = null
+        this.iHrmoType = null
+
+        this.iJobStatus = null
+        this.iEducation = null
+        this.iExperience = null
+        this.iTraining = null
+        this.iEligibility = null
+        this.iOther = null
+        this.iDuties = null
+
+        this.iItemNumber = null
+        this.iSalaryGrade = null
+        this.iSalaryValue = null
+        this.iDeadline = null
+        this.iDateFilled = null
+        this.iAttachment = null
+        this.iDateUnpost = null
+        this.iRemark = false
+        this.iVisibility = true
+        this.iShowDetails = true
+        this.iLink = null
         this.e1 = 1
 
-        this.$refs.inventoryForm.resetValidation()
+        /* this.$refs.jobPostingForm.resetValidation() */
       }, 500)
     },
 
@@ -1097,7 +1120,7 @@ export default {
       this.saving = true
 
       this._saveItem({
-        acquired_at: this.iDateAcquired,
+        /*     acquired_at: this.iDateAcquired,
         po_number: this.iPoNum,
         article: this.iArticle,
         description: this.iDescription,
@@ -1108,7 +1131,7 @@ export default {
         quantity: this.iQuantity,
         measurement_id: this.iUnit,
         warranty_duration: this.iWarrantyDuration,
-        warranty_length_id: this.iWarrantyLength
+        warranty_length_id: this.iWarrantyLength */
       })
         .catch((e) => {
           this.inventoryErrors = e.errors
@@ -1134,7 +1157,7 @@ export default {
       this.saving = true
 
       this._updateItem({
-        id: this.itemId,
+        /*      id: this.itemId,
         acquired_at: this.iDateAcquired,
         po_number: this.iPoNum,
         article: this.iArticle,
@@ -1146,7 +1169,7 @@ export default {
         quantity: this.iQuantity,
         measurement_id: this.iUnit,
         warranty_duration: this.iWarrantyDuration,
-        warranty_length_id: this.iWarrantyLength
+        warranty_length_id: this.iWarrantyLength */
       })
         .catch((e) => {
           this.inventoryErrors = e.errors

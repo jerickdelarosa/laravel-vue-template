@@ -33,6 +33,9 @@ Route::prefix('job_openings')->name('job_openings.')->group(function () {
     //Store New Job
     Route::post('/', [JobOpeningsController::class, 'store'])->name('store');
 
+    // Edit Job
+    Route::get('/{jobOpening:jo_id}/edit', [JobOpeningsController::class, 'edit'])->name('edit');
+
     //Update
     Route::patch('/{jobOpening}', [JobOpeningsController::class, 'update'])->name('update');
 

@@ -2359,6 +2359,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2385,9 +2403,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       deleting: false,
       loading: false,
       jobPostingLoading: false,
+      iJobId: null,
       selectedItem: null,
       search: null,
       headers: [{
+        value: 'jo_visibility',
+        text: 'Status',
+        filterable: false,
+        width: 150
+      }, {
         value: 'jo_date_posted',
         text: 'Date Posted',
         filterable: false,
@@ -2435,7 +2459,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   watch: {},
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)({
-    _getJobs: 'jobopenings/GET'
+    _getJobs: 'jobopenings/GET',
+    _deleteJob: 'jobopenings/DELETE'
   })), {}, {
     getJobs: function getJobs() {
       var _this = this;
@@ -2460,37 +2485,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // View Item Details
     viewItem: function viewItem(item) {
-      this.$router.push({
+      /* this.$router.push({
         name: 'main.inventory.view.overview',
         params: {
-          item: item === null || item === void 0 ? void 0 : item.id
+          item: item?.id
         },
         query: {
           ref: 'inventory'
         }
-      });
+      }) */
     },
     // SHOW EDIT DIALOG FOR SELECTED CATEGORY
     editItem: function editItem(item) {
-      this.selectedItem = item === null || item === void 0 ? void 0 : item.id;
+      this.selectedItem = item === null || item === void 0 ? void 0 : item.jo_id;
       this.jobPostingDialog = true;
     },
     // DELETE
     deleteItem: function deleteItem(item) {
-      this.iId = item === null || item === void 0 ? void 0 : item.id;
+      this.iJobId = item === null || item === void 0 ? void 0 : item.jo_id;
       this.deleteDialog = true;
     },
     closeDelete: function closeDelete() {
       this.deleteDialog = false;
-      this.iId = null;
+      this.iJobId = null;
     },
     confirmDelete: function confirmDelete() {
       var _this2 = this;
 
       this.deleting = true;
 
-      this._deleteItem({
-        id: this.iId
+      this._deleteJob({
+        jo_id: this.iJobId
       }).then(function (response) {
         if (response !== null && response !== void 0 && response.deleted) {
           _this2.getJobs();
@@ -3429,7 +3454,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       "default": false
     },
     itemId: {
-      type: String,
+      type: Number,
       required: false,
       "default": null
     }
@@ -3449,7 +3474,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       formLoading: false,
       saving: false,
-      iId: null,
       datePostedDialog: false,
       iDatePosted: null,
       iPosition: null,
@@ -3554,26 +3578,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _context.next = 6;
                 return _this._editItem({
-                  id: _this.itemId
+                  jo_id: _this.itemId
                 }).then(function (response) {
-                  /* const selectedItem = response?.data */
+                  var selectedItem = response === null || response === void 0 ? void 0 : response.data;
+                  console.log(selectedItem);
+                  _this.itemName = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_position; // Step 1
 
-                  /*
-                  this.itemName = selectedItem?.article
-                   this.iPoNum = selectedItem?.po_number
-                  this.iDateAcquired = selectedItem?.acquired_at
-                   this.iArticle = selectedItem?.article
-                  this.iDescription = selectedItem?.description
-                   this.iCategory = this.categories?.find((category) => {
-                    return category.id === selectedItem?.category?.id
-                  })
-                  this.iSubcategory = selectedItem?.subcategory?.id
-                   this.iFund = selectedItem?.fund?.id
-                   this.iAmount = selectedItem?.amount
-                   this.iQuantity = selectedItem?.quantity
-                  this.iUnit = selectedItem?.measurement?.id
-                   this.iWarrantyDuration = selectedItem?.warranty_duration
-                  this.iWarrantyLength = selectedItem?.warranty_length?.id */
+                  // Step 1
+                  _this.iDatePosted = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_date_posted; // Date Format
+
+                  // Date Format
+                  _this.iPosition = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_position;
+                  _this.iCampus = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_campus; // Add Table for Campuses (Model/Resource)
+
+                  // Add Table for Campuses (Model/Resource)
+                  _this.iOffice = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_office;
+                  _this.iVacancyCount = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_vacancy_count;
+                  _this.iHrmoType = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_hr_type; // Step 2
+
+                  // Step 2
+                  _this.iJobStatus = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_status;
+                  _this.iEducation = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_qualifications_education;
+                  _this.iExperience = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_qualifications_experience;
+                  _this.iTraining = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_qualifications_training;
+                  _this.iEligibility = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_qualifications_eligibility;
+                  _this.iOther = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_qualifications_other;
+                  _this.iDuties = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_duties; // Step 3
+
+                  // Step 3
+                  _this.iItemNumber = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_item_number;
+                  _this.iSalaryGrade = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_salary_grade;
+                  _this.iSalaryValue = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_salary_value;
+                  _this.iDeadline = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_deadline;
+                  _this.iDateFilled = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_date_filled;
+                  _this.iDateUnpost = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_hidden_at;
+                  _this.iAttachment = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.attachment;
+                  _this.iLink = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.link;
+                  _this.iRemark = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_remarks;
+                  _this.iVisibility = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_visibility;
+                  _this.iShowDetails = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.show_details;
                 });
 
               case 6:
@@ -3605,43 +3648,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       setTimeout(function () {
-        _this2.iPoNum = null;
-        _this2.iArticle = null;
-        _this2.iDescription = null;
-        _this2.iCategory = null;
-        _this2.iSubcategory = null;
-        _this2.iFund = null;
-        _this2.iAmount = null;
-        _this2.iQuantity = null;
-        _this2.iUnit = null;
-        _this2.iWarrantyDuration = null;
-        _this2.iWarrantyLength = null;
-        _this2.iDateAcquired = null;
+        _this2.iDatePosted = null;
+        _this2.iPosition = null;
+        _this2.iCampus = null;
+        _this2.iOffice = null;
+        _this2.iVacancyCount = null;
+        _this2.iHrmoType = null;
+        _this2.iJobStatus = null;
+        _this2.iEducation = null;
+        _this2.iExperience = null;
+        _this2.iTraining = null;
+        _this2.iEligibility = null;
+        _this2.iOther = null;
+        _this2.iDuties = null;
+        _this2.iItemNumber = null;
+        _this2.iSalaryGrade = null;
+        _this2.iSalaryValue = null;
+        _this2.iDeadline = null;
+        _this2.iDateFilled = null;
+        _this2.iAttachment = null;
+        _this2.iDateUnpost = null;
+        _this2.iRemark = false;
+        _this2.iVisibility = true;
+        _this2.iShowDetails = true;
+        _this2.iLink = null;
         _this2.e1 = 1;
-
-        _this2.$refs.inventoryForm.resetValidation();
+        /* this.$refs.jobPostingForm.resetValidation() */
       }, 500);
     },
     // Save New Item
     saveItem: function saveItem() {
-      var _this$iCategory,
-          _this3 = this;
+      var _this3 = this;
 
       this.saving = true;
 
       this._saveItem({
-        acquired_at: this.iDateAcquired,
+        /*     acquired_at: this.iDateAcquired,
         po_number: this.iPoNum,
         article: this.iArticle,
         description: this.iDescription,
-        category_id: (_this$iCategory = this.iCategory) === null || _this$iCategory === void 0 ? void 0 : _this$iCategory.id,
+        category_id: this.iCategory?.id,
         subcategory_id: this.iSubcategory,
         fund_id: this.iFund,
         amount: this.iAmount,
         quantity: this.iQuantity,
         measurement_id: this.iUnit,
         warranty_duration: this.iWarrantyDuration,
-        warranty_length_id: this.iWarrantyLength
+        warranty_length_id: this.iWarrantyLength */
       })["catch"](function (e) {
         _this3.inventoryErrors = e.errors;
       }).then(function (response) {
@@ -3661,25 +3714,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // Update Selected Item
     updateItem: function updateItem() {
-      var _this$iCategory2,
-          _this4 = this;
+      var _this4 = this;
 
       this.saving = true;
 
       this._updateItem({
-        id: this.itemId,
+        /*      id: this.itemId,
         acquired_at: this.iDateAcquired,
         po_number: this.iPoNum,
         article: this.iArticle,
         description: this.iDescription,
-        category_id: (_this$iCategory2 = this.iCategory) === null || _this$iCategory2 === void 0 ? void 0 : _this$iCategory2.id,
+        category_id: this.iCategory?.id,
         subcategory_id: this.iSubcategory,
         fund_id: this.iFund,
         amount: this.iAmount,
         quantity: this.iQuantity,
         measurement_id: this.iUnit,
         warranty_duration: this.iWarrantyDuration,
-        warranty_length_id: this.iWarrantyLength
+        warranty_length_id: this.iWarrantyLength */
       })["catch"](function (e) {
         _this4.inventoryErrors = e.errors;
       }).then(function (response) {
@@ -4129,37 +4181,8 @@ var actions = {
     return GET;
   }(),
   // Show details of inventory
-
-  /*  EDIT: async ({ commit }, payload) => {
-    return await new Promise((resolve, reject) => {
-      return api.get(`/api/inventory/${payload.code}/edit`)
-        .then((response) => {
-          resolve(response?.data)
-        })
-        .catch((e) => {
-          reject(e.response?.data)
-        })
-    })
-  },
-   SHOW: async ({ commit }, payload) => {
-    return await new Promise((resolve, reject) => {
-      return api.get(`/api/inventory/${payload.code}`)
-        .then((response) => {
-          resolve(true)
-          commit('SET_ITEM_DETAILS', response?.data?.data)
-        })
-        .catch((e) => {
-          reject(e.response?.data)
-        })
-    })
-  },
-   CLEAR_ITEM_DETAILS: async ({ commit }) => {
-    commit('SET_ITEM_DETAILS', null)
-  },
-  */
-  // Save Job
-  SAVE: function () {
-    var _SAVE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(_ref3, data) {
+  EDIT: function () {
+    var _EDIT = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(_ref3, payload) {
       var commit;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
@@ -4168,7 +4191,7 @@ var actions = {
               commit = _ref3.commit;
               _context3.next = 3;
               return new Promise(function (resolve, reject) {
-                return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/job_openings', data).then(function (response) {
+                return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/job_openings/".concat(payload.jo_id, "/edit")).then(function (response) {
                   resolve(response === null || response === void 0 ? void 0 : response.data);
                 })["catch"](function (e) {
                   var _e$response;
@@ -4188,15 +4211,31 @@ var actions = {
       }, _callee3);
     }));
 
-    function SAVE(_x3, _x4) {
-      return _SAVE.apply(this, arguments);
+    function EDIT(_x3, _x4) {
+      return _EDIT.apply(this, arguments);
     }
 
-    return SAVE;
+    return EDIT;
   }(),
+
+  /* SHOW: async ({ commit }, payload) => {
+    return await new Promise((resolve, reject) => {
+      return api.get(`/api/inventory/${payload.code}`)
+        .then((response) => {
+          resolve(true)
+          commit('SET_ITEM_DETAILS', response?.data?.data)
+        })
+        .catch((e) => {
+          reject(e.response?.data)
+        })
+    })
+  },
+   CLEAR_ITEM_DETAILS: async ({ commit }) => {
+    commit('SET_ITEM_DETAILS', null)
+  }, */
   // Save Job
-  UPDATE: function () {
-    var _UPDATE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(_ref4, payload) {
+  SAVE: function () {
+    var _SAVE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(_ref4, data) {
       var commit;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
@@ -4205,7 +4244,7 @@ var actions = {
               commit = _ref4.commit;
               _context4.next = 3;
               return new Promise(function (resolve, reject) {
-                return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/api/job_openings/".concat(payload.id), payload).then(function (response) {
+                return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/job_openings', data).then(function (response) {
                   resolve(response === null || response === void 0 ? void 0 : response.data);
                 })["catch"](function (e) {
                   var _e$response2;
@@ -4225,15 +4264,15 @@ var actions = {
       }, _callee4);
     }));
 
-    function UPDATE(_x5, _x6) {
-      return _UPDATE.apply(this, arguments);
+    function SAVE(_x5, _x6) {
+      return _SAVE.apply(this, arguments);
     }
 
-    return UPDATE;
+    return SAVE;
   }(),
-  // Delete Job
-  DELETE: function () {
-    var _DELETE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(_ref5, payload) {
+  // Save Job
+  UPDATE: function () {
+    var _UPDATE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(_ref5, payload) {
       var commit;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
         while (1) {
@@ -4242,7 +4281,7 @@ var actions = {
               commit = _ref5.commit;
               _context5.next = 3;
               return new Promise(function (resolve, reject) {
-                _api_api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/job_openings/".concat(payload.id)).then(function (response) {
+                return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/api/job_openings/".concat(payload.jo_id), payload).then(function (response) {
                   resolve(response === null || response === void 0 ? void 0 : response.data);
                 })["catch"](function (e) {
                   var _e$response3;
@@ -4262,7 +4301,44 @@ var actions = {
       }, _callee5);
     }));
 
-    function DELETE(_x7, _x8) {
+    function UPDATE(_x7, _x8) {
+      return _UPDATE.apply(this, arguments);
+    }
+
+    return UPDATE;
+  }(),
+  // Delete Job
+  DELETE: function () {
+    var _DELETE = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(_ref6, payload) {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              commit = _ref6.commit;
+              _context6.next = 3;
+              return new Promise(function (resolve, reject) {
+                _api_api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/job_openings/".concat(payload.jo_id)).then(function (response) {
+                  resolve(response === null || response === void 0 ? void 0 : response.data);
+                })["catch"](function (e) {
+                  var _e$response4;
+
+                  reject((_e$response4 = e.response) === null || _e$response4 === void 0 ? void 0 : _e$response4.data);
+                });
+              });
+
+            case 3:
+              return _context6.abrupt("return", _context6.sent);
+
+            case 4:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    function DELETE(_x9, _x10) {
       return _DELETE.apply(this, arguments);
     }
 
@@ -45103,6 +45179,42 @@ var render = function () {
             scopedSlots: _vm._u(
               [
                 {
+                  key: "item.jo_visibility",
+                  fn: function (ref) {
+                    var item = ref.item
+                    return [
+                      _c(
+                        "v-chip",
+                        {
+                          attrs: {
+                            small: "",
+                            dark: "",
+                            label: "",
+                            color: item.jo_visibility ? "green" : "grey",
+                          },
+                        },
+                        [
+                          _c("v-icon", { attrs: { small: "", left: "" } }, [
+                            _vm._v(
+                              "\n            mdi-" +
+                                _vm._s(item.jo_visibility ? "check" : "close") +
+                                "\n          "
+                            ),
+                          ]),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(
+                                item.jo_visibility ? "Active" : "Inactive"
+                              ) +
+                              "\n        "
+                          ),
+                        ],
+                        1
+                      ),
+                    ]
+                  },
+                },
+                {
                   key: "item.actions",
                   fn: function (ref) {
                     var item = ref.item
@@ -45668,7 +45780,7 @@ var render = function () {
                                       _c("v-autocomplete", {
                                         attrs: {
                                           items: _vm.campuses,
-                                          "item-value": "name",
+                                          "item-value": "id",
                                           "item-text": "name",
                                           label: "Campus *",
                                           rules: [_vm.rules.required],
@@ -45727,8 +45839,8 @@ var render = function () {
                                       _c("v-autocomplete", {
                                         attrs: {
                                           items: _vm.hrmoTypes,
-                                          "item-value": "email",
-                                          "item-text": "name",
+                                          "item-value": "id",
+                                          "item-text": "email",
                                           label: "HRMO type *",
                                           rules: [_vm.rules.required],
                                           required: "",
