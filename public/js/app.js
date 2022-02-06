@@ -2415,35 +2415,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         value: 'jo_date_posted',
         text: 'Date Posted',
         filterable: false,
-        sortable: false,
         width: 150
       }, {
         value: 'jo_position',
         text: 'Position',
-        filterable: false,
         sortable: false,
         width: 300
       }, {
         value: 'jo_vacancy_count',
         text: 'Vacancy Count',
+        filterable: false,
         width: 150
       }, {
         value: 'jo_campus',
         text: 'Campus',
         cellClass: ['text-wrap'],
+        sortable: false,
         width: 150
       }, {
         value: 'jo_office',
         text: 'Office',
+        sortable: false,
         width: 150
       }, {
         value: 'jo_status',
         text: 'Status',
+        sortable: false,
         width: 150
       }, {
         value: 'actions',
         text: '',
         sortable: false,
+        filterable: false,
         align: 'end',
         width: 150
       }],
