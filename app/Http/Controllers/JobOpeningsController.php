@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\JobOpeningRequest;
+use App\Http\Resources\create\JobCampusesResource;
 use App\Http\Resources\create\JobHrmoTypeResource;
 use App\Http\Resources\create\JobOfficesResource;
 use App\Http\Resources\create\JobStatusResource;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\JobOpeningResource;
 use App\Models\BulsuJoHrmoTypes;
 use App\Models\BulsuOffices;
+use App\Models\TblBulsuCampuses;
 use App\Models\TblJobStatus;
 
 class JobOpeningsController extends Controller
@@ -19,7 +21,7 @@ class JobOpeningsController extends Controller
 
     public function get()
     {
-        $list = BulsuJobOpenings::orderBy('jo_date_posted', 'DESC')->get();
+        $list = BulsuJobOpenings::orderBy('jo_visibility', 'DESC')->orderBy('jo_date_posted', 'DESC')->get();
         return JobOpeningResource::collection($list);
     }
 
@@ -28,11 +30,13 @@ class JobOpeningsController extends Controller
         $offices = BulsuOffices::orderBy('office_id')->get();
         $status = TblJobStatus::orderBy('status_id')->get();
         $hrmoTypes = BulsuJoHrmoTypes::orderBy('id')->get();
+        $campuses = TblBulsuCampuses::orderBy('id')->get();
 
         return [
             'offices' => JobOfficesResource::collection($offices),
             'status' => JobStatusResource::collection($status),
-            'hrmoTypes' => JobHrmoTypeResource::collection($hrmoTypes)
+            'hrmoTypes' => JobHrmoTypeResource::collection($hrmoTypes),
+            'campuses' => JobCampusesResource::collection($campuses)
         ];
     }
 

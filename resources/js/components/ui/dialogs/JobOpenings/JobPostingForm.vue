@@ -179,8 +179,8 @@
                     <v-autocomplete
                       v-model="iCampus"
                       :items="campuses"
-                      item-value="id"
-                      item-text="name"
+                      item-value="campus_name"
+                      item-text="campus_name"
                       label="Campus *"
                       :rules="[rules.required]"
                       required
@@ -802,7 +802,7 @@
                             Salary Grade:
                           </td>
                           <td class="font-weight-regular">
-                            {{ this.iSalaryGrade !== null ? this.iSalaryGrade : 'N/A' }}
+                            {{ this.iSalaryGrade }}
                           </td>
                         </tr>
                         <tr>
@@ -810,7 +810,7 @@
                             Salary Value:
                           </td>
                           <td class="font-weight-regular">
-                            {{ this.iSalaryValue !== null ? '₱'+this.iSalaryValue : 'N/A' }}
+                            {{ this.iSalaryValue !== null ? '₱'+this.iSalaryValue : '' }}
                           </td>
                         </tr>
                         <tr>
@@ -850,7 +850,7 @@
                             Apply Link:
                           </td>
                           <td class="font-weight-regular">
-                            {{ this.iLinks ? this.iLinks : 'N/A' }}
+                            {{ this.iLinks }}
                           </td>
                         </tr>
                       </tbody>
@@ -948,34 +948,7 @@ export default {
       iLinks: null,
 
       steps: 4,
-      e1: 1,
-
-      campuses: [
-        {
-          id: 1,
-          name: 'Malolos Campus'
-        },
-        {
-          id: 2,
-          name: 'Bustos Campus'
-        },
-        {
-          id: 3,
-          name: 'Meneses Campus'
-        },
-        {
-          id: 4,
-          name: 'Sarmiento Campus'
-        },
-        {
-          id: 5,
-          name: 'Hagonoy Campus'
-        },
-        {
-          id: 6,
-          name: 'Main Campus'
-        }
-      ]
+      e1: 1
 
     }
   },
@@ -983,7 +956,8 @@ export default {
     ...mapGetters({
       offices: 'jobopenings/OFFICE_LIST',
       status: 'jobopenings/STATUS_LIST',
-      hrmoTypes: 'jobopenings/HRMO_TYPE_LIST'
+      hrmoTypes: 'jobopenings/HRMO_TYPE_LIST',
+      campuses: 'jobopenings/CAMPUS_LIST'
     }),
     dateDeadlineFormatted () {
       return this.iDeadline ? moment(this.iDeadline).format('YYYY-MM-DD') : ''
@@ -1040,7 +1014,7 @@ export default {
           // Step 1
           this.iDatePosted = selectedItem?.jo_date_posted // Date Format
           this.iPosition = selectedItem?.jo_position
-          this.iCampus = selectedItem?.jo_campus // Add Table for Campuses (Model/Resource)
+          this.iCampus = selectedItem?.jo_campus
           this.iOffice = selectedItem?.jo_office
           this.iVacancyCount = selectedItem?.jo_vacancy_count
           this.iHrmoType = selectedItem?.jo_hr_type

@@ -3570,32 +3570,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       iShowDetails: true,
       iLinks: null,
       steps: 4,
-      e1: 1,
-      campuses: [{
-        id: 1,
-        name: 'Malolos Campus'
-      }, {
-        id: 2,
-        name: 'Bustos Campus'
-      }, {
-        id: 3,
-        name: 'Meneses Campus'
-      }, {
-        id: 4,
-        name: 'Sarmiento Campus'
-      }, {
-        id: 5,
-        name: 'Hagonoy Campus'
-      }, {
-        id: 6,
-        name: 'Main Campus'
-      }]
+      e1: 1
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
     offices: 'jobopenings/OFFICE_LIST',
     status: 'jobopenings/STATUS_LIST',
-    hrmoTypes: 'jobopenings/HRMO_TYPE_LIST'
+    hrmoTypes: 'jobopenings/HRMO_TYPE_LIST',
+    campuses: 'jobopenings/CAMPUS_LIST'
   })), {}, {
     dateDeadlineFormatted: function dateDeadlineFormatted() {
       return this.iDeadline ? moment__WEBPACK_IMPORTED_MODULE_1___default()(this.iDeadline).format('YYYY-MM-DD') : '';
@@ -3659,9 +3641,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                   // Date Format
                   _this.iPosition = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_position;
-                  _this.iCampus = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_campus; // Add Table for Campuses (Model/Resource)
-
-                  // Add Table for Campuses (Model/Resource)
+                  _this.iCampus = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_campus;
                   _this.iOffice = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_office;
                   _this.iVacancyCount = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_vacancy_count;
                   _this.iHrmoType = selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.jo_hr_type; // Step 2
@@ -4148,6 +4128,7 @@ var state = {
   offices: [],
   status: [],
   hrmoTypes: [],
+  campuses: [],
   jobDetails: null
 };
 var getters = {
@@ -4159,6 +4140,9 @@ var getters = {
   },
   HRMO_TYPE_LIST: function HRMO_TYPE_LIST(state) {
     return state.hrmoTypes;
+  },
+  CAMPUS_LIST: function CAMPUS_LIST(state) {
+    return state.campuses;
   },
   JOBS_LIST: function JOBS_LIST(state) {
     return state.jobs;
@@ -4177,6 +4161,9 @@ var mutations = {
   SET_HRMO_TYPE: function SET_HRMO_TYPE(state, payload) {
     return state.hrmoTypes = payload;
   },
+  SET_CAMPUS: function SET_CAMPUS(state, payload) {
+    return state.campuses = payload;
+  },
   SET_JOBS: function SET_JOBS(state, payload) {
     state.jobs = payload;
   }
@@ -4193,11 +4180,12 @@ var actions = {
               commit = _ref.commit;
               _context.next = 3;
               return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/job_openings/create').then(function (response) {
-                var _response$data, _response$data2, _response$data3;
+                var _response$data, _response$data2, _response$data3, _response$data4;
 
                 commit('SET_OFFICE', response === null || response === void 0 ? void 0 : (_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.offices);
                 commit('SET_STATUS', response === null || response === void 0 ? void 0 : (_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.status);
                 commit('SET_HRMO_TYPE', response === null || response === void 0 ? void 0 : (_response$data3 = response.data) === null || _response$data3 === void 0 ? void 0 : _response$data3.hrmoTypes);
+                commit('SET_CAMPUS', response === null || response === void 0 ? void 0 : (_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.campuses);
               });
 
             case 3:
@@ -4228,9 +4216,9 @@ var actions = {
               commit = _ref2.commit;
               _context2.next = 3;
               return _api_api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/job_openings').then(function (response) {
-                var _response$data4;
+                var _response$data5;
 
-                commit('SET_JOBS', response === null || response === void 0 ? void 0 : (_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.data);
+                commit('SET_JOBS', response === null || response === void 0 ? void 0 : (_response$data5 = response.data) === null || _response$data5 === void 0 ? void 0 : _response$data5.data);
               });
 
             case 3:
@@ -4300,7 +4288,7 @@ var actions = {
         })
     })
   },
-    CLEAR_ITEM_DETAILS: async ({ commit }) => {
+   CLEAR_ITEM_DETAILS: async ({ commit }) => {
     commit('SET_ITEM_DETAILS', null)
   }, */
   // Save Job
@@ -45922,8 +45910,8 @@ var render = function () {
                                       _c("v-autocomplete", {
                                         attrs: {
                                           items: _vm.campuses,
-                                          "item-value": "id",
-                                          "item-text": "name",
+                                          "item-value": "campus_name",
+                                          "item-text": "campus_name",
                                           label: "Campus *",
                                           rules: [_vm.rules.required],
                                           required: "",
@@ -47504,10 +47492,7 @@ var render = function () {
                                                   _vm._v(
                                                     "\n                          " +
                                                       _vm._s(
-                                                        this.iSalaryGrade !==
-                                                          null
-                                                          ? this.iSalaryGrade
-                                                          : "N/A"
+                                                        this.iSalaryGrade
                                                       ) +
                                                       "\n                        "
                                                   ),
@@ -47543,7 +47528,7 @@ var render = function () {
                                                           null
                                                           ? "₱" +
                                                               this.iSalaryValue
-                                                          : "N/A"
+                                                          : ""
                                                       ) +
                                                       "\n                        "
                                                   ),
@@ -47702,11 +47687,7 @@ var render = function () {
                                                 [
                                                   _vm._v(
                                                     "\n                          " +
-                                                      _vm._s(
-                                                        this.iLinks
-                                                          ? this.iLinks
-                                                          : "N/A"
-                                                      ) +
+                                                      _vm._s(this.iLinks) +
                                                       "\n                        "
                                                   ),
                                                 ]

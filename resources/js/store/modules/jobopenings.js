@@ -6,6 +6,7 @@ const state = {
   offices: [],
   status: [],
   hrmoTypes: [],
+  campuses: [],
 
   jobDetails: null
 
@@ -16,6 +17,7 @@ const getters = {
   OFFICE_LIST: state => state.offices,
   STATUS_LIST: state => state.status,
   HRMO_TYPE_LIST: state => state.hrmoTypes,
+  CAMPUS_LIST: state => state.campuses,
 
   JOBS_LIST: state => state.jobs,
   JOB_DETAILS: state => state.jobDetails
@@ -26,6 +28,7 @@ const mutations = {
   SET_OFFICE: (state, payload) => (state.offices = payload),
   SET_STATUS: (state, payload) => (state.status = payload),
   SET_HRMO_TYPE: (state, payload) => (state.hrmoTypes = payload),
+  SET_CAMPUS: (state, payload) => (state.campuses = payload),
 
   SET_JOBS: (state, payload) => { state.jobs = payload }
 
@@ -40,6 +43,7 @@ const actions = {
         commit('SET_OFFICE', response?.data?.offices)
         commit('SET_STATUS', response?.data?.status)
         commit('SET_HRMO_TYPE', response?.data?.hrmoTypes)
+        commit('SET_CAMPUS', response?.data?.campuses)
       })
   },
 
