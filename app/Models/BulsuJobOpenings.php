@@ -36,7 +36,7 @@ class BulsuJobOpenings extends Model
         'jo_hidden_at',
         'attachment',
         'show_details',
-        'link',
+        'links',
     ];
 
     protected $casts = [

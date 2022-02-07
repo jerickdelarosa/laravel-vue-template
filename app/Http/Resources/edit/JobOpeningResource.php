@@ -33,14 +33,14 @@ class JobOpeningResource extends JsonResource
             'jo_item_number' => $this->jo_item_number,
             'jo_salary_grade' => $this->jo_salary_grade,
             'jo_salary_value' => $this->jo_salary_value,
-            'jo_deadline' => $this->jo_deadline,
+            'jo_deadline' => $this->jo_deadline !== null ? $this->jo_deadline->format('Y-m-d') : $this->jo_deadline,
             'jo_remarks' => $this->jo_remarks,
             'jo_visibility' => $this->jo_visibility,
-            'jo_date_filled' => $this->jo_date_filled,
-            'jo_hidden_at' => $this->jo_hidden_at,
+            'jo_date_filled' => $this->jo_date_filled !== null ? $this->jo_date_filled->format('Y-m-d') : $this->jo_date_filled,
+            'jo_hidden_at' => $this->jo_hidden_at !== null ? $this->jo_hidden_at->format('Y-m-d') : $this->jo_hidden_at,
             'attachment' => $this->attachment,
             'show_details' => $this->show_details,
-            'link' => $this->link,
+            'links' => $this->links,
         ];
     }
 }

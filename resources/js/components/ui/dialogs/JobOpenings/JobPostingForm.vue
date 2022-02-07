@@ -529,7 +529,7 @@
 
                     <!-- Job Link-->
                     <v-text-field
-                      v-model="iLink"
+                      v-model="iLinks"
                       clearable
                       clear-icon="mdi-close"
                       label="Appy Link"
@@ -850,7 +850,7 @@
                             Apply Link:
                           </td>
                           <td class="font-weight-regular">
-                            {{ this.iLink ? this.iLink : 'N/A' }}
+                            {{ this.iLinks ? this.iLinks : 'N/A' }}
                           </td>
                         </tr>
                       </tbody>
@@ -945,7 +945,7 @@ export default {
       iRemark: false,
       iVisibility: true,
       iShowDetails: true,
-      iLink: null,
+      iLinks: null,
 
       steps: 4,
       e1: 1,
@@ -970,6 +970,10 @@ export default {
         {
           id: 5,
           name: 'Hagonoy Campus'
+        },
+        {
+          id: 6,
+          name: 'Main Campus'
         }
       ]
 
@@ -1058,7 +1062,7 @@ export default {
           this.iDateFilled = selectedItem?.jo_date_filled
           this.iDateUnpost = selectedItem?.jo_hidden_at
           this.iAttachment = selectedItem?.attachment
-          this.iLink = selectedItem?.link
+          this.iLinks = selectedItem?.links
           this.iRemark = selectedItem?.jo_remarks
           this.iVisibility = selectedItem?.jo_visibility
           this.iShowDetails = selectedItem?.show_details
@@ -1108,7 +1112,7 @@ export default {
         this.iRemark = false
         this.iVisibility = true
         this.iShowDetails = true
-        this.iLink = null
+        this.iLinks = null
         this.e1 = 1
 
         /* this.$refs.jobPostingForm.resetValidation() */

@@ -115,7 +115,7 @@ class JobOpeningRequest extends FormRequest
             'show_details' => [
                 'boolean'
             ],
-            'link' => [
+            'links' => [
                 'string',
                 'nullable'
             ]
