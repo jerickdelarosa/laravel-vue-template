@@ -83,11 +83,11 @@ class JobOpeningRequest extends FormRequest
                 'nullable'
             ],
             'jo_salary_grade' => [
-                'string',
+                'numeric',
                 'nullable'
             ],
             'jo_salary_value' => [
-                'string',
+                'numeric',
                 'nullable'
             ],
             'jo_deadline' => [

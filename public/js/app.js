@@ -3512,6 +3512,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3540,7 +3550,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       },
       formLoading: false,
+      jobPostingForm: null,
       saving: false,
+      jobPostingErrors: null,
       datePostedDialog: false,
       iDatePosted: null,
       iPosition: null,
@@ -3579,6 +3591,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     hrmoTypes: 'jobopenings/HRMO_TYPE_LIST',
     campuses: 'jobopenings/CAMPUS_LIST'
   })), {}, {
+    hasSelectedItem: function hasSelectedItem() {
+      return !!this.itemId;
+    },
     dateDeadlineFormatted: function dateDeadlineFormatted() {
       return this.iDeadline ? moment__WEBPACK_IMPORTED_MODULE_1___default()(this.iDeadline).format('YYYY-MM-DD') : '';
     },
@@ -3591,8 +3606,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     dateUnpostFormatted: function dateUnpostFormatted() {
       return this.iDateUnpost ? moment__WEBPACK_IMPORTED_MODULE_1___default()(this.iDateUnpost).format('YYYY-MM-DD') : '';
     },
-    hasSelectedItem: function hasSelectedItem() {
-      return !!this.itemId;
+    positionError: function positionError() {
+      var _this$jobPostingError;
+
+      return (_this$jobPostingError = this.jobPostingErrors) === null || _this$jobPostingError === void 0 ? void 0 : _this$jobPostingError.itemId;
+    },
+    hasPositionError: function hasPositionError() {
+      return !!this.positionError;
+    },
+    campusError: function campusError() {
+      var _this$jobPostingError2;
+
+      return (_this$jobPostingError2 = this.jobPostingErrors) === null || _this$jobPostingError2 === void 0 ? void 0 : _this$jobPostingError2.itemId;
+    },
+    hasCampusError: function hasCampusError() {
+      return !!this.campusError;
     }
   }),
   watch: {
@@ -3686,10 +3714,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // Submit Item Form
     submitForm: function submitForm() {
-      if (this.$refs.inventoryForm.validate()) {
+      console.log(this.$refs.jobPostingForm.validate());
+
+      if (this.$refs.jobPostingForm.validate()) {
+        console.log('qweqewq');
+
         if (this.hasSelectedItem) {
+          console.log('zxczxc');
           this.updateItem();
         } else {
+          console.log('asdadas');
           this.saveItem();
         }
       }
@@ -3722,8 +3756,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.iVisibility = true;
         _this2.iShowDetails = true;
         _this2.iLinks = null;
+        _this2.jobPostingErrors = null;
         _this2.e1 = 1;
-        /* this.$refs.jobPostingForm.resetValidation() */
+
+        _this2.$refs.jobPostingForm.resetValidation();
       }, 500);
     },
     // Save New Item
@@ -3733,30 +3769,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.saving = true;
 
       this._saveItem({
-        /*     acquired_at: this.iDateAcquired,
-        po_number: this.iPoNum,
-        article: this.iArticle,
-        description: this.iDescription,
-        category_id: this.iCategory?.id,
-        subcategory_id: this.iSubcategory,
-        fund_id: this.iFund,
-        amount: this.iAmount,
-        quantity: this.iQuantity,
-        measurement_id: this.iUnit,
-        warranty_duration: this.iWarrantyDuration,
-        warranty_length_id: this.iWarrantyLength */
+        jo_date_posted: this.iDatePosted,
+        jo_position: this.iPosition,
+        jo_campus: this.iCampus,
+        jo_office: this.iOffice,
+        jo_vacancy_count: this.iVacancyCount,
+        jo_status: this.iJobStatus,
+        jo_hr_type: this.iHrmoType,
+        jo_qualifications_education: this.iEducation,
+        jo_qualifications_experience: this.iExperience,
+        jo_qualifications_training: this.iTraining,
+        jo_qualifications_eligibility: this.iEligibility,
+        jo_qualifications_other: this.iOther,
+        jo_duties: this.iDuties,
+        jo_item_number: this.iItemNumber,
+        jo_salary_grade: this.iSalaryGrade,
+        jo_salary_value: this.iSalaryValue,
+        jo_deadline: this.iDeadline,
+        jo_remarks: this.iRemark,
+        jo_visibility: this.iVisibility,
+        jo_date_filled: this.iDateFilled,
+        jo_hidden_at: this.iDateUnpost,
+        attachment: this.iAttachment,
+        show_details: this.iShowDetails,
+        links: this.iLinks
       })["catch"](function (e) {
-        _this3.inventoryErrors = e.errors;
+        _this3.jobPostingErrors = e.errors;
       }).then(function (response) {
         if (response !== null && response !== void 0 && response.created) {
           _this3.closeDialog(true);
-
-          _this3.$router.push({
+          /* this.$router.push({
             name: 'main.inventory.view.overview',
             params: {
-              item: response.code
+              item: response.jo_id
             }
-          });
+          }) */
+
         }
       })["finally"](function () {
         _this3.saving = false;
@@ -3769,21 +3817,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.saving = true;
 
       this._updateItem({
-        /*      id: this.itemId,
-        acquired_at: this.iDateAcquired,
-        po_number: this.iPoNum,
-        article: this.iArticle,
-        description: this.iDescription,
-        category_id: this.iCategory?.id,
-        subcategory_id: this.iSubcategory,
-        fund_id: this.iFund,
-        amount: this.iAmount,
-        quantity: this.iQuantity,
-        measurement_id: this.iUnit,
-        warranty_duration: this.iWarrantyDuration,
-        warranty_length_id: this.iWarrantyLength */
+        jo_id: this.itemId,
+        jo_date_posted: this.iDatePosted,
+        jo_position: this.iPosition,
+        jo_campus: this.iCampus,
+        jo_office: this.iOffice,
+        jo_vacancy_count: this.iVacancyCount,
+        jo_status: this.iJobStatus,
+        jo_hr_type: this.iHrmoType,
+        jo_qualifications_education: this.iEducation,
+        jo_qualifications_experience: this.iExperience,
+        jo_qualifications_training: this.iTraining,
+        jo_qualifications_eligibility: this.iEligibility,
+        jo_qualifications_other: this.iOther,
+        jo_duties: this.iDuties,
+        jo_item_number: this.iItemNumber,
+        jo_salary_grade: this.iSalaryGrade,
+        jo_salary_value: this.iSalaryValue,
+        jo_deadline: this.iDeadline,
+        jo_remarks: this.iRemark,
+        jo_visibility: this.iVisibility,
+        jo_date_filled: this.iDateFilled,
+        jo_hidden_at: this.iDateUnpost,
+        attachment: this.iAttachment,
+        show_details: this.iShowDetails,
+        links: this.iLinks
       })["catch"](function (e) {
-        _this4.inventoryErrors = e.errors;
+        _this4.jobPostingErrors = e.errors;
       }).then(function (response) {
         if (response !== null && response !== void 0 && response.updated) {
           _this4.closeDialog(true);
@@ -45674,191 +45734,365 @@ var render = function () {
                   ),
                   _vm._v(" "),
                   _c(
-                    "v-row",
-                    { attrs: { justify: "center" } },
+                    "v-form",
+                    {
+                      ref: "jobPostingForm",
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.submitForm.apply(null, arguments)
+                        },
+                      },
+                      model: {
+                        value: _vm.jobPostingForm,
+                        callback: function ($$v) {
+                          _vm.jobPostingForm = $$v
+                        },
+                        expression: "jobPostingForm",
+                      },
+                    },
                     [
                       _c(
-                        "v-col",
-                        { attrs: { cols: "12", md: "10", lg: "8", xl: "8" } },
+                        "v-row",
+                        { attrs: { justify: "center" } },
                         [
                           _c(
-                            "v-stepper",
+                            "v-col",
                             {
-                              model: {
-                                value: _vm.e1,
-                                callback: function ($$v) {
-                                  _vm.e1 = $$v
-                                },
-                                expression: "e1",
-                              },
+                              attrs: { cols: "12", md: "10", lg: "8", xl: "8" },
                             },
                             [
                               _c(
-                                "v-stepper-header",
+                                "v-stepper",
+                                {
+                                  model: {
+                                    value: _vm.e1,
+                                    callback: function ($$v) {
+                                      _vm.e1 = $$v
+                                    },
+                                    expression: "e1",
+                                  },
+                                },
                                 [
-                                  _vm._l(_vm.steps, function (n) {
-                                    return [
+                                  _c(
+                                    "v-stepper-header",
+                                    [
+                                      _vm._l(_vm.steps, function (n) {
+                                        return [
+                                          _c(
+                                            "v-stepper-step",
+                                            {
+                                              key: n + "-step",
+                                              attrs: {
+                                                complete: _vm.e1 > n,
+                                                step: n,
+                                                editable: "",
+                                                "edit-icon": "mdi-check",
+                                              },
+                                            },
+                                            [
+                                              n == _vm.steps
+                                                ? [
+                                                    _vm._v(
+                                                      "\n                        Summary\n                      "
+                                                    ),
+                                                  ]
+                                                : [
+                                                    _vm._v(
+                                                      "\n                        Step " +
+                                                        _vm._s(n) +
+                                                        "\n                      "
+                                                    ),
+                                                  ],
+                                            ],
+                                            2
+                                          ),
+                                          _vm._v(" "),
+                                          n !== _vm.steps
+                                            ? _c("v-divider", { key: n })
+                                            : _vm._e(),
+                                        ]
+                                      }),
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-stepper-items",
+                                    [
                                       _c(
-                                        "v-stepper-step",
-                                        {
-                                          key: n + "-step",
-                                          attrs: {
-                                            complete: _vm.e1 > n,
-                                            step: n,
-                                            editable: "",
-                                            "edit-icon": "mdi-check",
-                                          },
-                                        },
+                                        "v-stepper-content",
+                                        { key: "step-1", attrs: { step: "1" } },
                                         [
-                                          n == _vm.steps
-                                            ? [
-                                                _vm._v(
-                                                  "\n                      Summary\n                    "
-                                                ),
-                                              ]
-                                            : [
-                                                _vm._v(
-                                                  "\n                      Step " +
-                                                    _vm._s(n) +
-                                                    "\n                    "
-                                                ),
+                                          _c(
+                                            "v-dialog",
+                                            {
+                                              ref: "datePostedDialog",
+                                              attrs: {
+                                                "return-value": _vm.iDatePosted,
+                                                persistent: "",
+                                                width: "290px",
+                                              },
+                                              on: {
+                                                "update:returnValue": function (
+                                                  $event
+                                                ) {
+                                                  _vm.iDatePosted = $event
+                                                },
+                                                "update:return-value":
+                                                  function ($event) {
+                                                    _vm.iDatePosted = $event
+                                                  },
+                                              },
+                                              scopedSlots: _vm._u([
+                                                {
+                                                  key: "activator",
+                                                  fn: function (ref) {
+                                                    var on = ref.on
+                                                    var attrs = ref.attrs
+                                                    return [
+                                                      _c(
+                                                        "v-text-field",
+                                                        _vm._g(
+                                                          _vm._b(
+                                                            {
+                                                              staticClass:
+                                                                "mt-3",
+                                                              attrs: {
+                                                                outlined: "",
+                                                                label:
+                                                                  "Date Posted *",
+                                                                value:
+                                                                  _vm.datePostedFormatted,
+                                                                clearable: "",
+                                                                readonly: "",
+                                                                rules: [
+                                                                  _vm.rules
+                                                                    .required,
+                                                                ],
+                                                                required: "",
+                                                                "append-icon":
+                                                                  "mdi-calendar",
+                                                              },
+                                                              on: {
+                                                                "click:clear":
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    _vm.iDatePosted =
+                                                                      null
+                                                                  },
+                                                              },
+                                                            },
+                                                            "v-text-field",
+                                                            attrs,
+                                                            false
+                                                          ),
+                                                          on
+                                                        )
+                                                      ),
+                                                    ]
+                                                  },
+                                                },
+                                              ]),
+                                              model: {
+                                                value: _vm.datePostedDialog,
+                                                callback: function ($$v) {
+                                                  _vm.datePostedDialog = $$v
+                                                },
+                                                expression: "datePostedDialog",
+                                              },
+                                            },
+                                            [
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-date-picker",
+                                                {
+                                                  ref: "datePostedPicker",
+                                                  attrs: {
+                                                    scrollable: "",
+                                                    clearable: "",
+                                                  },
+                                                  model: {
+                                                    value: _vm.iDatePosted,
+                                                    callback: function ($$v) {
+                                                      _vm.iDatePosted = $$v
+                                                    },
+                                                    expression: "iDatePosted",
+                                                  },
+                                                },
+                                                [
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        text: "",
+                                                        color: "primary",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          _vm.datePostedDialog = false
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Cancel\n                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        text: "",
+                                                        color: "primary",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.$refs.datePostedDialog.save(
+                                                            _vm.iDatePosted
+                                                          )
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          OK\n                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ],
+                                                1
+                                              ),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              label: "Position *",
+                                              rules: [_vm.rules.required],
+                                              error: _vm.hasPositionError,
+                                              "error-messages":
+                                                _vm.positionError,
+                                              outlined: "",
+                                              clearable: "",
+                                            },
+                                            model: {
+                                              value: _vm.iPosition,
+                                              callback: function ($$v) {
+                                                _vm.iPosition = $$v
+                                              },
+                                              expression: "iPosition",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-autocomplete", {
+                                            attrs: {
+                                              items: _vm.campuses,
+                                              "item-value": "campus_name",
+                                              "item-text": "campus_name",
+                                              label: "Campus *",
+                                              rules: [_vm.rules.required],
+                                              error: _vm.hasCampusError,
+                                              "error-messages": _vm.campusError,
+                                              required: "",
+                                              outlined: "",
+                                              clearable: "",
+                                            },
+                                            model: {
+                                              value: _vm.iCampus,
+                                              callback: function ($$v) {
+                                                _vm.iCampus = $$v
+                                              },
+                                              expression: "iCampus",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-autocomplete", {
+                                            attrs: {
+                                              items: _vm.offices,
+                                              "item-value": "office_id",
+                                              "item-text": "office_name",
+                                              label: "Office",
+                                              outlined: "",
+                                              clearable: "",
+                                            },
+                                            model: {
+                                              value: _vm.iOffice,
+                                              callback: function ($$v) {
+                                                _vm.iOffice = $$v
+                                              },
+                                              expression: "iOffice",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              label: "Vacancy Count *",
+                                              rules: [
+                                                _vm.rules.required,
+                                                _vm.rules.number_min,
                                               ],
-                                        ],
-                                        2
-                                      ),
-                                      _vm._v(" "),
-                                      n !== _vm.steps
-                                        ? _c("v-divider", { key: n })
-                                        : _vm._e(),
-                                    ]
-                                  }),
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-stepper-items",
-                                [
-                                  _c(
-                                    "v-stepper-content",
-                                    { key: "step-1", attrs: { step: "1" } },
-                                    [
-                                      _c(
-                                        "v-dialog",
-                                        {
-                                          ref: "datePostedDialog",
-                                          attrs: {
-                                            "return-value": _vm.iDatePosted,
-                                            persistent: "",
-                                            width: "290px",
-                                          },
-                                          on: {
-                                            "update:returnValue": function (
-                                              $event
-                                            ) {
-                                              _vm.iDatePosted = $event
+                                              type: "number",
+                                              required: "",
+                                              outlined: "",
+                                              clearable: "",
                                             },
-                                            "update:return-value": function (
-                                              $event
-                                            ) {
-                                              _vm.iDatePosted = $event
-                                            },
-                                          },
-                                          scopedSlots: _vm._u([
-                                            {
-                                              key: "activator",
-                                              fn: function (ref) {
-                                                var on = ref.on
-                                                var attrs = ref.attrs
-                                                return [
-                                                  _c(
-                                                    "v-text-field",
-                                                    _vm._g(
-                                                      _vm._b(
-                                                        {
-                                                          staticClass: "mt-3",
-                                                          attrs: {
-                                                            outlined: "",
-                                                            label:
-                                                              "Date Posted *",
-                                                            value:
-                                                              _vm.datePostedFormatted,
-                                                            clearable: "",
-                                                            readonly: "",
-                                                            rules: [
-                                                              _vm.rules
-                                                                .required,
-                                                            ],
-                                                            required: "",
-                                                            "append-icon":
-                                                              "mdi-calendar",
-                                                          },
-                                                          on: {
-                                                            "click:clear":
-                                                              function (
-                                                                $event
-                                                              ) {
-                                                                _vm.iDatePosted =
-                                                                  null
-                                                              },
-                                                          },
-                                                        },
-                                                        "v-text-field",
-                                                        attrs,
-                                                        false
-                                                      ),
-                                                      on
-                                                    )
-                                                  ),
-                                                ]
+                                            model: {
+                                              value: _vm.iVacancyCount,
+                                              callback: function ($$v) {
+                                                _vm.iVacancyCount = $$v
                                               },
+                                              expression: "iVacancyCount",
                                             },
-                                          ]),
-                                          model: {
-                                            value: _vm.datePostedDialog,
-                                            callback: function ($$v) {
-                                              _vm.datePostedDialog = $$v
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-autocomplete", {
+                                            attrs: {
+                                              items: _vm.hrmoTypes,
+                                              "item-value": "id",
+                                              "item-text": "email",
+                                              label: "HRMO type *",
+                                              rules: [_vm.rules.required],
+                                              required: "",
+                                              outlined: "",
+                                              clearable: "",
                                             },
-                                            expression: "datePostedDialog",
-                                          },
-                                        },
-                                        [
+                                            model: {
+                                              value: _vm.iHrmoType,
+                                              callback: function ($$v) {
+                                                _vm.iHrmoType = $$v
+                                              },
+                                              expression: "iHrmoType",
+                                            },
+                                          }),
                                           _vm._v(" "),
                                           _c(
-                                            "v-date-picker",
-                                            {
-                                              ref: "datePostedPicker",
-                                              attrs: {
-                                                scrollable: "",
-                                                clearable: "",
-                                              },
-                                              model: {
-                                                value: _vm.iDatePosted,
-                                                callback: function ($$v) {
-                                                  _vm.iDatePosted = $$v
-                                                },
-                                                expression: "iDatePosted",
-                                              },
-                                            },
+                                            "v-layout",
+                                            { attrs: { "justify-end": "" } },
                                             [
-                                              _c("v-spacer"),
-                                              _vm._v(" "),
                                               _c(
                                                 "v-btn",
                                                 {
-                                                  attrs: {
-                                                    text: "",
-                                                    color: "primary",
-                                                  },
+                                                  attrs: { color: "primary" },
                                                   on: {
                                                     click: function ($event) {
-                                                      _vm.datePostedDialog = false
+                                                      _vm.e1 = 2
                                                     },
                                                   },
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                        Cancel\n                      "
+                                                    "\n                        Continue\n                      "
                                                   ),
                                                 ]
                                               ),
@@ -45866,536 +46100,19 @@ var render = function () {
                                               _c(
                                                 "v-btn",
                                                 {
-                                                  attrs: {
-                                                    text: "",
-                                                    color: "primary",
-                                                  },
+                                                  staticClass: "ml-2",
+                                                  attrs: { text: "" },
                                                   on: {
                                                     click: function ($event) {
-                                                      return _vm.$refs.datePostedDialog.save(
-                                                        _vm.iDatePosted
+                                                      return _vm.closeDialog(
+                                                        false
                                                       )
                                                     },
                                                   },
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                        OK\n                      "
-                                                  ),
-                                                ]
-                                              ),
-                                            ],
-                                            1
-                                          ),
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Position *",
-                                          rules: [_vm.rules.required],
-                                          outlined: "",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iPosition,
-                                          callback: function ($$v) {
-                                            _vm.iPosition = $$v
-                                          },
-                                          expression: "iPosition",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-autocomplete", {
-                                        attrs: {
-                                          items: _vm.campuses,
-                                          "item-value": "campus_name",
-                                          "item-text": "campus_name",
-                                          label: "Campus *",
-                                          rules: [_vm.rules.required],
-                                          required: "",
-                                          outlined: "",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iCampus,
-                                          callback: function ($$v) {
-                                            _vm.iCampus = $$v
-                                          },
-                                          expression: "iCampus",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-autocomplete", {
-                                        attrs: {
-                                          items: _vm.offices,
-                                          "item-value": "office_id",
-                                          "item-text": "office_name",
-                                          label: "Office",
-                                          outlined: "",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iOffice,
-                                          callback: function ($$v) {
-                                            _vm.iOffice = $$v
-                                          },
-                                          expression: "iOffice",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Vacancy Count *",
-                                          rules: [
-                                            _vm.rules.required,
-                                            _vm.rules.number_min,
-                                          ],
-                                          type: "number",
-                                          required: "",
-                                          outlined: "",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iVacancyCount,
-                                          callback: function ($$v) {
-                                            _vm.iVacancyCount = $$v
-                                          },
-                                          expression: "iVacancyCount",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-autocomplete", {
-                                        attrs: {
-                                          items: _vm.hrmoTypes,
-                                          "item-value": "id",
-                                          "item-text": "email",
-                                          label: "HRMO type *",
-                                          rules: [_vm.rules.required],
-                                          required: "",
-                                          outlined: "",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iHrmoType,
-                                          callback: function ($$v) {
-                                            _vm.iHrmoType = $$v
-                                          },
-                                          expression: "iHrmoType",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-layout",
-                                        { attrs: { "justify-end": "" } },
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: { color: "primary" },
-                                              on: {
-                                                click: function ($event) {
-                                                  _vm.e1 = 2
-                                                },
-                                              },
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                      Continue\n                    "
-                                              ),
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              staticClass: "ml-2",
-                                              attrs: { text: "" },
-                                              on: {
-                                                click: function ($event) {
-                                                  return _vm.closeDialog(false)
-                                                },
-                                              },
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                      Close\n                    "
-                                              ),
-                                            ]
-                                          ),
-                                        ],
-                                        1
-                                      ),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-stepper-content",
-                                    { key: "step-2", attrs: { step: "2" } },
-                                    [
-                                      _c("v-autocomplete", {
-                                        staticClass: "mt-2",
-                                        attrs: {
-                                          items: _vm.status,
-                                          "item-value": "status_id",
-                                          "item-text": "status_name",
-                                          label: "Job Status *",
-                                          rules: [_vm.rules.required],
-                                          required: "",
-                                          outlined: "",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iJobStatus,
-                                          callback: function ($$v) {
-                                            _vm.iJobStatus = $$v
-                                          },
-                                          expression: "iJobStatus",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-textarea", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label: "Job Qualification Education",
-                                          "auto-grow": "",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iEducation,
-                                          callback: function ($$v) {
-                                            _vm.iEducation = $$v
-                                          },
-                                          expression: "iEducation",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-textarea", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label: "Job Qualification Experience",
-                                          "auto-grow": "",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iExperience,
-                                          callback: function ($$v) {
-                                            _vm.iExperience = $$v
-                                          },
-                                          expression: "iExperience",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-textarea", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label: "Job Qualification Training",
-                                          "auto-grow": "",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iTraining,
-                                          callback: function ($$v) {
-                                            _vm.iTraining = $$v
-                                          },
-                                          expression: "iTraining",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-textarea", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label:
-                                            "Job Qualification Eligibility",
-                                          "auto-grow": "",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iEligibility,
-                                          callback: function ($$v) {
-                                            _vm.iEligibility = $$v
-                                          },
-                                          expression: "iEligibility",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-textarea", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label: "Job Qualification Other",
-                                          "auto-grow": "",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iOther,
-                                          callback: function ($$v) {
-                                            _vm.iOther = $$v
-                                          },
-                                          expression: "iOther",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-textarea", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label: "Job Duties",
-                                          "auto-grow": "",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iDuties,
-                                          callback: function ($$v) {
-                                            _vm.iDuties = $$v
-                                          },
-                                          expression: "iDuties",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-layout",
-                                        { attrs: { "justify-end": "" } },
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: { color: "primary" },
-                                              on: {
-                                                click: function ($event) {
-                                                  _vm.e1 = 3
-                                                },
-                                              },
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                      Continue\n                    "
-                                              ),
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              staticClass: "ml-2",
-                                              attrs: { text: "" },
-                                              on: {
-                                                click: function ($event) {
-                                                  _vm.e1 = 1
-                                                },
-                                              },
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                      Back\n                    "
-                                              ),
-                                            ]
-                                          ),
-                                        ],
-                                        1
-                                      ),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-stepper-content",
-                                    { key: "step-3", attrs: { step: "3" } },
-                                    [
-                                      _c("v-text-field", {
-                                        staticClass: "mt-3",
-                                        attrs: {
-                                          label: "Job Item Number",
-                                          outlined: "",
-                                          "clear-icon": "mdi-close",
-                                          clearable: "",
-                                        },
-                                        model: {
-                                          value: _vm.iItemNumber,
-                                          callback: function ($$v) {
-                                            _vm.iItemNumber = $$v
-                                          },
-                                          expression: "iItemNumber",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Job Salary Grade",
-                                          rules: [_vm.rules.number_min],
-                                          type: "number",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iSalaryGrade,
-                                          callback: function ($$v) {
-                                            _vm.iSalaryGrade = $$v
-                                          },
-                                          expression: "iSalaryGrade",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label: "Job Salary Value",
-                                          rules: [_vm.rules.number_min],
-                                          type: "number",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iSalaryValue,
-                                          callback: function ($$v) {
-                                            _vm.iSalaryValue = $$v
-                                          },
-                                          expression: "iSalaryValue",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-dialog",
-                                        {
-                                          ref: "dateDeadlineDialog",
-                                          attrs: {
-                                            "return-value": _vm.iDeadline,
-                                            persistent: "",
-                                            width: "290px",
-                                          },
-                                          on: {
-                                            "update:returnValue": function (
-                                              $event
-                                            ) {
-                                              _vm.iDeadline = $event
-                                            },
-                                            "update:return-value": function (
-                                              $event
-                                            ) {
-                                              _vm.iDeadline = $event
-                                            },
-                                          },
-                                          scopedSlots: _vm._u([
-                                            {
-                                              key: "activator",
-                                              fn: function (ref) {
-                                                var on = ref.on
-                                                var attrs = ref.attrs
-                                                return [
-                                                  _c(
-                                                    "v-text-field",
-                                                    _vm._g(
-                                                      _vm._b(
-                                                        {
-                                                          attrs: {
-                                                            outlined: "",
-                                                            label:
-                                                              "Job Deadline",
-                                                            value:
-                                                              _vm.dateDeadlineFormatted,
-                                                            clearable: "",
-                                                            readonly: "",
-                                                            rules: [
-                                                              _vm.rules
-                                                                .required,
-                                                            ],
-                                                            required: "",
-                                                            "append-icon":
-                                                              "mdi-calendar",
-                                                          },
-                                                          on: {
-                                                            "click:clear":
-                                                              function (
-                                                                $event
-                                                              ) {
-                                                                _vm.iDeadline =
-                                                                  null
-                                                              },
-                                                          },
-                                                        },
-                                                        "v-text-field",
-                                                        attrs,
-                                                        false
-                                                      ),
-                                                      on
-                                                    )
-                                                  ),
-                                                ]
-                                              },
-                                            },
-                                          ]),
-                                          model: {
-                                            value: _vm.dateDeadlineDialog,
-                                            callback: function ($$v) {
-                                              _vm.dateDeadlineDialog = $$v
-                                            },
-                                            expression: "dateDeadlineDialog",
-                                          },
-                                        },
-                                        [
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-date-picker",
-                                            {
-                                              ref: "dateDeadlinePicker",
-                                              attrs: {
-                                                scrollable: "",
-                                                clearable: "",
-                                              },
-                                              model: {
-                                                value: _vm.iDeadline,
-                                                callback: function ($$v) {
-                                                  _vm.iDeadline = $$v
-                                                },
-                                                expression: "iDeadline",
-                                              },
-                                            },
-                                            [
-                                              _c("v-spacer"),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    text: "",
-                                                    color: "primary",
-                                                  },
-                                                  on: {
-                                                    click: function ($event) {
-                                                      _vm.dateDeadlineDialog = false
-                                                    },
-                                                  },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                        Cancel\n                      "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    text: "",
-                                                    color: "primary",
-                                                  },
-                                                  on: {
-                                                    click: function ($event) {
-                                                      return _vm.$refs.dateDeadlineDialog.save(
-                                                        _vm.iDeadline
-                                                      )
-                                                    },
-                                                  },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                        OK\n                      "
+                                                    "\n                        Close\n                      "
                                                   ),
                                                 ]
                                               ),
@@ -46407,116 +46124,153 @@ var render = function () {
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "v-dialog",
-                                        {
-                                          ref: "dateFilledDialog",
-                                          attrs: {
-                                            "return-value": _vm.iDateFilled,
-                                            persistent: "",
-                                            width: "290px",
-                                          },
-                                          on: {
-                                            "update:returnValue": function (
-                                              $event
-                                            ) {
-                                              _vm.iDateFilled = $event
-                                            },
-                                            "update:return-value": function (
-                                              $event
-                                            ) {
-                                              _vm.iDateFilled = $event
-                                            },
-                                          },
-                                          scopedSlots: _vm._u([
-                                            {
-                                              key: "activator",
-                                              fn: function (ref) {
-                                                var on = ref.on
-                                                var attrs = ref.attrs
-                                                return [
-                                                  _c(
-                                                    "v-text-field",
-                                                    _vm._g(
-                                                      _vm._b(
-                                                        {
-                                                          attrs: {
-                                                            outlined: "",
-                                                            label:
-                                                              "Job Date Filled",
-                                                            value:
-                                                              _vm.dateFilledFormatted,
-                                                            clearable: "",
-                                                            readonly: "",
-                                                            required: "",
-                                                            "append-icon":
-                                                              "mdi-calendar-check",
-                                                          },
-                                                          on: {
-                                                            "click:clear":
-                                                              function (
-                                                                $event
-                                                              ) {
-                                                                _vm.iDateFilled =
-                                                                  null
-                                                              },
-                                                          },
-                                                        },
-                                                        "v-text-field",
-                                                        attrs,
-                                                        false
-                                                      ),
-                                                      on
-                                                    )
-                                                  ),
-                                                ]
-                                              },
-                                            },
-                                          ]),
-                                          model: {
-                                            value: _vm.dateFilledDialog,
-                                            callback: function ($$v) {
-                                              _vm.dateFilledDialog = $$v
-                                            },
-                                            expression: "dateFilledDialog",
-                                          },
-                                        },
+                                        "v-stepper-content",
+                                        { key: "step-2", attrs: { step: "2" } },
                                         [
+                                          _c("v-autocomplete", {
+                                            staticClass: "mt-2",
+                                            attrs: {
+                                              items: _vm.status,
+                                              "item-value": "status_id",
+                                              "item-text": "status_name",
+                                              label: "Job Status *",
+                                              rules: [_vm.rules.required],
+                                              required: "",
+                                              outlined: "",
+                                              clearable: "",
+                                            },
+                                            model: {
+                                              value: _vm.iJobStatus,
+                                              callback: function ($$v) {
+                                                _vm.iJobStatus = $$v
+                                              },
+                                              expression: "iJobStatus",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-textarea", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label:
+                                                "Job Qualification Education",
+                                              "auto-grow": "",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iEducation,
+                                              callback: function ($$v) {
+                                                _vm.iEducation = $$v
+                                              },
+                                              expression: "iEducation",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-textarea", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label:
+                                                "Job Qualification Experience",
+                                              "auto-grow": "",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iExperience,
+                                              callback: function ($$v) {
+                                                _vm.iExperience = $$v
+                                              },
+                                              expression: "iExperience",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-textarea", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label:
+                                                "Job Qualification Training",
+                                              "auto-grow": "",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iTraining,
+                                              callback: function ($$v) {
+                                                _vm.iTraining = $$v
+                                              },
+                                              expression: "iTraining",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-textarea", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label:
+                                                "Job Qualification Eligibility",
+                                              "auto-grow": "",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iEligibility,
+                                              callback: function ($$v) {
+                                                _vm.iEligibility = $$v
+                                              },
+                                              expression: "iEligibility",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-textarea", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label: "Job Qualification Other",
+                                              "auto-grow": "",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iOther,
+                                              callback: function ($$v) {
+                                                _vm.iOther = $$v
+                                              },
+                                              expression: "iOther",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-textarea", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label: "Job Duties",
+                                              "auto-grow": "",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iDuties,
+                                              callback: function ($$v) {
+                                                _vm.iDuties = $$v
+                                              },
+                                              expression: "iDuties",
+                                            },
+                                          }),
                                           _vm._v(" "),
                                           _c(
-                                            "v-date-picker",
-                                            {
-                                              ref: "dateFilledPicker",
-                                              attrs: {
-                                                scrollable: "",
-                                                clearable: "",
-                                              },
-                                              model: {
-                                                value: _vm.iDateFilled,
-                                                callback: function ($$v) {
-                                                  _vm.iDateFilled = $$v
-                                                },
-                                                expression: "iDateFilled",
-                                              },
-                                            },
+                                            "v-layout",
+                                            { attrs: { "justify-end": "" } },
                                             [
-                                              _c("v-spacer"),
-                                              _vm._v(" "),
                                               _c(
                                                 "v-btn",
                                                 {
-                                                  attrs: {
-                                                    text: "",
-                                                    color: "primary",
-                                                  },
+                                                  attrs: { color: "primary" },
                                                   on: {
                                                     click: function ($event) {
-                                                      _vm.dateFilledDialog = false
+                                                      _vm.e1 = 3
                                                     },
                                                   },
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                        Cancel\n                      "
+                                                    "\n                        Continue\n                      "
                                                   ),
                                                 ]
                                               ),
@@ -46524,21 +46278,17 @@ var render = function () {
                                               _c(
                                                 "v-btn",
                                                 {
-                                                  attrs: {
-                                                    text: "",
-                                                    color: "primary",
-                                                  },
+                                                  staticClass: "ml-2",
+                                                  attrs: { text: "" },
                                                   on: {
                                                     click: function ($event) {
-                                                      return _vm.$refs.dateFilledDialog.save(
-                                                        _vm.iDateFilled
-                                                      )
+                                                      _vm.e1 = 1
                                                     },
                                                   },
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                        OK\n                      "
+                                                    "\n                        Back\n                      "
                                                   ),
                                                 ]
                                               ),
@@ -46550,116 +46300,616 @@ var render = function () {
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "v-dialog",
-                                        {
-                                          ref: "dateUnpostDialog",
-                                          attrs: {
-                                            "return-value": _vm.iDateUnpost,
-                                            persistent: "",
-                                            width: "290px",
-                                          },
-                                          on: {
-                                            "update:returnValue": function (
-                                              $event
-                                            ) {
-                                              _vm.iDateUnpost = $event
-                                            },
-                                            "update:return-value": function (
-                                              $event
-                                            ) {
-                                              _vm.iDateUnpost = $event
-                                            },
-                                          },
-                                          scopedSlots: _vm._u([
-                                            {
-                                              key: "activator",
-                                              fn: function (ref) {
-                                                var on = ref.on
-                                                var attrs = ref.attrs
-                                                return [
-                                                  _c(
-                                                    "v-text-field",
-                                                    _vm._g(
-                                                      _vm._b(
-                                                        {
-                                                          attrs: {
-                                                            outlined: "",
-                                                            label:
-                                                              "Job Unpost Date",
-                                                            value:
-                                                              _vm.dateUnpostFormatted,
-                                                            clearable: "",
-                                                            readonly: "",
-                                                            required: "",
-                                                            "append-icon":
-                                                              "mdi-briefcase-off-outline",
-                                                          },
-                                                          on: {
-                                                            "click:clear":
-                                                              function (
-                                                                $event
-                                                              ) {
-                                                                _vm.iDateUnpost =
-                                                                  null
-                                                              },
-                                                          },
-                                                        },
-                                                        "v-text-field",
-                                                        attrs,
-                                                        false
-                                                      ),
-                                                      on
-                                                    )
-                                                  ),
-                                                ]
-                                              },
-                                            },
-                                          ]),
-                                          model: {
-                                            value: _vm.dateUnpostDialog,
-                                            callback: function ($$v) {
-                                              _vm.dateUnpostDialog = $$v
-                                            },
-                                            expression: "dateUnpostDialog",
-                                          },
-                                        },
+                                        "v-stepper-content",
+                                        { key: "step-3", attrs: { step: "3" } },
                                         [
+                                          _c("v-text-field", {
+                                            staticClass: "mt-3",
+                                            attrs: {
+                                              label: "Job Item Number",
+                                              outlined: "",
+                                              "clear-icon": "mdi-close",
+                                              clearable: "",
+                                            },
+                                            model: {
+                                              value: _vm.iItemNumber,
+                                              callback: function ($$v) {
+                                                _vm.iItemNumber = $$v
+                                              },
+                                              expression: "iItemNumber",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              label: "Job Salary Grade",
+                                              rules: [_vm.rules.number_min],
+                                              type: "number",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iSalaryGrade,
+                                              callback: function ($$v) {
+                                                _vm.iSalaryGrade = $$v
+                                              },
+                                              expression: "iSalaryGrade",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label: "Job Salary Value",
+                                              rules: [_vm.rules.number_min],
+                                              type: "number",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iSalaryValue,
+                                              callback: function ($$v) {
+                                                _vm.iSalaryValue = $$v
+                                              },
+                                              expression: "iSalaryValue",
+                                            },
+                                          }),
                                           _vm._v(" "),
                                           _c(
-                                            "v-date-picker",
+                                            "v-dialog",
                                             {
-                                              ref: "dateUnpostPicker",
+                                              ref: "dateDeadlineDialog",
                                               attrs: {
-                                                scrollable: "",
-                                                clearable: "",
+                                                "return-value": _vm.iDeadline,
+                                                persistent: "",
+                                                width: "290px",
                                               },
-                                              model: {
-                                                value: _vm.iDateUnpost,
-                                                callback: function ($$v) {
-                                                  _vm.iDateUnpost = $$v
+                                              on: {
+                                                "update:returnValue": function (
+                                                  $event
+                                                ) {
+                                                  _vm.iDeadline = $event
                                                 },
-                                                expression: "iDateUnpost",
+                                                "update:return-value":
+                                                  function ($event) {
+                                                    _vm.iDeadline = $event
+                                                  },
+                                              },
+                                              scopedSlots: _vm._u([
+                                                {
+                                                  key: "activator",
+                                                  fn: function (ref) {
+                                                    var on = ref.on
+                                                    var attrs = ref.attrs
+                                                    return [
+                                                      _c(
+                                                        "v-text-field",
+                                                        _vm._g(
+                                                          _vm._b(
+                                                            {
+                                                              attrs: {
+                                                                outlined: "",
+                                                                label:
+                                                                  "Job Deadline",
+                                                                value:
+                                                                  _vm.dateDeadlineFormatted,
+                                                                clearable: "",
+                                                                readonly: "",
+                                                                rules: [
+                                                                  _vm.rules
+                                                                    .required,
+                                                                ],
+                                                                required: "",
+                                                                "append-icon":
+                                                                  "mdi-calendar",
+                                                              },
+                                                              on: {
+                                                                "click:clear":
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    _vm.iDeadline =
+                                                                      null
+                                                                  },
+                                                              },
+                                                            },
+                                                            "v-text-field",
+                                                            attrs,
+                                                            false
+                                                          ),
+                                                          on
+                                                        )
+                                                      ),
+                                                    ]
+                                                  },
+                                                },
+                                              ]),
+                                              model: {
+                                                value: _vm.dateDeadlineDialog,
+                                                callback: function ($$v) {
+                                                  _vm.dateDeadlineDialog = $$v
+                                                },
+                                                expression:
+                                                  "dateDeadlineDialog",
                                               },
                                             },
                                             [
-                                              _c("v-spacer"),
                                               _vm._v(" "),
+                                              _c(
+                                                "v-date-picker",
+                                                {
+                                                  ref: "dateDeadlinePicker",
+                                                  attrs: {
+                                                    scrollable: "",
+                                                    clearable: "",
+                                                  },
+                                                  model: {
+                                                    value: _vm.iDeadline,
+                                                    callback: function ($$v) {
+                                                      _vm.iDeadline = $$v
+                                                    },
+                                                    expression: "iDeadline",
+                                                  },
+                                                },
+                                                [
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        text: "",
+                                                        color: "primary",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          _vm.dateDeadlineDialog = false
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Cancel\n                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        text: "",
+                                                        color: "primary",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.$refs.dateDeadlineDialog.save(
+                                                            _vm.iDeadline
+                                                          )
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          OK\n                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ],
+                                                1
+                                              ),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-dialog",
+                                            {
+                                              ref: "dateFilledDialog",
+                                              attrs: {
+                                                "return-value": _vm.iDateFilled,
+                                                persistent: "",
+                                                width: "290px",
+                                              },
+                                              on: {
+                                                "update:returnValue": function (
+                                                  $event
+                                                ) {
+                                                  _vm.iDateFilled = $event
+                                                },
+                                                "update:return-value":
+                                                  function ($event) {
+                                                    _vm.iDateFilled = $event
+                                                  },
+                                              },
+                                              scopedSlots: _vm._u([
+                                                {
+                                                  key: "activator",
+                                                  fn: function (ref) {
+                                                    var on = ref.on
+                                                    var attrs = ref.attrs
+                                                    return [
+                                                      _c(
+                                                        "v-text-field",
+                                                        _vm._g(
+                                                          _vm._b(
+                                                            {
+                                                              attrs: {
+                                                                outlined: "",
+                                                                label:
+                                                                  "Job Date Filled",
+                                                                value:
+                                                                  _vm.dateFilledFormatted,
+                                                                clearable: "",
+                                                                readonly: "",
+                                                                required: "",
+                                                                "append-icon":
+                                                                  "mdi-calendar-check",
+                                                              },
+                                                              on: {
+                                                                "click:clear":
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    _vm.iDateFilled =
+                                                                      null
+                                                                  },
+                                                              },
+                                                            },
+                                                            "v-text-field",
+                                                            attrs,
+                                                            false
+                                                          ),
+                                                          on
+                                                        )
+                                                      ),
+                                                    ]
+                                                  },
+                                                },
+                                              ]),
+                                              model: {
+                                                value: _vm.dateFilledDialog,
+                                                callback: function ($$v) {
+                                                  _vm.dateFilledDialog = $$v
+                                                },
+                                                expression: "dateFilledDialog",
+                                              },
+                                            },
+                                            [
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-date-picker",
+                                                {
+                                                  ref: "dateFilledPicker",
+                                                  attrs: {
+                                                    scrollable: "",
+                                                    clearable: "",
+                                                  },
+                                                  model: {
+                                                    value: _vm.iDateFilled,
+                                                    callback: function ($$v) {
+                                                      _vm.iDateFilled = $$v
+                                                    },
+                                                    expression: "iDateFilled",
+                                                  },
+                                                },
+                                                [
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        text: "",
+                                                        color: "primary",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          _vm.dateFilledDialog = false
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Cancel\n                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        text: "",
+                                                        color: "primary",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.$refs.dateFilledDialog.save(
+                                                            _vm.iDateFilled
+                                                          )
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          OK\n                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ],
+                                                1
+                                              ),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-dialog",
+                                            {
+                                              ref: "dateUnpostDialog",
+                                              attrs: {
+                                                "return-value": _vm.iDateUnpost,
+                                                persistent: "",
+                                                width: "290px",
+                                              },
+                                              on: {
+                                                "update:returnValue": function (
+                                                  $event
+                                                ) {
+                                                  _vm.iDateUnpost = $event
+                                                },
+                                                "update:return-value":
+                                                  function ($event) {
+                                                    _vm.iDateUnpost = $event
+                                                  },
+                                              },
+                                              scopedSlots: _vm._u([
+                                                {
+                                                  key: "activator",
+                                                  fn: function (ref) {
+                                                    var on = ref.on
+                                                    var attrs = ref.attrs
+                                                    return [
+                                                      _c(
+                                                        "v-text-field",
+                                                        _vm._g(
+                                                          _vm._b(
+                                                            {
+                                                              attrs: {
+                                                                outlined: "",
+                                                                label:
+                                                                  "Job Unpost Date",
+                                                                value:
+                                                                  _vm.dateUnpostFormatted,
+                                                                clearable: "",
+                                                                readonly: "",
+                                                                required: "",
+                                                                "append-icon":
+                                                                  "mdi-briefcase-off-outline",
+                                                              },
+                                                              on: {
+                                                                "click:clear":
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    _vm.iDateUnpost =
+                                                                      null
+                                                                  },
+                                                              },
+                                                            },
+                                                            "v-text-field",
+                                                            attrs,
+                                                            false
+                                                          ),
+                                                          on
+                                                        )
+                                                      ),
+                                                    ]
+                                                  },
+                                                },
+                                              ]),
+                                              model: {
+                                                value: _vm.dateUnpostDialog,
+                                                callback: function ($$v) {
+                                                  _vm.dateUnpostDialog = $$v
+                                                },
+                                                expression: "dateUnpostDialog",
+                                              },
+                                            },
+                                            [
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-date-picker",
+                                                {
+                                                  ref: "dateUnpostPicker",
+                                                  attrs: {
+                                                    scrollable: "",
+                                                    clearable: "",
+                                                  },
+                                                  model: {
+                                                    value: _vm.iDateUnpost,
+                                                    callback: function ($$v) {
+                                                      _vm.iDateUnpost = $$v
+                                                    },
+                                                    expression: "iDateUnpost",
+                                                  },
+                                                },
+                                                [
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        text: "",
+                                                        color: "primary",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          _vm.dateUnpostDialog = false
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Cancel\n                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        text: "",
+                                                        color: "primary",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.$refs.dateUnpostDialog.save(
+                                                            _vm.iDateUnpost
+                                                          )
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          OK\n                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ],
+                                                1
+                                              ),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label: "Attachment Name",
+                                              rules: [_vm.rules.valid_string],
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iAttachment,
+                                              callback: function ($$v) {
+                                                _vm.iAttachment = $$v
+                                              },
+                                              expression: "iAttachment",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              clearable: "",
+                                              "clear-icon": "mdi-close",
+                                              label: "Appy Link",
+                                              outlined: "",
+                                            },
+                                            model: {
+                                              value: _vm.iLinks,
+                                              callback: function ($$v) {
+                                                _vm.iLinks = $$v
+                                              },
+                                              expression: "iLinks",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-switch", {
+                                            staticClass: "my-0 ml-3",
+                                            attrs: {
+                                              label:
+                                                "Job Remark: " +
+                                                (_vm.iRemark
+                                                  ? "True"
+                                                  : "False"),
+                                              color: "primary",
+                                              "hide-details": "",
+                                            },
+                                            model: {
+                                              value: _vm.iRemark,
+                                              callback: function ($$v) {
+                                                _vm.iRemark = $$v
+                                              },
+                                              expression: "iRemark",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-switch", {
+                                            staticClass: "my-0 ml-3",
+                                            attrs: {
+                                              label:
+                                                "Job Visibility: " +
+                                                (_vm.iVisibility
+                                                  ? "True"
+                                                  : "False"),
+                                              color: "primary",
+                                              "hide-details": "",
+                                            },
+                                            model: {
+                                              value: _vm.iVisibility,
+                                              callback: function ($$v) {
+                                                _vm.iVisibility = $$v
+                                              },
+                                              expression: "iVisibility",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("v-switch", {
+                                            staticClass: "my-0 ml-3",
+                                            attrs: {
+                                              label:
+                                                "Show Job details: " +
+                                                (_vm.iShowDetails
+                                                  ? "True"
+                                                  : "False"),
+                                              color: "primary",
+                                              "hide-details": "",
+                                            },
+                                            model: {
+                                              value: _vm.iShowDetails,
+                                              callback: function ($$v) {
+                                                _vm.iShowDetails = $$v
+                                              },
+                                              expression: "iShowDetails",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-layout",
+                                            {
+                                              staticClass: "pt-5",
+                                              attrs: { "justify-end": "" },
+                                            },
+                                            [
                                               _c(
                                                 "v-btn",
                                                 {
-                                                  attrs: {
-                                                    text: "",
-                                                    color: "primary",
-                                                  },
+                                                  attrs: { color: "primary" },
                                                   on: {
                                                     click: function ($event) {
-                                                      _vm.dateUnpostDialog = false
+                                                      _vm.e1 = 4
                                                     },
                                                   },
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                        Cancel\n                      "
+                                                    "\n                        Continue\n                      "
                                                   ),
                                                 ]
                                               ),
@@ -46667,21 +46917,17 @@ var render = function () {
                                               _c(
                                                 "v-btn",
                                                 {
-                                                  attrs: {
-                                                    text: "",
-                                                    color: "primary",
-                                                  },
+                                                  staticClass: "ml-2",
+                                                  attrs: { text: "" },
                                                   on: {
                                                     click: function ($event) {
-                                                      return _vm.$refs.dateUnpostDialog.save(
-                                                        _vm.iDateUnpost
-                                                      )
+                                                      _vm.e1 = 2
                                                     },
                                                   },
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                        OK\n                      "
+                                                    "\n                        Back\n                      "
                                                   ),
                                                 ]
                                               ),
@@ -46692,1048 +46938,932 @@ var render = function () {
                                         1
                                       ),
                                       _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label: "Attachment Name",
-                                          rules: [_vm.rules.valid_string],
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iAttachment,
-                                          callback: function ($$v) {
-                                            _vm.iAttachment = $$v
-                                          },
-                                          expression: "iAttachment",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          clearable: "",
-                                          "clear-icon": "mdi-close",
-                                          label: "Appy Link",
-                                          outlined: "",
-                                        },
-                                        model: {
-                                          value: _vm.iLinks,
-                                          callback: function ($$v) {
-                                            _vm.iLinks = $$v
-                                          },
-                                          expression: "iLinks",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-switch", {
-                                        staticClass: "my-0 ml-3",
-                                        attrs: {
-                                          label:
-                                            "Job Remark: " +
-                                            (_vm.iRemark ? "True" : "False"),
-                                          color: "primary",
-                                          "hide-details": "",
-                                        },
-                                        model: {
-                                          value: _vm.iRemark,
-                                          callback: function ($$v) {
-                                            _vm.iRemark = $$v
-                                          },
-                                          expression: "iRemark",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-switch", {
-                                        staticClass: "my-0 ml-3",
-                                        attrs: {
-                                          label:
-                                            "Job Visibility: " +
-                                            (_vm.iVisibility
-                                              ? "True"
-                                              : "False"),
-                                          color: "primary",
-                                          "hide-details": "",
-                                        },
-                                        model: {
-                                          value: _vm.iVisibility,
-                                          callback: function ($$v) {
-                                            _vm.iVisibility = $$v
-                                          },
-                                          expression: "iVisibility",
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-switch", {
-                                        staticClass: "my-0 ml-3",
-                                        attrs: {
-                                          label:
-                                            "Show Job details: " +
-                                            (_vm.iShowDetails
-                                              ? "True"
-                                              : "False"),
-                                          color: "primary",
-                                          "hide-details": "",
-                                        },
-                                        model: {
-                                          value: _vm.iShowDetails,
-                                          callback: function ($$v) {
-                                            _vm.iShowDetails = $$v
-                                          },
-                                          expression: "iShowDetails",
-                                        },
-                                      }),
-                                      _vm._v(" "),
                                       _c(
-                                        "v-layout",
-                                        {
-                                          staticClass: "pt-5",
-                                          attrs: { "justify-end": "" },
-                                        },
+                                        "v-stepper-content",
+                                        { key: "step-4", attrs: { step: "4" } },
                                         [
                                           _c(
-                                            "v-btn",
+                                            "v-simple-table",
                                             {
-                                              attrs: { color: "primary" },
-                                              on: {
-                                                click: function ($event) {
-                                                  _vm.e1 = 4
-                                                },
-                                              },
+                                              staticClass: "mb-5",
+                                              attrs: { dense: "" },
                                             },
                                             [
-                                              _vm._v(
-                                                "\n                      Continue\n                    "
-                                              ),
+                                              _c("thead", [
+                                                _c("tr", [
+                                                  _c(
+                                                    "th",
+                                                    {
+                                                      staticClass:
+                                                        "text-subtitle-2 font-weight-bold primary--text",
+                                                      attrs: { width: "250" },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Description\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("th", {
+                                                    staticClass: "text-left",
+                                                  }),
+                                                ]),
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("tbody", [
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Position:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iPosition
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Campus:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(this.iCampus) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            College / Office:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(this.iOffice) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            No. of Vacancies:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iVacancyCount
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Job Item Number:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iItemNumber
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Employment Type:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iJobStatus
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Duties:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(this.iDuties) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                              ]),
                                             ]
                                           ),
                                           _vm._v(" "),
                                           _c(
-                                            "v-btn",
+                                            "v-simple-table",
                                             {
-                                              staticClass: "ml-2",
-                                              attrs: { text: "" },
-                                              on: {
-                                                click: function ($event) {
-                                                  _vm.e1 = 2
-                                                },
-                                              },
+                                              staticClass: "mb-5",
+                                              attrs: { dense: "" },
                                             },
                                             [
-                                              _vm._v(
-                                                "\n                      Back\n                    "
-                                              ),
-                                            ]
-                                          ),
-                                        ],
-                                        1
-                                      ),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-stepper-content",
-                                    { key: "step-4", attrs: { step: "4" } },
-                                    [
-                                      _c(
-                                        "v-simple-table",
-                                        {
-                                          staticClass: "mb-5",
-                                          attrs: { dense: "" },
-                                        },
-                                        [
-                                          _c("thead", [
-                                            _c("tr", [
-                                              _c(
-                                                "th",
-                                                {
-                                                  staticClass:
-                                                    "text-subtitle-2 font-weight-bold primary--text",
-                                                  attrs: { width: "250" },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Description\n                        "
+                                              _c("thead", [
+                                                _c("tr", [
+                                                  _c(
+                                                    "th",
+                                                    {
+                                                      staticClass:
+                                                        "text-subtitle-2 font-weight-bold primary--text",
+                                                      attrs: { width: "250" },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Qualifications\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
+                                                  _vm._v(" "),
+                                                  _c("th", {
+                                                    staticClass: "text-left",
+                                                  }),
+                                                ]),
+                                              ]),
                                               _vm._v(" "),
-                                              _c("th", {
-                                                staticClass: "text-left",
-                                              }),
-                                            ]),
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tbody", [
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Position:\n                        "
+                                              _c("tbody", [
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Education:\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iPosition) +
-                                                      "\n                        "
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iEducation !==
+                                                              null
+                                                              ? this.iEducation
+                                                              : "None required"
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Campus:\n                        "
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Experience:\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iCampus) +
-                                                      "\n                        "
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iExperience !==
+                                                              null
+                                                              ? this.iExperience
+                                                              : "None required"
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          College / Office:\n                        "
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Training:\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iOffice) +
-                                                      "\n                        "
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iTraining !==
+                                                              null
+                                                              ? this.iTraining
+                                                              : "None required"
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          No. of Vacancies:\n                        "
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Eligibility:\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iVacancyCount
-                                                      ) +
-                                                      "\n                        "
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this
+                                                              .iEligibility !==
+                                                              null
+                                                              ? this
+                                                                  .iEligibility
+                                                              : "None required"
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Job Item Number:\n                        "
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Other Qualifications:\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iItemNumber) +
-                                                      "\n                        "
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(this.iOther) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Employment Type:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iJobStatus) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Duties:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iDuties) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                          ]),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-simple-table",
-                                        {
-                                          staticClass: "mb-5",
-                                          attrs: { dense: "" },
-                                        },
-                                        [
-                                          _c("thead", [
-                                            _c("tr", [
-                                              _c(
-                                                "th",
-                                                {
-                                                  staticClass:
-                                                    "text-subtitle-2 font-weight-bold primary--text",
-                                                  attrs: { width: "250" },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Qualifications\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c("th", {
-                                                staticClass: "text-left",
-                                              }),
-                                            ]),
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tbody", [
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Education:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iEducation !== null
-                                                          ? this.iEducation
-                                                          : "None required"
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Experience:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iExperience !==
-                                                          null
-                                                          ? this.iExperience
-                                                          : "None required"
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Training:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iTraining !== null
-                                                          ? this.iTraining
-                                                          : "None required"
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Eligibility:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iEligibility !==
-                                                          null
-                                                          ? this.iEligibility
-                                                          : "None required"
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Other Qualifications:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iOther) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                          ]),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-simple-table",
-                                        {
-                                          staticClass: "mb-5",
-                                          attrs: { dense: "" },
-                                        },
-                                        [
-                                          _c("thead", [
-                                            _c("tr", [
-                                              _c(
-                                                "th",
-                                                {
-                                                  staticClass:
-                                                    "text-subtitle-2 font-weight-bold primary--text",
-                                                  attrs: { width: "250" },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Remarks\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c("th", {
-                                                staticClass: "text-left",
-                                              }),
-                                            ]),
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tbody", [
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Date Posted:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iDatePosted) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Deadline of Application:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iDeadline) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Remarks:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iRemark
-                                                          ? "Filled"
-                                                          : "Unfilled"
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                          ]),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-simple-table",
-                                        {
-                                          staticClass: "mb-5",
-                                          attrs: { dense: "" },
-                                        },
-                                        [
-                                          _c("thead", [
-                                            _c("tr", [
-                                              _c(
-                                                "th",
-                                                {
-                                                  staticClass:
-                                                    "text-subtitle-2 font-weight-bold primary--text",
-                                                  attrs: { width: "250" },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Others\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c("th", {
-                                                staticClass: "text-left",
-                                              }),
-                                            ]),
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tbody", [
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          HRMO Type:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iHrmoType) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Salary Grade:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iSalaryGrade
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Salary Value:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iSalaryValue !==
-                                                          null
-                                                          ? "₱" +
-                                                              this.iSalaryValue
-                                                          : ""
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Date Filled:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iDateFilled) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Date Unpost:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iDateUnpost) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Visibility:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iVisibility
-                                                          ? "True"
-                                                          : "False"
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Show Details:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        this.iShowDetails
-                                                          ? "True"
-                                                          : "False"
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-bold",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          Apply Link:\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass:
-                                                    "font-weight-regular",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(this.iLinks) +
-                                                      "\n                        "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]),
-                                          ]),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-layout",
-                                        { attrs: { "justify-end": "" } },
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: { color: "primary" },
-                                              on: {
-                                                click: function ($event) {
-                                                  _vm.e1 = 4
-                                                },
-                                              },
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                      Submit\n                    "
-                                              ),
+                                                ]),
+                                              ]),
                                             ]
                                           ),
                                           _vm._v(" "),
                                           _c(
-                                            "v-btn",
+                                            "v-simple-table",
                                             {
-                                              staticClass: "ml-2",
-                                              attrs: { text: "" },
-                                              on: {
-                                                click: function ($event) {
-                                                  _vm.e1 = 3
-                                                },
-                                              },
+                                              staticClass: "mb-5",
+                                              attrs: { dense: "" },
                                             },
                                             [
-                                              _vm._v(
-                                                "\n                      Back\n                    "
-                                              ),
+                                              _c("thead", [
+                                                _c("tr", [
+                                                  _c(
+                                                    "th",
+                                                    {
+                                                      staticClass:
+                                                        "text-subtitle-2 font-weight-bold primary--text",
+                                                      attrs: { width: "250" },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Remarks\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("th", {
+                                                    staticClass: "text-left",
+                                                  }),
+                                                ]),
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("tbody", [
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Date Posted:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iDatePosted
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Deadline of Application:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iDeadline
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Remarks:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iRemark
+                                                              ? "Filled"
+                                                              : "Unfilled"
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                              ]),
                                             ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-simple-table",
+                                            {
+                                              staticClass: "mb-5",
+                                              attrs: { dense: "" },
+                                            },
+                                            [
+                                              _c("thead", [
+                                                _c("tr", [
+                                                  _c(
+                                                    "th",
+                                                    {
+                                                      staticClass:
+                                                        "text-subtitle-2 font-weight-bold primary--text",
+                                                      attrs: { width: "250" },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Others\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("th", {
+                                                    staticClass: "text-left",
+                                                  }),
+                                                ]),
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("tbody", [
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            HRMO Type:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iHrmoType
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Salary Grade:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iSalaryGrade
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Salary Value:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this
+                                                              .iSalaryValue !==
+                                                              null
+                                                              ? "₱" +
+                                                                  this
+                                                                    .iSalaryValue
+                                                              : ""
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Date Filled:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iDateFilled
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Date Unpost:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iDateUnpost
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Visibility:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iVisibility
+                                                              ? "True"
+                                                              : "False"
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Show Details:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(
+                                                            this.iShowDetails
+                                                              ? "True"
+                                                              : "False"
+                                                          ) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("tr", [
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            Apply Link:\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-regular",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                            " +
+                                                          _vm._s(this.iLinks) +
+                                                          "\n                          "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                              ]),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { "justify-end": "" } },
+                                            [
+                                              _c(
+                                                "v-btn",
+                                                {
+                                                  attrs: {
+                                                    color: "primary",
+                                                    type: "submit",
+                                                  },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        Submit\n                      "
+                                                  ),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-btn",
+                                                {
+                                                  staticClass: "ml-2",
+                                                  attrs: { text: "" },
+                                                  on: {
+                                                    click: function ($event) {
+                                                      _vm.e1 = 3
+                                                    },
+                                                  },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        Back\n                      "
+                                                  ),
+                                                ]
+                                              ),
+                                            ],
+                                            1
                                           ),
                                         ],
                                         1
