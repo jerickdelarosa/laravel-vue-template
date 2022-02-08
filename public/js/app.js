@@ -4288,7 +4288,7 @@ var actions = {
         })
     })
   },
-   CLEAR_ITEM_DETAILS: async ({ commit }) => {
+    CLEAR_ITEM_DETAILS: async ({ commit }) => {
     commit('SET_ITEM_DETAILS', null)
   }, */
   // Save Job

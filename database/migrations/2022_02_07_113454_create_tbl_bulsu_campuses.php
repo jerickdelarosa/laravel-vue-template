@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\BulsuCampusSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,9 @@ class CreateTblBulsuCampuses extends Migration
             $table->id();
             $table->string('campus_name');
         });
+
+        $seeder = new BulsuCampusSeeder();
+        $seeder->run();
     }
 
     /**
