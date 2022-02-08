@@ -115,7 +115,6 @@
                       />
                     </template>
                   </v-stepper-header>
-
                   <v-stepper-items>
                     <!-- STEP 1 -->
                     <v-stepper-content
@@ -368,7 +367,6 @@
                       <v-text-field
                         v-model="iSalaryGrade"
                         label="Job Salary Grade"
-                        :rules="[rules.number_min]"
                         type="number"
                         outlined
                       />
@@ -379,7 +377,6 @@
                         clearable
                         clear-icon="mdi-close"
                         label="Job Salary Value"
-                        :rules="[rules.number_min]"
                         type="number"
                         outlined
                       />
@@ -395,7 +392,7 @@
                         <template #activator="{ on, attrs }">
                           <v-text-field
                             outlined
-                            label="Job Deadline"
+                            label="Job Deadline *"
                             :value="dateDeadlineFormatted"
                             clearable
                             @click:clear="iDeadline = null"
@@ -891,6 +888,44 @@
         </v-container>
       </v-card-text>
     </v-card>
+
+    <!-- ERROR DIALOG -->
+    <v-dialog
+      v-model="submitErrorDialog"
+      max-width="390"
+      persistent
+    >
+      <v-card>
+        <v-toolbar
+          color="primary"
+          dark
+          dense
+        >
+          <v-icon
+            dark
+            large
+          >
+            mdi-alert-octagon-outline
+          </v-icon>
+        </v-toolbar>
+        <v-card-text>
+          <div class="pt-5">
+            <span class="text-subtitle-2 font-weight-bold">Please make sure all the data are correct.</span>
+          </div>
+        </v-card-text>
+        <v-card-actions class="pt-0">
+          <v-spacer />
+          <v-btn
+            color="grey darken-1"
+            text
+            @click="submitErrorDialog = false"
+          >
+            Close
+          </v-btn>
+          <v-spacer />
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-dialog>
 </template>
 
@@ -961,7 +996,9 @@ export default {
       iLinks: null,
 
       steps: 4,
-      e1: 1
+      e1: 1,
+
+      submitErrorDialog: false
 
     }
   },
@@ -1076,18 +1113,14 @@ export default {
     },
     // Submit Item Form
     submitForm () {
-      console.log(this.$refs.jobPostingForm.validate())
       if (this.$refs.jobPostingForm.validate()) {
-        console.log('qweqewq')
-
         if (this.hasSelectedItem) {
-          console.log('zxczxc')
-
           this.updateItem()
         } else {
-          console.log('asdadas')
           this.saveItem()
         }
+      } else {
+        this.submitErrorDialog = true
       }
     },
     resetFields () {
@@ -1121,6 +1154,7 @@ export default {
 
         this.jobPostingErrors = null
         this.e1 = 1
+        this.submitErrorDialog = false
 
         this.$refs.jobPostingForm.resetValidation()
       }, 500)
@@ -1162,12 +1196,6 @@ export default {
         .then((response) => {
           if (response?.created) {
             this.closeDialog(true)
-            /* this.$router.push({
-              name: 'main.inventory.view.overview',
-              params: {
-                item: response.jo_id
-              }
-            }) */
           }
         })
         .finally(() => {

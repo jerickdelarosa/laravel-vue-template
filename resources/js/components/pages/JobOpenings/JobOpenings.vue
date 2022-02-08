@@ -62,7 +62,6 @@
         :items="jobs"
         :search="search"
         :loading="loading"
-        @click:row="viewItem"
       >
         <!-- JOB STATUS-->
         <template #[`item.jo_visibility`]="{ item }">
@@ -292,19 +291,6 @@ export default {
       if (mustReload) {
         this.getJobs()
       }
-    },
-
-    // View Item Details
-    viewItem (item) {
-      /* this.$router.push({
-        name: 'main.inventory.view.overview',
-        params: {
-          item: item?.id
-        },
-        query: {
-          ref: 'inventory'
-        }
-      }) */
     },
 
     // SHOW EDIT DIALOG FOR SELECTED CATEGORY

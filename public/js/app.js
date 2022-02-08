@@ -2440,7 +2440,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2549,18 +2548,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (mustReload) {
         this.getJobs();
       }
-    },
-    // View Item Details
-    viewItem: function viewItem(item) {
-      /* this.$router.push({
-        name: 'main.inventory.view.overview',
-        params: {
-          item: item?.id
-        },
-        query: {
-          ref: 'inventory'
-        }
-      }) */
     },
     // SHOW EDIT DIALOG FOR SELECTED CATEGORY
     editItem: function editItem(item) {
@@ -3522,6 +3509,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3582,7 +3604,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       iShowDetails: true,
       iLinks: null,
       steps: 4,
-      e1: 1
+      e1: 1,
+      submitErrorDialog: false
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
@@ -3714,18 +3737,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // Submit Item Form
     submitForm: function submitForm() {
-      console.log(this.$refs.jobPostingForm.validate());
-
       if (this.$refs.jobPostingForm.validate()) {
-        console.log('qweqewq');
-
         if (this.hasSelectedItem) {
-          console.log('zxczxc');
           this.updateItem();
         } else {
-          console.log('asdadas');
           this.saveItem();
         }
+      } else {
+        this.submitErrorDialog = true;
       }
     },
     resetFields: function resetFields() {
@@ -3758,6 +3777,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.iLinks = null;
         _this2.jobPostingErrors = null;
         _this2.e1 = 1;
+        _this2.submitErrorDialog = false;
 
         _this2.$refs.jobPostingForm.resetValidation();
       }, 500);
@@ -3798,13 +3818,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (response) {
         if (response !== null && response !== void 0 && response.created) {
           _this3.closeDialog(true);
-          /* this.$router.push({
-            name: 'main.inventory.view.overview',
-            params: {
-              item: response.jo_id
-            }
-          }) */
-
         }
       })["finally"](function () {
         _this3.saving = false;
@@ -4348,7 +4361,7 @@ var actions = {
         })
     })
   },
-    CLEAR_ITEM_DETAILS: async ({ commit }) => {
+   CLEAR_ITEM_DETAILS: async ({ commit }) => {
     commit('SET_ITEM_DETAILS', null)
   }, */
   // Save Job
@@ -45365,7 +45378,6 @@ var render = function () {
               search: _vm.search,
               loading: _vm.loading,
             },
-            on: { "click:row": _vm.viewItem },
             scopedSlots: _vm._u(
               [
                 {
@@ -46323,7 +46335,6 @@ var render = function () {
                                           _c("v-text-field", {
                                             attrs: {
                                               label: "Job Salary Grade",
-                                              rules: [_vm.rules.number_min],
                                               type: "number",
                                               outlined: "",
                                             },
@@ -46341,7 +46352,6 @@ var render = function () {
                                               clearable: "",
                                               "clear-icon": "mdi-close",
                                               label: "Job Salary Value",
-                                              rules: [_vm.rules.number_min],
                                               type: "number",
                                               outlined: "",
                                             },
@@ -46389,7 +46399,7 @@ var render = function () {
                                                               attrs: {
                                                                 outlined: "",
                                                                 label:
-                                                                  "Job Deadline",
+                                                                  "Job Deadline *",
                                                                 value:
                                                                   _vm.dateDeadlineFormatted,
                                                                 clearable: "",
@@ -47883,6 +47893,73 @@ var render = function () {
                     ],
                     1
                   ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "390", persistent: "" },
+          model: {
+            value: _vm.submitErrorDialog,
+            callback: function ($$v) {
+              _vm.submitErrorDialog = $$v
+            },
+            expression: "submitErrorDialog",
+          },
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-toolbar",
+                { attrs: { color: "primary", dark: "", dense: "" } },
+                [
+                  _c("v-icon", { attrs: { dark: "", large: "" } }, [
+                    _vm._v("\n          mdi-alert-octagon-outline\n        "),
+                  ]),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _c("div", { staticClass: "pt-5" }, [
+                  _c(
+                    "span",
+                    { staticClass: "text-subtitle-2 font-weight-bold" },
+                    [_vm._v("Please make sure all the data are correct.")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { staticClass: "pt-0" },
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "grey darken-1", text: "" },
+                      on: {
+                        click: function ($event) {
+                          _vm.submitErrorDialog = false
+                        },
+                      },
+                    },
+                    [_vm._v("\n          Close\n        ")]
+                  ),
+                  _vm._v(" "),
+                  _c("v-spacer"),
                 ],
                 1
               ),
