@@ -11,21 +11,21 @@ Vue.use(Vuetify)
 // Vuetify Settings
 // ==============================
 const opts = {
-  theme: {
-    dark: false,
-    themes: {
-      light: {
-        primary: '#c4223a',
-        secondary: '#226666',
-        accent: '#CB824E',
+    theme: {
+        dark: false,
+        themes: {
+            light: {
+                primary: '#11998e',
+                secondary: '#226666',
+                accent: '#CB824E',
 
-        info: '#216666',
-        success: '#70854a',
-        warning: '#ed7512',
-        error: '#f44336'
-      }
+                info: '#216666',
+                success: '#70854a',
+                warning: '#ed7512',
+                error: '#f44336'
+            }
+        }
     }
-  }
 }
 
 // ==============================

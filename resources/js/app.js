@@ -22,6 +22,14 @@ import router from './plugins/router'
 import store from './store'
 
 // =============================================================================
+// Vue Croppie
+// =============================================================================
+import VueCroppie from 'vue-croppie'
+import 'croppie/croppie.css'
+
+Vue.use(VueCroppie)
+
+// =============================================================================
 // Main App Component
 // =============================================================================
 Vue.component('App', require('./components/layouts/App.vue').default)
@@ -35,8 +43,8 @@ Vue.config.productionTip = false
 // Init Vue App
 // =============================================================================
 const app = new Vue({
-  el: '#app',
-  vuetify,
-  router,
-  store
+    el: '#app',
+    vuetify,
+    router,
+    store
 })
