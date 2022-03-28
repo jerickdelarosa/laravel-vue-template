@@ -43,8 +43,8 @@ Vue.config.productionTip = false
 // Init Vue App
 // =============================================================================
 const app = new Vue({
-    el: '#app',
-    vuetify,
-    router,
-    store
+  el: '#app',
+  vuetify,
+  router,
+  store
 })
