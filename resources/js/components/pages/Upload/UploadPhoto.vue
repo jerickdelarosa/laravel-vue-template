@@ -10,10 +10,17 @@
       :style="{ 'margin-top': $vuetify.breakpoint.smAndDown ? '-68' : '-76' }"
     >
       <v-row justify="center">
-        <v-col cols="12" md="10" lg="7" xl="5">
+        <v-col
+          cols="12"
+          md="10"
+          lg="7"
+          xl="5"
+        >
           <v-card class="mb-3">
             <v-toolbar flat>
-              <v-toolbar-title class="title">Upload a Photo</v-toolbar-title>
+              <v-toolbar-title class="title">
+                Upload a Photo
+              </v-toolbar-title>
             </v-toolbar>
 
             <v-divider />
@@ -41,8 +48,7 @@
                 @change="croppie"
                 label="Select a photo"
                 show-size
-              >
-              </v-file-input>
+              />
             </v-card-text>
 
             <template v-if="!!image && photoForm">
@@ -50,39 +56,55 @@
                 <vue-croppie
                   :boundary="{ height: 500 }"
                   :vieport="{ width: 350, height: 350 }"
-                  :enableResize="false"
+                  :enable-resize="false"
                   ref="cropper"
                 />
               </v-card-text>
             </template>
           </v-card>
 
-          <v-btn color="primary" type="submit" :loading="uploading" large
-            >Upload photo
+          <v-btn
+            color="primary"
+            type="submit"
+            :loading="uploading"
+            large
+          >
+            Upload photo
           </v-btn>
         </v-col>
       </v-row>
     </v-container>
 
-    <v-snackbar v-model="snackbar" timeout="2000" app>
-      <v-icon left :color="snackbarIconColor">{{ snackbarIcon }}</v-icon>
+    <v-snackbar
+      v-model="snackbar"
+      timeout="4000"
+      :color="snackbarColor"
+      right
+      app
+    >
+      <v-icon
+        left
+        :color="snackbarIconColor"
+      >
+        {{ snackbarIcon }}
+      </v-icon>
       {{ snackbarText }}
     </v-snackbar>
   </v-form>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  data() {
+  data () {
     return {
       rules: {
         image: [
-          (v) => !!v || "Please select a photo.",
-          (v) => !v || v.type == "image/jpeg" || "Upload only .jpeg images.",
+          (v) => !!v || 'Please select a photo.',
+          (v) => !v || v.type == 'image/jpeg' || 'Upload only .jpeg images.',
           (v) =>
-            !v || v.size < 1000000 || "Photo size should be less than 1 MB.",
-        ],
+            !v || v.size < 1000000 || 'Photo size should be less than 1 MB.'
+        ]
       },
 
       image: null,
@@ -90,80 +112,82 @@ export default {
       cropped: null,
 
       snackbar: false,
+      snackbarColor: null,
       snackbarText: false,
       snackbarIcon: null,
-      snackbarIconColor: null,
-    };
+      snackbarIconColor: null
+
+    }
   },
 
   computed: {
     ...mapGetters({
-      uploading: "photo/PHOTO_UPLOADING",
-      uploaded: "photo/PHOTO_UPLOADED",
-    }),
+      uploading: 'photo/PHOTO_UPLOADING',
+      uploaded: 'photo/PHOTO_UPLOADED'
+    })
   },
 
   methods: {
     ...mapActions({
-      uploadPhoto: "photo/UPLOAD_PHOTO",
+      uploadPhoto: 'photo/UPLOAD_PHOTO'
     }),
 
-    croppie(file) {
-      if (!!file) {
-        const reader = new FileReader();
+    croppie (file) {
+      if (file) {
+        const reader = new FileReader()
 
         reader.onload = (e) => {
           this.$refs.cropper.bind({
-            url: e.target.result,
-          });
-        };
+            url: e.target.result
+          })
+        }
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file)
       }
     },
 
-    submitPhoto() {
+    submitPhoto () {
       if (this.$refs.photoForm.validate()) {
         var opts = {
-          type: "base64",
-          format: "jpeg",
-        };
+          type: 'base64',
+          format: 'jpeg'
+        }
       }
 
       this.$refs.cropper.result(opts, (output) => {
-        this.cropped = output;
-      });
+        this.cropped = output
+      })
     },
 
-    showSnackbar(data) {
-      this.snackbarIcon = data?.icon;
-      this.snacbarrIconColor = data?.color;
-      this.snackbarText = data?.text;
+    showSnackbar (data) {
+      this.snackbar = true
 
-      this.snackbar = true;
-    },
+      this.snackbarColor = data?.color
+      this.snackbarIcon = data?.icon
+      this.snacbarIconColor = data?.iconColor
+      this.snackbarText = data?.text
+    }
   },
 
   watch: {
-    cropped(croppedImage) {
-      if (!!croppedImage) {
+    cropped (croppedImage) {
+      if (croppedImage) {
         this.uploadPhoto({
-          image: croppedImage,
-        });
+          image: croppedImage
+        })
       }
     },
 
-    uploaded(val) {
+    uploaded (val) {
       if (val) {
         this.showSnackbar({
-          icon: "mdi-check-circle-outline",
-          color: "success",
-          text: "Your photo has beed updated.",
-        });
-
-        this.$router.back();
+          color: 'primary',
+          icon: 'mdi-check-circle-outline',
+          iconColor: 'primary',
+          text: 'Your photo has beed updated.'
+        })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

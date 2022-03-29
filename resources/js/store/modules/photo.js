@@ -21,17 +21,12 @@ const actions = {
     commit('SET_PHOTO_UPLOADING', true)
     commit('SET_PHOTO_UPLOADED', false)
 
-    console.log(data)
-
     try {
       const response = await api.post('api/user/photo', data)
-      console.log(response.data.status)
       commit('SET_PHOTO_UPLOADED', response.data.status)
     } catch (e) {
-      console.log('catch')
       commit('SET_PHOTO_UPLOADED', false)
     } finally {
-      console.log('finally')
       commit('SET_PHOTO_UPLOADING', false)
     }
   }

@@ -10,6 +10,9 @@ import Dashboard from '../components/pages/Dashboard.vue'
 // Uploading a Photo
 import UploadPhoto from '../components/pages/Upload/UploadPhoto.vue'
 
+// Document
+import Document from '../components/pages/Document/Document.vue'
+
 // =======================================================================
 // IMPORT ROUTER CHILD COMPONENTS HERE
 // =======================================================================
@@ -30,48 +33,61 @@ Vue.use(VueRouter)
 const AppName = 'Test'
 
 const router = new VueRouter({
-    mode: 'history', // Navigation Mode
-    base: '/', // Base Route
-    scrollBehavior(to, from, savedPosition) {
-        return { x: 0, y: 0 } // Scroll Behavior on each navigation change
+  mode: 'history', // Navigation Mode
+  base: '/', // Base Route
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 } // Scroll Behavior on each navigation change
+  },
+
+  // Routes Declaration
+  routes: [
+    // Dashboard
+    {
+      path: '/',
+      name: 'dashboard',
+      components: {
+        default: Dashboard,
+        navigation: MainNavigation
+      },
+      meta: {
+        title: 'Dashboard',
+        auth: true
+      }
     },
+    // Upload Photo
+    {
+      path: '/upload-photo',
+      name: 'upload.photo',
+      components: {
+        default: UploadPhoto,
+        navigation: MainNavigation
+      },
+      meta: {
+        title: 'Upload Photo',
+        auth: true
+      }
+    },
+    // Upload Photo
+    {
+      path: '/upload-document',
+      name: 'upload.document',
+      components: {
+        default: Document,
+        navigation: MainNavigation
+      },
+      meta: {
+        title: 'Upload Document',
+        auth: true
+      }
+    }
 
-    // Routes Declaration
-    routes: [
-        // Dashboard
-        {
-            path: '/',
-            name: 'dashboard',
-            components: {
-                default: Dashboard,
-                navigation: MainNavigation
-            },
-            meta: {
-                title: 'Dashboard',
-                auth: true
-            }
-        },
-        // Upload Photo
-        {
-            path: '/upload-photo',
-            name: 'upload.photo',
-            components: {
-                default: UploadPhoto,
-                navigation: MainNavigation
-            },
-            meta: {
-                title: 'Upload Photo',
-                auth: true
-            }
-        }
-
-    ]
+  ]
 })
 
 router.beforeEach((to, from, next) => {
-    // Change Title on route change
-    document.title = `${to.meta?.title} | ${AppName}`
-    next()
+  // Change Title on route change
+  document.title = `${to.meta?.title} | ${AppName}`
+  next()
 })
 
 // =======================================================================

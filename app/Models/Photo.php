@@ -9,12 +9,7 @@ class Photo extends Model
 {
     use HasFactory;
 
-    protected $filled = [
+    protected $fillable = [
         'photo',
-        'date_updated'
-    ];
-
-    protected $casts = [
-        'date_updated' => 'datetime'
     ];
 }

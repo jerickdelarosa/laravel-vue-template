@@ -1,7 +1,11 @@
 <template>
   <div>
     <!-- NAVIGATION DRAWER -->
-    <v-navigation-drawer clipped app v-model="navbar">
+    <v-navigation-drawer
+      clipped
+      app
+      v-model="navbar"
+    >
       <!-- NAVIGATION LINKS -->
       <v-list dense>
         <template v-for="(nav, i) in navLinks">
@@ -24,7 +28,13 @@
     </v-navigation-drawer>
 
     <!-- APP BAR -->
-    <v-app-bar clipped-left clipped-right app dark color="primary">
+    <v-app-bar
+      clipped-left
+      clipped-right
+      app
+      dark
+      color="primary"
+    >
       <!-- NAVIGATION ICON -->
       <v-app-bar-nav-icon @click="toggleNav" />
 
@@ -36,7 +46,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       // NAVBAR
       navbar: null,
@@ -45,24 +55,29 @@ export default {
       // For icons: https://materialdesignicons.com/
       navLinks: [
         {
-          to: "dashboard",
-          title: "Dashboard",
-          icon: "mdi-view-dashboard-outline",
+          to: 'dashboard',
+          title: 'Dashboard',
+          icon: 'mdi-view-dashboard-outline'
         },
         {
-          to: "upload.photo",
-          title: "Upload Photo",
-          icon: "mdi-image",
+          to: 'upload.photo',
+          title: 'Upload Photo',
+          icon: 'mdi-image'
         },
-      ],
-    };
+        {
+          to: 'upload.document',
+          title: 'Upload Document',
+          icon: 'mdi-file'
+        }
+      ]
+    }
   },
 
   methods: {
     // Toggle navigation drawer
-    toggleNav() {
-      this.navbar = !this.navbar;
-    },
-  },
-};
+    toggleNav () {
+      this.navbar = !this.navbar
+    }
+  }
+}
 </script>

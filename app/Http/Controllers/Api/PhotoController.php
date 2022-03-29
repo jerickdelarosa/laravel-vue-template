@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use App\Http\Requests\PhotoRequest;
 use App\Http\Controllers\Controller;
@@ -23,18 +24,18 @@ class PhotoController extends Controller
         $stored = false;
 
         $filename = "APPLICANT_test_" . strtotime(now());
-        dd('file name: ', $filename);
+        /* dd('file name: ', $filename); */
 
         $hashed_filename = md5($filename) . ".jpg";
 
-        dd($hashed_filename);
+        /* dd($hashed_filename); */
 
         $image = Image::make($request->image)->encode('jpeg');
 
         $stored = Storage::put("/uploads/images/photos/{$hashed_filename}", $image);
 
         if ($stored) {
-            $request->update([
+            Photo::create([
                 'photo' => $hashed_filename
             ]);
         }
