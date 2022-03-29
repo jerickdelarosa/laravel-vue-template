@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DocumentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PhotoController;
@@ -20,5 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('user')->name('user.')->group(function () {
+
+    // Photo
     Route::post('/photo', [PhotoController::class, 'uploadPhoto'])->name('photo.upload');
+
+    // Document
+    Route::post('/document', [DocumentController::class, 'store'])->name('document.upload');
 });

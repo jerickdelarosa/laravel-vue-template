@@ -23,12 +23,9 @@ class PhotoController extends Controller
     {
         $stored = false;
 
-        $filename = "APPLICANT_test_" . strtotime(now());
-        /* dd('file name: ', $filename); */
+        $filename = "IMAGE_test_" . strtotime(now());
 
         $hashed_filename = md5($filename) . ".jpg";
-
-        /* dd($hashed_filename); */
 
         $image = Image::make($request->image)->encode('jpeg');
 

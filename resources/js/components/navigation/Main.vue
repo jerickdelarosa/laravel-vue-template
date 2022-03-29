@@ -39,7 +39,7 @@
       <v-app-bar-nav-icon @click="toggleNav" />
 
       <!-- TITLE -->
-      <v-toolbar-title> Test </v-toolbar-title>
+      <v-toolbar-title> App </v-toolbar-title>
     </v-app-bar>
   </div>
 </template>

@@ -19,7 +19,7 @@
           <v-card class="mb-3">
             <v-toolbar flat>
               <v-toolbar-title class="title">
-                Upload a Photo
+                Upload Photo
               </v-toolbar-title>
             </v-toolbar>
 
@@ -101,7 +101,7 @@ export default {
       rules: {
         image: [
           (v) => !!v || 'Please select a photo.',
-          (v) => !v || v.type == 'image/jpeg' || 'Upload only .jpeg images.',
+          (v) => !v || v.type === 'image/jpeg' || 'Upload only .jpeg images.',
           (v) =>
             !v || v.size < 1000000 || 'Photo size should be less than 1 MB.'
         ]
@@ -183,8 +183,8 @@ export default {
         this.showSnackbar({
           color: 'primary',
           icon: 'mdi-check-circle-outline',
-          iconColor: 'primary',
-          text: 'Your photo has beed updated.'
+          iconColor: '#fff',
+          text: 'Your photo has been uploaded.'
         })
       }
     }
