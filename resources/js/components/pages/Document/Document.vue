@@ -1,0 +1,12 @@
+<template>
+  <v-form
+    v-model="uploadForm"
+    ref="uploadForm"
+    @submit.prevent="uploadDocument"
+    enctype="multipart/form-data"
+  >
+    <v-card>
+      asdads
+    </v-card>
+  </v-form>
+</template>
