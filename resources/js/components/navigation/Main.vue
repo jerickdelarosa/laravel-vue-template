@@ -68,6 +68,11 @@ export default {
           to: 'upload.document',
           title: 'Upload Document',
           icon: 'mdi-file'
+        },
+        {
+          to: 'test',
+          title: 'Tester',
+          icon: 'mdi-account'
         }
       ]
     }

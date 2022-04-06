@@ -13,6 +13,9 @@ import UploadPhoto from '../components/pages/Upload/UploadPhoto.vue'
 // Document
 import Document from '../components/pages/Document/Document.vue'
 
+// Tester Section
+import Tester from '../components/pages/Tester/Tester.vue'
+
 // =======================================================================
 // IMPORT ROUTER CHILD COMPONENTS HERE
 // =======================================================================
@@ -77,6 +80,19 @@ const router = new VueRouter({
       },
       meta: {
         title: 'Upload Document',
+        auth: true
+      }
+    },
+    // Tester Section
+    {
+      path: '/test',
+      name: 'test',
+      components: {
+        default: Tester,
+        navigation: MainNavigation
+      },
+      meta: {
+        title: 'Tester',
         auth: true
       }
     }
