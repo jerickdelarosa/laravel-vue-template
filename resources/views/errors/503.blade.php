@@ -578,9 +578,7 @@
     <div class="relative flex items-top justify-center min-h-screen sm:items-center sm:pt-0" style="
         color:#f1f1f1;
         z-index: 2;
-        padding: 20px;
-        text-align: left;
-        ">
+        padding: 20px;">
 
 
         <article>
@@ -588,13 +586,14 @@
             <img src="/assets/images/503.png" class="sm:pt-50" style="display: block;
             margin-left: auto;
             margin-right: auto" width="150" height="150" alt="maintenance_logo" />
-            <h2 style="padding-top: 10px">We&rsquo;ll be back soon!</h2>
-            <div>
-                <p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment and
-                    we&rsquo;ll
-                    be back online shortly!</p>
-                <p>&mdash; MIS Team</p>
-            </div>
+            <p class="text-nowrap text-center" style="padding-top: 10px; font-weight: bold; font-size: 24px">SYSTEM UNDER
+                MAINTENANCE
+            </p>
+            {{-- <p style="margin-bottom: 0">Sorry for the inconvenience but the system is unavailable as we are
+                currently conducting a maintence.
+                we&rsquo;ll be back once completed.</p>
+            <p style="margin-top: 0px; font-style: italic">- Manangement Information System Office</p> --}}
+
         </article>
     </div>
 </body>
