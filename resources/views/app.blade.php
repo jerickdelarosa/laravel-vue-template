@@ -27,12 +27,12 @@
     <script src="{{ mix('js/manifest.js') }}"></script>
     <script src="{{ mix('js/vendor.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
-    <script>
+    {{-- <script>
         Echo.channel('home')
             .listen('NewMessage', (e) => {
                 console.log(e.message);
             })
-    </script>
+    </script> --}}
 </body>
 
 </html>
