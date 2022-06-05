@@ -117,7 +117,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // Auth Token
-  const userToken = localStorage.getItem('dts-token')
+  const userToken = localStorage.getItem('app-token')
 
   // Change Title on route change
   document.title = `${to.meta?.title} | ${AppName}`

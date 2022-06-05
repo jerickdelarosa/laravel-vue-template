@@ -6,7 +6,7 @@ const state = {
 }
 
 const getters = {
-  TOKEN: () => localStorage.getItem('dts-token'),
+  TOKEN: () => localStorage.getItem('app-token'),
   USER_DATA: (state) => state.user
 }
 
@@ -20,13 +20,13 @@ const actions = {
   },
 
   LOGIN: ({ commit }, token) => {
-    localStorage.setItem('dts-token', token)
+    localStorage.setItem('app-token', token)
     api.setToken(token)
   },
 
   LOGOUT: ({ commit }) => {
     commit('SET_USER_DATA', null)
-    localStorage.removeItem('dts-token')
+    localStorage.removeItem('app-token')
     api.removeToken()
   },
 

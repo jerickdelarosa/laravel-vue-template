@@ -20,6 +20,6 @@ class InfoResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'designation' => $this->designation
-        ]
+        ];
     }
 }

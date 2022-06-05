@@ -9,12 +9,13 @@
       flat
     >
       <!-- NAVIGATION ICON -->
-      <template v-if="$vuetify.breakpoint.mdAndDown">
-        <v-app-bar-nav-icon @click="toggleNav" />
-      </template>
+
+      <v-app-bar-nav-icon @click="toggleNav" />
 
       <!-- TITLE -->
       <v-toolbar-title> App </v-toolbar-title>
+
+      <v-spacer />
 
       <!-- USER ACCOUNT -->
       <v-menu offset-y>
@@ -54,14 +55,12 @@
 
             <v-divider class="my-2" />
 
-            <v-list-item>
+            <v-list-item @click="logout">
               <v-list-item-icon>
                 <v-icon>mdi-logout-variant</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>
-                  Sign Out
-                </v-list-item-title>
+                <v-list-item-title>Sign Out</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -73,7 +72,7 @@
     <v-navigation-drawer
       clipped
       app
-      v-model="navbar"
+      v-model="mainNav"
       :width="$vuetify.breakpoint.mdAndDown ? 320 : 256"
     >
       <!-- NAVIGATION LINKS -->

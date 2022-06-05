@@ -22,7 +22,7 @@ class AuthController extends Controller
         }
 
         return response([
-            'token' => $user->createToken('dts-token')->plainTextToken
+            'token' => $user->createToken('app-token')->plainTextToken
         ], 201);
     }
 
@@ -62,7 +62,7 @@ class AuthController extends Controller
         );
 
         return response([
-            'token' => $user->createToken('dts-token')->plainTextToken
+            'token' => $user->createToken('app-token')->plainTextToken
         ], 201);
     }
 }
