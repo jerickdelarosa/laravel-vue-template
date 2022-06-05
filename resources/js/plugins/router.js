@@ -4,6 +4,10 @@ import VueRouter from 'vue-router'
 // =======================================================================
 // IMPORT ROUTER COMPONENTS HERE
 // =======================================================================
+
+// Login
+import AuthLogin from '../components/pages/Auth/Login.vue'
+
 // Dashboard
 import Dashboard from '../components/pages/Dashboard.vue'
 
@@ -33,7 +37,7 @@ Vue.use(VueRouter)
 // =======================================================================
 // VueRouter Settings
 // =======================================================================
-const AppName = 'Test'
+const AppName = 'App'
 
 const router = new VueRouter({
   mode: 'history', // Navigation Mode
@@ -95,14 +99,47 @@ const router = new VueRouter({
         title: 'Tester',
         auth: true
       }
+    },
+
+    // Auth Login
+    {
+      path: '/login',
+      name: 'auth.login',
+      component: AuthLogin,
+      meta: {
+        title: 'Login',
+        guest: true
+      }
     }
 
   ]
 })
 
 router.beforeEach((to, from, next) => {
+  // Auth Token
+  const userToken = localStorage.getItem('dts-token')
+
   // Change Title on route change
   document.title = `${to.meta?.title} | ${AppName}`
+
+  if (userToken) {
+    if (to.matched.some(record => record.meta?.guest)) {
+      next({
+        name: 'dashboard'
+      })
+    }
+
+    next()
+  } else {
+    if (to.matched.some(record => record.meta?.auth)) {
+      next({
+        name: 'auth.login'
+      })
+    }
+
+    next()
+  }
+
   next()
 })
 

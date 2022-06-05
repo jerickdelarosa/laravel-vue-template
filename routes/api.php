@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\DocumentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PhotoController;
+use App\Http\Controllers\Api\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +17,27 @@ use App\Http\Controllers\Api\PhotoController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('auth')->name('auth.')->group(function () {
+    // Authentication
+    Route::get('google', [AuthController::class, 'redirectToProvider'])->name('google.login');
+
+    Route::post('login', [AuthController::class, 'handleProviderCallback'])->name('login');
+
+
+    // User information
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('user', [AuthController::class, 'show'])->name('user');
+    });
 });
 
-Route::prefix('user')->name('user.')->group(function () {
 
-    // Photo
-    Route::post('/photo', [PhotoController::class, 'uploadPhoto'])->name('photo.upload');
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('user')->name('user.')->group(function () {
 
-    // Document
-    Route::post('/document', [DocumentController::class, 'store'])->name('document.upload');
+        // Photo
+        Route::post('/photo', [PhotoController::class, 'uploadPhoto'])->name('photo.upload');
+
+        // Document
+        Route::post('/document', [DocumentController::class, 'store'])->name('document.upload');
+    });
 });

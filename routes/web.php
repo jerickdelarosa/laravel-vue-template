@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PhotoController;
 
 /*
@@ -13,6 +14,8 @@ use App\Http\Controllers\Api\PhotoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/auth/login', [AuthController::class, 'handleProviderCallback']);
 
 Route::get('/images/photos/{image}', PhotoController::class)->name('photo');
 

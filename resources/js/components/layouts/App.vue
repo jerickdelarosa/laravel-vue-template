@@ -25,11 +25,41 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
       userLoading: false
     }
+  },
+  created () {
+    /* if (this.token) {
+      this.userLoading = true
+      this.getUserData()
+        .then(() => {
+          this.connectToWS()
+        })
+        .finally(() => {
+          this.userLoading = false
+        })
+    } */
+  },
+  computed: {
+    ...mapGetters({
+      token: 'auth/TOKEN',
+      user: 'auth/USER_DATA'
+
+    })
+
+    /* connectToWS () {
+      window.Echo.private('admin-channel')
+        .listen('.update-dashboard', (e) => {
+          if (e) {
+            this._getDashboardData()
+          }
+        })
+    } */
   }
 
 }
