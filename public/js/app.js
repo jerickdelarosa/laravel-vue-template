@@ -2116,20 +2116,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   created: function created() {
-    /* if (this.token) {
-      this.userLoading = true
-      this.getUserData()
-        .then(() => {
-          this.connectToWS()
-        })
-        .finally(() => {
-          this.userLoading = false
-        })
-    } */
+    var _this = this;
+
+    if (this.token) {
+      this.userLoading = true;
+      this.getUserData()["finally"](function () {
+        _this.userLoading = false;
+      });
+    }
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
     token: 'auth/TOKEN',
     user: 'auth/USER_DATA'
+  })),
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
+    getUserData: 'auth/GET_USER_DATA'
   }))
 });
 
@@ -2289,6 +2290,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     userAvatar: function userAvatar() {
       var _this$user;
 
+      console.log(this.user);
       return (_this$user = this.user) === null || _this$user === void 0 ? void 0 : _this$user.avatar;
     },
     userName: function userName() {

@@ -34,16 +34,13 @@ export default {
     }
   },
   created () {
-    /* if (this.token) {
+    if (this.token) {
       this.userLoading = true
       this.getUserData()
-        .then(() => {
-          this.connectToWS()
-        })
         .finally(() => {
           this.userLoading = false
         })
-    } */
+    }
   },
   computed: {
     ...mapGetters({
@@ -60,6 +57,11 @@ export default {
           }
         })
     } */
+  },
+  methods: {
+    ...mapActions({
+      getUserData: 'auth/GET_USER_DATA'
+    })
   }
 
 }

@@ -143,6 +143,7 @@ export default {
       return !!this.user
     },
     userAvatar () {
+      console.log(this.user)
       return this.user?.avatar
     },
     userName () {
